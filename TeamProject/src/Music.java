@@ -1,16 +1,21 @@
 import java.util.ArrayList;
+import java.io.*;
 
 public class Music {
 	private String author;
 	private String singer;
 	private String name;
 	private int play_time;
+	private String genre;
+	private String nation;
+	
 	private int play_count;
+	
 	private String file_address;
 	private String file_information_address;
+	
 	private Lyric lyrics;
 	private ArrayList<Integer> recent_play;
-	private Category category;
 	
 	private static int music_file_num = 0;
 	
@@ -21,45 +26,57 @@ public class Music {
 		//파일 읽기
 		this.name = name;
 		this.file_address = file_address;
-		music_file_num++;
 		
-		getMusicFile();
+		music_file_num++;
 	}
 	Music(String file_infromation_address){
 		this.file_information_address = file_information_address;
 		
 		String[] information = getMusicFileInformation();
 		
-		getMusicFile();
+		music_file_num++;
 	}
 	Music(String author, String singer, String name,int play_time,
+			String file_address, String nation, String[] genre){
+		
+		setMusicFileInformation(author, singer, name,
+				play_time, file_address, nation, genre);
+	
+		music_file_num++;
+	}
+	
+	/*
+	private void getMusicFile(){
+		try{
+			String file_name = this.name + ".mp3";
+			File music_file = new File(file_name);
+			
+			
+		}
+		catch(Exception ex){
+			
+		}
+	}*/
+	
+	
+	private void reNameMusicFile(){
+		// 음악파일 이름 바꾸기
+	}
+	
+	
+	public String[] getMusicFileInformation(){
+		String[] information = {};
+		return information;
+	}
+	public void setMusicFileInformation(String author, String singer, String name,int play_time,
 			String file_address, String nation, String[] genre){
 		this.author = author;
 		this.singer = singer;
 		this.name = name;
 		this.play_time = play_time;
 		this.file_address = file_address;
-		//category에 nation, genre 넣기
-		setMusicFileInformation();//////
-		music_file_num++;
-	}
-	
-	private void getMusicFile(){
-		// 주소를 통해 파일 가져오기
-	}
-	private String[] getMusicFileInformation(){
-		// 정보가 저장된 곳에 가서 정보를 가져옴
-		String[] information = {};
-		
-		return information;
-	}
-	private void setMusicFileInformation(){
 		
 	}
-	private void reNameMusicFile(){
-		// 음악파일 이름 바꾸기
-	}
-	
 	
 	public String getAuthor() {
 		return author;
@@ -109,11 +126,6 @@ public class Music {
 	public void setRecent_play(ArrayList<Integer> recent_play) {
 		this.recent_play = recent_play;
 	}
-	public Category getCategory() {
-		return category;
-	}
-	public void setCategory(Category category) {
-		this.category = category;
-	}
+
 	
 }
