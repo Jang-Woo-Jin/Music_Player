@@ -22,6 +22,15 @@ public class Music {
 		this.name = name;
 		this.file_address = file_address;
 		music_file_num++;
+		
+		getMusicFile();
+	}
+	Music(String file_infromation_address){
+		this.file_information_address = file_information_address;
+		
+		String[] information = getMusicFileInformation();
+		
+		getMusicFile();
 	}
 	Music(String author, String singer, String name,int play_time,
 			String file_address, String nation, String[] genre){
@@ -31,19 +40,26 @@ public class Music {
 		this.play_time = play_time;
 		this.file_address = file_address;
 		//category에 nation, genre 넣기
-		
+		setMusicFileInformation();//////
 		music_file_num++;
 	}
 	
 	private void getMusicFile(){
 		// 주소를 통해 파일 가져오기
 	}
-	private void getMusicFileInformation(){
+	private String[] getMusicFileInformation(){
 		// 정보가 저장된 곳에 가서 정보를 가져옴
+		String[] information = {};
+		
+		return information;
+	}
+	private void setMusicFileInformation(){
+		
 	}
 	private void reNameMusicFile(){
 		// 음악파일 이름 바꾸기
 	}
+	
 	
 	public String getAuthor() {
 		return author;
