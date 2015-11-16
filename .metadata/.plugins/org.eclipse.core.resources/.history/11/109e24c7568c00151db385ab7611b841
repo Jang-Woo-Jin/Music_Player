@@ -1,0 +1,10 @@
+
+public class test {
+
+	public static void main(String[] args) {
+		Music a = new Music();
+		Music b = new Music("14 Blue Jasmine","D:\\기타기타기타\\Music\\덕후의 기운이 감돌고 있습니다\\Bremen");
+		b.reNameMusicFile("흐음?");
+	}
+
+}

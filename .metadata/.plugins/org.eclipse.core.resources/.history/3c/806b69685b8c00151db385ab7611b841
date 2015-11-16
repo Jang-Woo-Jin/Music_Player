@@ -1,0 +1,11 @@
+
+public class test {
+
+	public static void main(String[] args) {
+		Music a = new Music();
+		Music b = new Music("D:\\기타기타기타\\Music\\덕후의 기운이 감돌고 있습니다\\Bremen");
+		//String[] c = b.getMusicFileInformation("후후.txt");
+		//System.out.println(c[0] + c[1]);
+	}
+
+}

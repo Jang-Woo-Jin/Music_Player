@@ -1,0 +1,8 @@
+
+public class CopyOfFileReader {
+
+	public String[] readFile(String file_information_address, String file_name){
+		String[] information = {};
+		return information;
+	}
+}

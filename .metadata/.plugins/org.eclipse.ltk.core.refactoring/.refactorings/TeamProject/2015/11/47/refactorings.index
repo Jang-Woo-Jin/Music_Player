@@ -1,0 +1,16 @@
+1447642183679	Rename field 'play_time'
+1447642192248	Rename field 'file_address'
+1447642201877	Rename field 'file_information_address'
+1447642208885	Rename field 'recent_play'
+1447642217374	Rename field 'music_file_num'
+1447642230026	Rename local variable 'file_address'
+1447642240670	Rename local variable 'file_information_address'
+1447642251267	Rename local variable 'play_time'
+1447642261836	Rename local variable 'play_time'
+1447644704003	Rename local variable 'file_name'
+1447676035531	Rename method 'setMusicFileInformation'
+1447677162713	Rename type 'Music'
+1447677214507	Delete element
+1447677347376	Copy compilation unit
+1447677349394	Copy compilation unit
+1447677366864	Delete element
