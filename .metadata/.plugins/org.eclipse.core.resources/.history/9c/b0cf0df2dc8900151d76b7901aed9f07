@@ -1,8 +1,0 @@
-
-public class FileReader {
-
-	public String[] readFile(String file_information_address, tring file_name){
-		String[] information = {};
-		return information;
-	}
-}
