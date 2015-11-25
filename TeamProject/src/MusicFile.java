@@ -1,10 +1,9 @@
 import java.util.ArrayList;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class MusicFile {
-	private String author, singer, name, genre, nation, playTime;
+	private String author, singer, name, genre, nation, 
+						playTime, informationFileName, musicFileId;
 	
 	private int play_count;
 	
@@ -14,20 +13,14 @@ public class MusicFile {
 	private ArrayList<String> recentPlay;
 	
 	private static int musicFileNum = 0;
-	MusicFile(){
+	
+	MusicFile(String musicFileId){
+		this.musicFileId = musicFileId;
 		musicFileNum++;
 	}
-	MusicFile(String fileName, String fileAddress){
-		//파일 읽기
-		setMusicInformation(null,null,name,null,fileAddress,null,null);
-		musicFileNum++;
-		
-		System.out.println(this.fileAddress + this.name + musicFileNum);
-	}
-	MusicFile(String name, String singer, String fileInformationAddress){
+	MusicFile(String musicFileId, String fileInformationAddress){
 		this.fileInformationAddress = fileInformationAddress;
-		this.name = name;
-		this.singer = singer;
+		this.musicFileId = musicFileId;
 		
 		String[] information = getMusicFileInformation();
 
@@ -35,39 +28,31 @@ public class MusicFile {
 				information[3],information[4],information[5],information[6]);
 		
 		musicFileNum++;
-		System.out.println(this.fileAddress + this.name + musicFileNum);
-		
 	}
-	MusicFile(String author, String singer, String name,int playTime,
+	MusicFile(String musicFileId, String author, String singer, String name,int playTime,
 			String file_address, String nation, String genre){
-		
+		this.musicFileId = musicFileId;
 		setMusicInformation(author, singer, name,
 				playTime, file_address, nation, genre);
 	
 		musicFileNum++;
 	}
 	
-	public void reNameMusicFile(String newName){
-		String path = this.fileAddress;
-		File oldfile =new File(path,this.name+".mp3");
-		File newfile =new File(path,newName+".mp3");
-        // musicInformationFile 의 이름 역시 바꿔주도록 해야한다.
-		oldfile.renameTo(newfile);
-		System.out.println("dd"); // 뭔가 안됨ㅠ
-	}
-	
 	public String[] getMusicFileInformation(){
-		FileReader fileReader = new FileReader();
+		FileIO fileReader = new FileIO();
 		
-		String informationFileName = this.name + "_" + this.singer;
+		String informationFileName = musicFileId;
 		String[] tempInformation = fileReader.readTextFile(fileInformationAddress, informationFileName);
 		String[] information = tempInformation[0].split("/");
-		
 		return information;
 	}
 	public void setMusicFileInformation(){
-		FileReader fileReader = new FileReader();
-		// write file 필요
+		FileIO fileReader = new FileIO();
+		String[] writeInformation = {};
+		if(this.informationFileName == null){
+			this.informationFileName = this.name + "_" + this.singer;
+		}
+		fileReader.writeTextFile(this.fileInformationAddress, this.informationFileName, writeInformation);
 	}
 
 	public void setMusicInformation(Object author, Object singer, Object name,Object playTime,
@@ -79,6 +64,8 @@ public class MusicFile {
 		this.fileAddress = (String)file_address;
 		this.nation = (String)nation;
 		this.genre = (String)genre;
+		
+		setMusicFileInformation();
 	}
 	
 	public void addRecentPlay(String information){
@@ -87,10 +74,19 @@ public class MusicFile {
 	public void deleteRecentPlay(int index){
 		recentPlay.remove(index);
 	}
+	public void deleteRecentPlay(String information){
+		recentPlay.remove(information);
+	}
 	public void deleteAllRecentPlay(){
 		recentPlay.clear();
 	}
 	
+	public static int getMusicFileNum(){
+		return musicFileNum;
+	}
+	public String getMusicFileId(){
+		return musicFileId;
+	}
 	public String getAuthor() {
 		return author;
 	}
