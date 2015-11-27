@@ -1,0 +1,22 @@
+import java.awt.*;
+
+import javafx.embed.swing.*;
+
+import javax.swing.*;
+public class Player_Tab {
+	
+	public void initialize() {
+		
+		JFXPanel playerJfxPanel = new JFXPanel();
+		JPanel playerPanel = new JPanel();
+		
+		playerPanel.setLayout(new BorderLayout());
+		
+		playerPanel.add(playerJfxPanel);
+		playerPanel.setBackground(Color.CYAN);
+		playerPanel.setVisible(true);
+		
+		
+	}
+	
+}

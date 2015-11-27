@@ -1,0 +1,32 @@
+import java.awt.*;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+public class GUI_MusicList implements ListSelectionListener {
+	private JPanel musicListPanel = new JPanel(new GridLayout(Music.getMusicFileNum(), 2, 20, 500)); 
+	private JList<Music> musicList;
+	private SingleSelectionModel musicListSeletion;
+	 
+	 
+	public JPanel createListPanel() {
+		musicList = new JList<Music>();
+		musicList.setVisibleRowCount(Music.getMusicFileNum());
+		musicList.setFixedCellHeight(20);
+		musicList.setFixedCellWidth(500);
+		musicList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		musicList.addListSelectionListener(this);
+		musicList.setVisible(true);
+		
+		musicListPanel.add(musicList);
+		
+		return musicListPanel;	 
+	}
+
+
+	public void valueChanged(ListSelectionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+}

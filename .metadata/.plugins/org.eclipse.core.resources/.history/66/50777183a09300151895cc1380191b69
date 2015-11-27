@@ -1,0 +1,48 @@
+import java.awt.*;
+
+import javafx.application.Platform;
+import javafx.embed.swing.*;
+import javafx.scene.*;
+import javafx.scene.text.Text;
+
+import javax.swing.*;
+public class Player_Tab {
+	
+	public void initialize() {
+		
+		final JFXPanel playerJfxPanel = new JFXPanel();
+		JPanel playerPanel = new JPanel();
+		
+		playerPanel.setLayout(new BorderLayout());
+		playerPanel.add(playerJfxPanel);
+		playerPanel.setBackground(Color.CYAN);
+		playerPanel.setVisible(true);
+		
+		Platform.runLater(new Runnable() {
+		     public void run() {
+		     initFX(playerJfxPanel);
+		     }
+		  });
+		
+		
+	}
+
+	private static void initFX(JFXPanel fxPanel) {
+		  Scene scene = initScene();
+		  fxPanel.setScene(scene);
+	}
+	
+	private static Scene initScene(){
+
+		  Group  root  =  new  Group();
+		  Scene  scene  =  new  Scene(root, javafx.scene.paint.Color.ALICEBLUE );
+		  Text  text  =  new  Text();
+		  text.setX(40);
+		  text.setY(100);
+		  //text.setFont(new Font(25));
+		  text.setText("Welcome JavaFX!");
+		  root.getChildren().add(text);
+		  return (scene);
+
+	}
+}

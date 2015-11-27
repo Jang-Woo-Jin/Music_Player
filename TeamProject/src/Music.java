@@ -115,5 +115,7 @@ public class Music {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	
+	public static int getMusicFileNum() {
+		return music_file_num; 
+	}
 }

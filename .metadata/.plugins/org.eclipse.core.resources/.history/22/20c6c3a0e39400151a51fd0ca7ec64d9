@@ -1,0 +1,10 @@
+import java.awt.GridLayout;
+
+import javax.swing.JPanel;
+
+
+public class GUI_MusicListTab {
+
+	
+	//public JPanel 
+}
