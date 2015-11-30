@@ -3,12 +3,14 @@ import java.util.ArrayList;
 public class MusicFileManager {
 	private ArrayList<MusicFile> musicFileList = new ArrayList<MusicFile>();
 	private ArrayList<String> recentPlayList = new ArrayList<String>();
-	
+	private static int musicFileNum = 0;
 	public void addMusicFile(String fileAddress, String fileName){
 		
+		musicFileNum++;
 	}
 	public void addMusicFileWithMusicInforationFile(String fileAddress){
 		
+		musicFileNum++;
 	}
 	public void appendMusicFile(MusicFile musicFile){
 		musicFileList.add(musicFile);
@@ -27,13 +29,13 @@ public class MusicFileManager {
 		recentPlayList.add(information);
 	}
 	public void deleteRecentPlayList(int index){
-		if(index > MusicFile.getMusicFileNum()){
+		if(index > getMusicFileNum()){
 			System.out.println("Error, Out of Index");
 		}
 		else{
 			String[] deleteRecentPlayMusicInfo = (recentPlayList.get(index)).split("/");
 			MusicFile deleteRecentPlayMusic = null;
-			for(int i=0;i<MusicFile.getMusicFileNum();i++){
+			for(int i=0;i<getMusicFileNum();i++){
 				if(deleteRecentPlayMusicInfo[2] == (musicFileList.get(i)).getMusicFileId()){
 					deleteRecentPlayMusic = musicFileList.get(i);
 					break;
@@ -47,7 +49,7 @@ public class MusicFileManager {
 		
 		String[] deleteRecentPlayMusicInfo = data.split("/");
 		MusicFile deleteRecentPlayMusic = null;
-		for(int i=0;i<MusicFile.getMusicFileNum();i++){
+		for(int i=0;i<getMusicFileNum();i++){
 			if(deleteRecentPlayMusicInfo[2] == (musicFileList.get(i)).getMusicFileId()){
 				deleteRecentPlayMusic = musicFileList.get(i);
 				break;
@@ -70,5 +72,7 @@ public class MusicFileManager {
 		this.recentPlayList = recentPlayList;
 	}
 
-
+	public int getMusicFileNum(){
+	      return this.musicFileList.size();
+	}
 }
