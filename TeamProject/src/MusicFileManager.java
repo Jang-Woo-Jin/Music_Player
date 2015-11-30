@@ -1,74 +1,93 @@
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+
 public class MusicFileManager {
 	private ArrayList<MusicFile> musicFileList = new ArrayList<MusicFile>();
-	private ArrayList<String> recentPlayList = new ArrayList<String>();
+	private RecentFileList recentPlayList = new RecentFileList();
+	private ArrayList<Integer> musicFileIDList = new ArrayList<Integer>();
+
+	private FavoriteFileList favoriteFileList;
+	private ArrayList<MusicFile> choosePlayList = new ArrayList<MusicFile>();
 	
-	public void addMusicFile(String fileAddress, String fileName){
-		
-	}
-	public void addMusicFileWithMusicInforationFile(String fileAddress){
-		
-	}
-	public void appendMusicFile(MusicFile musicFile){
-		musicFileList.add(musicFile);
-	}
-	public void deleteMusicFile(int index){
-		musicFileList.remove(index);
-	}
-	public void deleteMusicFile(MusicFile musicFile){
-		musicFileList.remove(musicFile);
+	private final int MAXMUSICFILENUM = 100000;
+	
+	MusicFileManager(String fileAddress){
+		addMusicFile(fileAddress);
+		favoriteFileList = new FavoriteFileList(musicFileList);
+		favoriteFileList.FSort();
 	}
 	
-	public void addRecentPlayList(MusicFile musicFile, String date, String time){
-		String information = date + "/" + time;
-		musicFile.addRecentPlay(information);
-		information = information + "/" + musicFile.getMusicFileId();
-		recentPlayList.add(information);
-	}
-	public void deleteRecentPlayList(int index){
-		if(index > MusicFile.getMusicFileNum()){
-			System.out.println("Error, Out of Index");
+	public void addMusicFile(String fileAddress) {
+		FileIO fileio = new FileIO();
+		ArrayList<String> musicFileNameList = fileio.readAllFIleInPath(fileAddress,"mp3");
+		for(int i=0;i<musicFileNameList.size();i++){
+			int musicFileId = generateMusicID();
+			String fileName = (String) musicFileNameList.get(i);
+			String[] information = fileio.readMusicFile(fileAddress, fileName);
+			
+			musicFileList.add(new MusicFile(Integer.toString(musicFileId),
+					information, fileName, fileAddress));
 		}
-		else{
-			String[] deleteRecentPlayMusicInfo = (recentPlayList.get(index)).split("/");
-			MusicFile deleteRecentPlayMusic = null;
-			for(int i=0;i<MusicFile.getMusicFileNum();i++){
-				if(deleteRecentPlayMusicInfo[2] == (musicFileList.get(i)).getMusicFileId()){
-					deleteRecentPlayMusic = musicFileList.get(i);
-					break;
+		for(int i=0;i<musicFileList.size();i++){
+			System.out.println(((MusicFile) musicFileList.get(i)).getName());
+		}
+	}
+
+	private int generateMusicID() {
+		int random;
+		boolean checkExist = false;
+		do {
+			random = (int) (Math.random() * MAXMUSICFILENUM);
+			for (int i = 0; i < musicFileIDList.size(); i++) {
+				if (random == musicFileIDList.get(i)) {
+					checkExist = true;
 				}
 			}
-			deleteRecentPlayMusic.deleteRecentPlay(deleteRecentPlayMusicInfo[0]+"/"+deleteRecentPlayMusicInfo[1]);
-		}
+
+		} while (checkExist);
+
+		return random;
 	}
-	public void deleteRecentPlayList(String data){
-		recentPlayList.remove(data);
-		
-		String[] deleteRecentPlayMusicInfo = data.split("/");
-		MusicFile deleteRecentPlayMusic = null;
-		for(int i=0;i<MusicFile.getMusicFileNum();i++){
-			if(deleteRecentPlayMusicInfo[2] == (musicFileList.get(i)).getMusicFileId()){
-				deleteRecentPlayMusic = musicFileList.get(i);
-				break;
-			}
-		}
-		deleteRecentPlayMusic.deleteRecentPlay(deleteRecentPlayMusicInfo[0]+"/"+deleteRecentPlayMusicInfo[1]);
-	}
+
 	
 	
+	
+	//~~~~~~~~~~~~~~ Getter & Setter
 	public ArrayList<MusicFile> getMusicFileList() {
 		return musicFileList;
 	}
+
 	public void setMusicFileList(ArrayList<MusicFile> musicFileList) {
 		this.musicFileList = musicFileList;
 	}
-	public ArrayList<String> getRecentPlayList() {
+
+	public RecentFileList getRecentPlayList() {
 		return recentPlayList;
 	}
-	public void setRecentPlayList(ArrayList<String> recentPlayList) {
+
+	public void setRecentPlayList(RecentFileList recentPlayList) {
 		this.recentPlayList = recentPlayList;
 	}
 
+	public FavoriteFileList getFavoriteFileList() {
+		return favoriteFileList;
+	}
 
+	public void setFavoriteFileList(FavoriteFileList favoriteFileList) {
+		this.favoriteFileList = favoriteFileList;
+	}
+
+	public ArrayList<MusicFile> getChoosePlayList() {
+		return choosePlayList;
+	}
+
+	public void setChoosePlayList(ArrayList<MusicFile> choosePlayList) {
+		this.choosePlayList = choosePlayList;
+	}
+
+	public int getMusicFileNum() {
+		return this.musicFileList.size();
+	}
 }
