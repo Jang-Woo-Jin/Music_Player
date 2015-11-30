@@ -16,10 +16,11 @@ public class MainGUI {
 		this.mainFrame.setSize(800, 450);
 		this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		this.mainFrame.add(new JScrollPane(new GUI_Tab().createTabList()), BorderLayout.WEST);
+		this.mainFrame.add(new GUI_Tab().createTabList(), BorderLayout.WEST);
 		this.mainFrame.add(new JScrollPane(new GUI_MusicList().createListPanel()), BorderLayout.CENTER);
 		this.mainFrame.add(new GUI_PlayerTab(), BorderLayout.EAST);
 		
+		this.mainFrame.setJMenuBar(new GUI_Toolbar());
 		this.mainFrame.setVisible(true);
 	 }
 	 
