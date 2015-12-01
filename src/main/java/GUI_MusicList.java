@@ -5,7 +5,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 public class GUI_MusicList implements ListSelectionListener {
-	private JPanel musicListPanel = new JPanel(new GridLayout(Music.getMusicFileNum(), 1)); 
+	private JPanel musicListPanel = new JPanel(new GridLayout(0, 1));
 	private JList<String> musicList;
 	private DefaultListModel<String> listModel = new DefaultListModel<String>();
 	private SingleSelectionModel musicListSeletion;

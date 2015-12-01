@@ -1,5 +1,5 @@
-//¾Ë¶÷±â´É - ÈŞ´ëÆù ¾Ë¶÷Ã³·³ ¿ÀÈÄ/¿ÀÀü ½Ã°£ ºĞ ÀÔ·Â ¹ŞÀ½
-//±× ½Ã°£¿¡ ±î¾Æ¾Æ²áÇÏ°í ¾Ë¶÷ º¸³¿ .
+//ì•ŒëŒê¸°ëŠ¥ - íœ´ëŒ€í° ì•ŒëŒì²˜ëŸ¼ ì˜¤í›„/ì˜¤ì „ ì‹œê°„ ë¶„ ì…ë ¥ ë°›ìŒ
+//ê·¸ ì‹œê°„ì— ê¹Œì•„ì•„ê¿í•˜ê³  ì•ŒëŒ ë³´ëƒ„ .
 
 import java.util.*;
 import java.text.*;
@@ -28,7 +28,7 @@ public class AlarmSystem extends Thread{
 		alarmTime.set(currentTime.SECOND, + 0);
 		alarmTime.set(currentTime.MINUTE, + setMin);
 		
-		if(ampm.equals("¿ÀÀü")){
+		if(ampm.equals("ì˜¤ì „")){
 			if(setHour != 12) 
 				alarmTime.set(currentTime.HOUR, + setHour);
 			else 

@@ -1,6 +1,6 @@
 public class Parser {
 
-	private int[][] time = new int[1000][3];// 0:∫– 1:√  2:0.√ 
+	private int[][] time = new int[1000][3];// 0:Î∂Ñ 1:Ï¥à 2:0.Ï¥à
 	private String[] lrctime = new String[1000];
 	private String[] lrc = new String[1000];
 	private String[] index = new String[10];

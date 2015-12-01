@@ -15,12 +15,12 @@ public class GUI_Tab implements ListSelectionListener{
 		//selectList.addListSelectionListener(this);
 		this.selectListPanel.setSize(100, 450);
 		
-		this.addElement(new JButton("ÇöÀç Àç»ıÁß"));
-		this.addElement(new JButton("ÀüÃ¼À½¾Ç"));
-		this.addElement(new JButton("Áñ°ÜÃ£±â"));
-		this.addElement(new JButton("ÃÖ±Ù Ãß°¡ÇÑ °î"));
-		this.addElement(new JButton("ÃÖ±Ù Àç»ıÇÑ °î"));
-		this.addElement(new JButton("°¡Àå ¸¹ÀÌ Àç»ıÇÑ °î"));
+		this.addElement(new JButton("í˜„ì¬ ì¬ìƒì¤‘"));
+		this.addElement(new JButton("ì „ì²´ìŒì•…"));
+		this.addElement(new JButton("ì¦ê²¨ì°¾ê¸°"));
+		this.addElement(new JButton("ìµœê·¼ ì¶”ê°€í•œ ê³¡"));
+		this.addElement(new JButton("ìµœê·¼ ì¬ìƒí•œ ê³¡"));
+		this.addElement(new JButton("ê°€ì¥ ë§ì´ ì¬ìƒí•œ ê³¡"));
 		
 		this.selectListPanel.setVisible(true);
 		return this.selectListPanel;

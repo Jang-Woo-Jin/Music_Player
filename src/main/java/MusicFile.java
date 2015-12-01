@@ -90,7 +90,7 @@ public class MusicFile {
 	
 	
 	
-	// ~~~~~~~~~~~~~~~ ÃÖ±Ù Àç»ıµÈ ±â·Ï¿¡ °ü·ÃµÈ ÇÔ¼ö
+	// ~~~~~~~~~~~~~~~ ìµœê·¼ ì¬ìƒëœ ê¸°ë¡ì— ê´€ë ¨ëœ í•¨ìˆ˜
 	public void addRecentPlay(String information){
 		recentPlay.add(information);
 	}

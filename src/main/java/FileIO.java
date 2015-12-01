@@ -48,7 +48,7 @@ public class FileIO {
 		try {
 			while((readLine = input.readLine()) != null){
 				
-				if(readLine.startsWith("//")||(readLine.trim()).equals("")) continue; // ÁÖ¼® ¶Ç´Â ºó ÁÙ
+				if(readLine.startsWith("//")||(readLine.trim()).equals("")) continue; // ì£¼ì„ ë˜ëŠ” ë¹ˆ ì¤„
 				else{
 					information[lineNum] = readLine;
 				
@@ -162,7 +162,7 @@ public class FileIO {
 		try {
 			while((inputLine = input.readLine()) != null){
 				System.out.println(inputLine);
-				if(inputLine.startsWith("//")||(inputLine.trim()).equals("")) continue; // ÁÖ¼® ¶Ç´Â ºó ÁÙ
+				if(inputLine.startsWith("//")||(inputLine.trim()).equals("")) continue; // ì£¼ì„ ë˜ëŠ” ë¹ˆ ì¤„
 				lineNum++;
 			}
 		} catch (IOException e) {
