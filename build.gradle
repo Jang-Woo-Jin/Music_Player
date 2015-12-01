@@ -16,5 +16,3 @@ dependencies {
 }
 
 mainClassName = "Main"
-
-// mainClassName = "org.gradle.sample.Main"
