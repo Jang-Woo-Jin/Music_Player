@@ -1,23 +1,41 @@
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.*;
+
 import javax.swing.*;
 
-public class GUI_PlayerTab {
+public class GUI_PlayerTab extends JPanel {
 
-    public static Container initialize(){
+    File bip;
+    Media hit;
+    MediaPlayer mediaPlayer;
+    JButton playButton;
+    JButton pauseButton;
+    final JFXPanel fxPanel = new JFXPanel();
 
-        final JFXPanel fxPanel = new JFXPanel();
-        JPanel jp = new JPanel();
+    public GUI_PlayerTab() {
+        this.initialize();
+    }
 
-        jp.add(fxPanel);
-        jp.setVisible(true);
-        // Really shouldn't do this, so commented it out
-        //jp.setPreferredSize(new Dimension(500, 300));
-        jp.setBackground(Color.CYAN);
+    public Container initialize() {
+
+        this.add(fxPanel);
+
+        this.setPreferredSize(new Dimension(400, 300));
+        this.setBackground(Color.BLACK);
+
+        setMusic();
+        setButtons();
 
         Platform.runLater(new Runnable() {
             public void run() {
@@ -25,24 +43,56 @@ public class GUI_PlayerTab {
             }
         });
 
-        return jp;
+        this.setVisible(true);
+        return this;
     }
 
-    private static void initFX(JFXPanel fxPanel) {
+    private void initFX(JFXPanel fxPanel) {
         Scene scene = initScene();
         fxPanel.setScene(scene);
     }
 
-    private static Scene initScene(){
-        Group  root  =  new  Group();
-        Scene  scene  =  new  Scene(root, javafx.scene.paint.Color.GREENYELLOW );
-        Text  text  =  new  Text();
-        text.setX(40);
-        text.setY(100);
-        text.setFont(new Font(25));
-        text.setText("Welcome JavaFX!");
-        root.getChildren().add(text);
+    private Scene initScene() {
+        Group root = new Group();
+        Scene scene = new Scene(root, javafx.scene.paint.Color.GREENYELLOW);
+
         return (scene);
     }
+
+    private void setButtons() {
+
+        playButton = new JButton("▶");
+       
+    	/* buttons setting */
+        playButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (playButton.getText().equals("▶")) {
+                    mediaPlayer.play();
+                    System.out.println("You clicked the play button");
+                    playButton.setText(" || ");
+                } else {
+                    mediaPlayer.pause();
+                    System.out.println("You clicked the pause button");
+                    playButton.setText("▶");
+                }
+            }
+        });
+
+
+        this.add(playButton);
+       
+        
+        /* buttons setting end */
+
+
+    }
+
+    private void setMusic() {
+        bip = new File(System.getProperty("user.home") + "/Downloads/【Lily】パラノイド【オリジナル曲】.mp3");
+        System.out.println(bip.toURI().toString());
+        hit = new Media(bip.toURI().toString());
+        mediaPlayer = new MediaPlayer(hit);
+    }
+
 
 }

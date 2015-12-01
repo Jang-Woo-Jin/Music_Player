@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 
 public class RecentFileList extends HashMap<String, MusicFile> {
-	
-	public void delete(int index) {
-		
-	}
+
+    public void delete(int index) {
+
+    }
 }
