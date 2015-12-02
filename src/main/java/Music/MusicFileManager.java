@@ -1,25 +1,40 @@
 package Music;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import FileIO.FileIO;
 
 
 public class MusicFileManager {
+
+    // Singleton Pattern
+    private static MusicFileManager uniqueInstance;
+
+    private MusicFileManager() {
+
+    }
+
+    public static MusicFileManager getInstance() {
+        if (uniqueInstance == null) {
+            uniqueInstance = new MusicFileManager();
+        }
+        return uniqueInstance;
+    }
+    // Singleton Pattern Applied
+
     private ArrayList<MusicFile> musicFileList = new ArrayList<MusicFile>();
     private RecentPlayList recentPlayList = new RecentPlayList();
     private ArrayList<Integer> musicFileIDList = new ArrayList<Integer>();
 
-    private FavoriteFileList favoriteFileList;
+    private FavoriteMusicList favoriteMusicList;
     private ArrayList<MusicFile> choosePlayList = new ArrayList<MusicFile>();
 
-    private final int MAXMUSICFILENUM = 100000;
+    private final int MAX_MUSIC_FILE_NUM = 100000;
 
     MusicFileManager(String fileAddress) {
         addMusicFile(fileAddress);
-        favoriteFileList = new FavoriteFileList(musicFileList);
-        favoriteFileList.FSort();
+        favoriteMusicList = new FavoriteMusicList(musicFileList);
+        favoriteMusicList.FSort();
     }
 
     public void addMusicFile(String fileAddress) {
@@ -42,7 +57,7 @@ public class MusicFileManager {
         int random;
         boolean checkExist = false;
         do {
-            random = (int) (Math.random() * MAXMUSICFILENUM);
+            random = (int) (Math.random() * MAX_MUSIC_FILE_NUM);
             for (int i = 0; i < musicFileIDList.size(); i++) {
                 if (random == musicFileIDList.get(i)) {
                     checkExist = true;
@@ -72,12 +87,12 @@ public class MusicFileManager {
         this.recentPlayList = recentPlayList;
     }
 
-    public FavoriteFileList getFavoriteFileList() {
-        return favoriteFileList;
+    public FavoriteMusicList getFavoriteFileList() {
+        return favoriteMusicList;
     }
 
-    public void setFavoriteFileList(FavoriteFileList favoriteFileList) {
-        this.favoriteFileList = favoriteFileList;
+    public void setFavoriteFileList(FavoriteMusicList favoriteMusicList) {
+        this.favoriteMusicList = favoriteMusicList;
     }
 
     public ArrayList<MusicFile> getChoosePlayList() {

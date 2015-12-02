@@ -1,38 +1,37 @@
 package GUI;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
-public class GUI_Tab implements ListSelectionListener {
-    private JPanel selectListPanel = new JPanel(new GridLayout(5, 1, 0, 0));
-    private SingleSelectionModel seletionModel;
-    private int elements = 5;
+public class GUI_Tab extends JPanel{
+    JButton allMusic        = new JButton("전체 음악");
+    JButton favoriteMusic   = new JButton("즐겨찾기");
+    JButton recentMusic     = new JButton("최근 재생한 곡");
+    JButton chooseMusic     = new JButton("가장 많이 재생한 곡");
 
     public JPanel createTabList() {
 
-        //selectList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        //selectList.addListSelectionListener(this);
-        this.selectListPanel.setSize(100, 450);
+        this.setLayout(new GridLayout(4, 1, 0, 0));
 
-        this.addElement(new JButton("현재 재생 중"));
-        this.addElement(new JButton("전체 음악"));
-        this.addElement(new JButton("즐겨찾기"));
-        this.addElement(new JButton("최근 재생한 곡"));
-        this.addElement(new JButton("가장 많이 재생한 곡"));
+        this.add(allMusic);
+        this.add(favoriteMusic);
+        this.add(recentMusic);
+        this.add(chooseMusic);
 
-        this.selectListPanel.setVisible(true);
-        return this.selectListPanel;
+        return this;
     }
 
-    public void addElement(JButton element) {
-        selectListPanel.add(element);
-        //elements++;
+
+    /* Button Actions Here */
+    private void setActionListeners() {
+        this.allMusic.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
-    public void valueChanged(ListSelectionEvent arg0) {
-        // TODO Auto-generated method stub
-
-    }
 }
