@@ -9,14 +9,14 @@ import javax.swing.*;
 
 public class GUI_Toolbar extends JMenuBar {
 
-    JMenu fileMenu = new JMenu("File");
+    JMenu fileMenu                      = new JMenu("File");
 
-    JMenuItem newMenuItem = new JMenuItem("New");
-    JMenuItem openMenuItem = new JMenuItem("Open");
-    JMenuItem saveMenuItem = new JMenuItem("Save");
-    JMenuItem exitMenuItem = new JMenuItem("Exit");
+    JMenuItem newMenuItem               = new JMenuItem("New");
+    JMenuItem openMenuItem              = new JMenuItem("Open");
+    JMenuItem saveMenuItem              = new JMenuItem("Save");
+    JMenuItem exitMenuItem              = new JMenuItem("Exit");
 
-    MenuItemListener menuItemListener = new MenuItemListener();
+    MenuItemListener menuItemListener   = new MenuItemListener();
 
     public GUI_Toolbar() {
         onCreate();
