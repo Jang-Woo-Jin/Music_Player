@@ -21,7 +21,6 @@ public class GUI_PlayerTab extends JPanel {
     Media hit;
     MediaPlayer mediaPlayer;
     JButton playButton;
-    JButton pauseButton;
     final JFXPanel fxPanel = new JFXPanel();
 
     public GUI_PlayerTab() {
@@ -63,7 +62,6 @@ public class GUI_PlayerTab extends JPanel {
     private void setButtons() {
 
         playButton = new JButton("▶");
-       
     	/* buttons setting */
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -88,8 +86,8 @@ public class GUI_PlayerTab extends JPanel {
 
     }
 
-    private void setMusic() {
-        bip = new File(System.getProperty("user.home") + "/Downloads/01 ヨンジュウナナ.mp3");
+        private void setMusic() {
+        bip = new File(System.getProperty("user.home") + "/Downloads/[와타아메]+모노크로스로드.mp3");
         System.out.println(bip.toURI().toString());
         hit = new Media(bip.toURI().toString());
         mediaPlayer = new MediaPlayer(hit);

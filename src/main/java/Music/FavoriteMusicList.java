@@ -3,12 +3,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class FavoriteFileList extends ArrayList<MusicFile> {
-    FavoriteFileList() {
+public class FavoriteMusicList extends ArrayList<MusicFile> {
+    FavoriteMusicList() {
         super();
     }
 
-    FavoriteFileList(ArrayList<MusicFile> list) {
+    FavoriteMusicList(ArrayList<MusicFile> list) {
         super(list);
     }
 
