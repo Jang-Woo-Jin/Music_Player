@@ -1,3 +1,4 @@
+package GUI;
 import java.awt.*;
 
 import javax.swing.*;
@@ -15,9 +16,9 @@ public class GUI_Tab implements ListSelectionListener {
         //selectList.addListSelectionListener(this);
         this.selectListPanel.setSize(100, 450);
 
-        this.addElement(new JButton("전체음악"));
+        this.addElement(new JButton("현재 재생 중"));
+        this.addElement(new JButton("전체 음악"));
         this.addElement(new JButton("즐겨찾기"));
-        this.addElement(new JButton("최근 추가한 곡"));
         this.addElement(new JButton("최근 재생한 곡"));
         this.addElement(new JButton("가장 많이 재생한 곡"));
 

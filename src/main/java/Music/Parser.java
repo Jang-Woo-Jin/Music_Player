@@ -1,6 +1,10 @@
+package Music;
+
+import FileIO.FileIO;
+
 public class Parser {
 
-    private int[][] time = new int[1000][3];// 0:분 1:초 2:0.초
+    private int[][] time = new int[1000][3];// 0:Min  1:Sec   2:0.Sec
     private String[] lrctime = new String[1000];
     private String[] lrc = new String[1000];
     private String[] index = new String[10];

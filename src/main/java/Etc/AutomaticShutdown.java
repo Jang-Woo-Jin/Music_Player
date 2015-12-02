@@ -1,6 +1,4 @@
-//예약종료 - 핸드폰의 취침예약처럼
-//15분 30분 45분 60분으로 나눔.
-
+package Etc;
 import java.util.*;
 
 public class AutomaticShutdown extends Thread {

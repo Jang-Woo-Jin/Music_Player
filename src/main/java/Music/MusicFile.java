@@ -1,5 +1,8 @@
+package Music;
 import java.util.ArrayList;
 import java.io.*;
+
+import FileIO.FileIO;
 
 public class MusicFile {
     private String composer, singer, name, genre, nation,
@@ -17,17 +20,15 @@ public class MusicFile {
     private final String musicInformationDelimiter = "/";
     private final int musicDataNum = 12;
 
-    MusicFile() {
+    public MusicFile() {
 
     }
 
-    ;
-
-    MusicFile(String musicFileId) {
+    public MusicFile(String musicFileId) {
         this.musicFileId = musicFileId;
     }
 
-    MusicFile(String musicFileId, String fileInformationAddress) {
+    public MusicFile(String musicFileId, String fileInformationAddress) {
         this.fileInformationAddress = fileInformationAddress;
         this.musicFileId = musicFileId;
 
@@ -36,7 +37,7 @@ public class MusicFile {
         setMusicInformation(information);
     }
 
-    MusicFile(String musicFileId, String[] information, String musicFileName, String musicFileAddress) {
+    public MusicFile(String musicFileId, String[] information, String musicFileName, String musicFileAddress) {
         this.musicFileId = musicFileId;
         this.fileAddress = musicFileAddress;
         this.fileName = musicFileName;
@@ -94,7 +95,7 @@ public class MusicFile {
     }
 
 
-    // ~~~~~~~~~~~~~~~ 최근 재생된 기록에 관련된 함수
+    // ~~~~~~~~~~~~~~~ relation with recent play time
     public void addRecentPlay(String information) {
         recentPlay.add(information);
     }

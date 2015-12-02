@@ -1,3 +1,4 @@
+package GUI;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -69,7 +70,7 @@ public class GUI_PlayerTab extends JPanel {
                 if (playButton.getText().equals("▶")) {
                     mediaPlayer.play();
                     System.out.println("You clicked the play button");
-                    playButton.setText(" || ");
+                    playButton.setText("||");
                 } else {
                     mediaPlayer.pause();
                     System.out.println("You clicked the pause button");
@@ -88,7 +89,7 @@ public class GUI_PlayerTab extends JPanel {
     }
 
     private void setMusic() {
-        bip = new File(System.getProperty("user.home") + "/Downloads/【Lily】パラノイド【オリジナル曲】.mp3");
+        bip = new File(System.getProperty("user.home") + "/Downloads/01 ヨンジュウナナ.mp3");
         System.out.println(bip.toURI().toString());
         hit = new Media(bip.toURI().toString());
         mediaPlayer = new MediaPlayer(hit);

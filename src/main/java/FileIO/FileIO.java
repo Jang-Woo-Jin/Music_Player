@@ -1,3 +1,5 @@
+package FileIO;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -45,7 +47,7 @@ public class FileIO {
         try {
             while ((readLine = input.readLine()) != null) {
 
-                if (readLine.startsWith("//") || (readLine.trim()).equals("")) continue; // 주석 또는 빈 줄
+                if (readLine.startsWith("//") || (readLine.trim()).equals("")) continue; 
                 else {
                     information[lineNum] = readLine;
 
@@ -166,7 +168,7 @@ public class FileIO {
         try {
             while ((inputLine = input.readLine()) != null) {
                 System.out.println(inputLine);
-                if (inputLine.startsWith("//") || (inputLine.trim()).equals("")) continue; // 주석 또는 빈 줄
+                if (inputLine.startsWith("//") || (inputLine.trim()).equals("")) continue; 
                 lineNum++;
             }
         } catch (IOException e) {

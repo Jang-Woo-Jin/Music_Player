@@ -1,11 +1,14 @@
+package Music;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import FileIO.FileIO;
+
 
 public class MusicFileManager {
     private ArrayList<MusicFile> musicFileList = new ArrayList<MusicFile>();
-    private RecentFileList recentPlayList = new RecentFileList();
+    private RecentPlayList recentPlayList = new RecentPlayList();
     private ArrayList<Integer> musicFileIDList = new ArrayList<Integer>();
 
     private FavoriteFileList favoriteFileList;
@@ -61,11 +64,11 @@ public class MusicFileManager {
         this.musicFileList = musicFileList;
     }
 
-    public RecentFileList getRecentPlayList() {
+    public RecentPlayList getRecentPlayList() {
         return recentPlayList;
     }
 
-    public void setRecentPlayList(RecentFileList recentPlayList) {
+    public void setRecentPlayList(RecentPlayList recentPlayList) {
         this.recentPlayList = recentPlayList;
     }
 
