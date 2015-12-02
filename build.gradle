@@ -17,6 +17,4 @@ dependencies {
     
 }
 
-[compileJava, compileTestJava]*.options.collect { options -> options.encoding = 'UTF-8' }
-
 mainClassName = "Main"
