@@ -8,14 +8,18 @@ import com.mpatric.mp3agic.UnsupportedTagException;
 
 import FileIO.FileIO;
 
-
 public class MusicFileManager {
 
     // Singleton Pattern
     private static MusicFileManager uniqueInstance;
 
+    private ArrayList<MusicFile> musicFileList = new ArrayList<MusicFile>();
+    private RecentPlayList recentPlayList = new RecentPlayList();
+    private FavoriteMusicList favoriteMusicList;
+    private ArrayList<MusicFile> choosePlayList = new ArrayList<MusicFile>();
+    
     private MusicFileManager() {
-
+    	favoriteMusicList.FSort();
     }
 
     public static MusicFileManager getInstance() {
@@ -25,60 +29,30 @@ public class MusicFileManager {
         return uniqueInstance;
     }
     // Singleton Pattern Applied
-
-    private ArrayList<MusicFile> musicFileList = new ArrayList<MusicFile>();
-    private RecentPlayList recentPlayList = new RecentPlayList();
-    private ArrayList<Integer> musicFileIDList = new ArrayList<Integer>();
-
-    private FavoriteMusicList favoriteMusicList;
-    private ArrayList<MusicFile> choosePlayList = new ArrayList<MusicFile>();
-
-    private final int MAX_MUSIC_FILE_NUM = 100000;
-
-    MusicFileManager(String fileAddress) {
-        addMusicFile(fileAddress);
-        favoriteMusicList = new FavoriteMusicList(musicFileList);
-        favoriteMusicList.FSort();
-    }
-
+        
+    
     public void addMusicFile(String fileAddress) {
-        FileIO fileio = new FileIO();
-        ArrayList<String> musicFileNameList = fileio.readAllFileInPath(fileAddress, "mp3");
+        ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress, "mp3");
         for (int i = 0; i < musicFileNameList.size(); i++) {
-            int musicFileId = generateMusicID();
             String fileName = (String) musicFileNameList.get(i);
-            String[] information = null;
-			try {
-				information = fileio.readMusicFile(fileAddress, fileName);
-			} 
-			catch (UnsupportedTagException e) {e.printStackTrace();} 
-			catch (InvalidDataException e) {e.printStackTrace();} 
-			catch (IOException e) {e.printStackTrace();}
-
-            musicFileList.add(new MusicFile(Integer.toString(musicFileId),
-                    information, fileName, fileAddress));
+           
+            try {
+				musicFileList.add(new MusicFile(fileAddress,fileName));
+			} catch (UnsupportedTagException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvalidDataException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
         for (int i = 0; i < musicFileList.size(); i++) {
             System.out.println(((MusicFile) musicFileList.get(i)).getName());
         }
     }
-
-    private int generateMusicID() {
-        int random;
-        boolean checkExist = false;
-        do {
-            random = (int) (Math.random() * MAX_MUSIC_FILE_NUM);
-            for (int i = 0; i < musicFileIDList.size(); i++) {
-                if (random == musicFileIDList.get(i)) {
-                    checkExist = true;
-                }
-            }
-
-        } while (checkExist);
-
-        return random;
-    }
-
 
     //~~~~~~~~~~~~~~ Getter & Setter
     public ArrayList<MusicFile> getMusicFileList() {

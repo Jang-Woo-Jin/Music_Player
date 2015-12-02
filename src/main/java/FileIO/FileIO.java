@@ -4,24 +4,11 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Scanner;
-
-import com.mpatric.mp3agic.*;
-
-import org.apache.tika.exception.TikaException;
-import org.apache.tika.metadata.Metadata;
-import org.apache.tika.parser.ParseContext;
-import org.apache.tika.parser.Parser;
-import org.apache.tika.parser.mp3.Mp3Parser;
-import org.xml.sax.ContentHandler;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
+;
 
 public class FileIO {
     public static String[] readTextFile(String fileAddress, String fileName) {
@@ -84,18 +71,7 @@ public class FileIO {
         }
     }
 
-    public static String[] readMusicFile(String fileAddress, String fileName) throws UnsupportedTagException, InvalidDataException, IOException {
-
-        String[] information = new String[12];
-        String fileLocation = fileAddress + "\\" + fileName + ".mp3";
-
-        Mp3File file = new Mp3File(fileLocation);
-          
-
-        return information;
-    }
-
-    public static ArrayList readAllFileInPath(String fileAddress, String extend) {
+    public static ArrayList<String> readAllFileInPath(String fileAddress, String extend) {
         File dirFile = new File(fileAddress);
         File[] fileList = dirFile.listFiles();
         ArrayList<String> information = new ArrayList<String>();
@@ -154,7 +130,7 @@ public class FileIO {
     }
 
     public static void deleteTextFile(String fileAddress, String fileName){
-    	 File file = new File(fileAddress, fileName + ".txt");
+    	 File file = new File(fileAddress+"//"+fileName + ".txt");
     	 if (file.delete()) {
     		 System.out.println("파일을 성공적으로 지웠습니다 : " + fileName);
     	 } 
