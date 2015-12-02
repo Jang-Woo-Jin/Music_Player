@@ -1,7 +1,11 @@
 package Music;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.UnsupportedTagException;
 
 import FileIO.FileIO;
 
@@ -24,11 +28,17 @@ public class MusicFileManager {
 
     public void addMusicFile(String fileAddress) {
         FileIO fileio = new FileIO();
-        ArrayList<String> musicFileNameList = fileio.readAllFIleInPath(fileAddress, "mp3");
+        ArrayList<String> musicFileNameList = fileio.readAllFileInPath(fileAddress, "mp3");
         for (int i = 0; i < musicFileNameList.size(); i++) {
             int musicFileId = generateMusicID();
             String fileName = (String) musicFileNameList.get(i);
-            String[] information = fileio.readMusicFile(fileAddress, fileName);
+            String[] information = null;
+			try {
+				information = fileio.readMusicFile(fileAddress, fileName);
+			} 
+			catch (UnsupportedTagException e) {e.printStackTrace();} 
+			catch (InvalidDataException e) {e.printStackTrace();} 
+			catch (IOException e) {e.printStackTrace();}
 
             musicFileList.add(new MusicFile(Integer.toString(musicFileId),
                     information, fileName, fileAddress));

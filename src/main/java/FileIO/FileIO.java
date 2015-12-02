@@ -12,6 +12,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.mpatric.mp3agic.*;
+
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.ParseContext;
@@ -22,12 +24,11 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class FileIO {
-    public String[] readTextFile(String fileAddress, String fileName) {
+    public static String[] readTextFile(String fileAddress, String fileName) {
 
         int lineNum = readLine(fileAddress, fileName);
         String[] information = new String[lineNum];
         lineNum = 0;
-
         String readLine = new String("");
         File file = new File(fileAddress, fileName + ".txt");
         BufferedReader input;
@@ -67,7 +68,7 @@ public class FileIO {
         return information;
     }
 
-    public void writeTextFile(String fileInformationAddress, String fileName, String[] writeInformation, final String delimiter) {
+    public static void writeTextFile(String fileInformationAddress, String fileName, String[] writeInformation, final String delimiter) {
         try {
             File file = new File(fileInformationAddress, fileName + ".txt");
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
@@ -83,52 +84,18 @@ public class FileIO {
         }
     }
 
-    public String[] readMusicFile(String fileAddress, String fileName) {
+    public static String[] readMusicFile(String fileAddress, String fileName) throws UnsupportedTagException, InvalidDataException, IOException {
 
         String[] information = new String[12];
         String fileLocation = fileAddress + "\\" + fileName + ".mp3";
 
-        try {
-
-            InputStream input = new FileInputStream(new File(fileLocation));
-            ContentHandler handler = new DefaultHandler();
-            Metadata metadata = new Metadata();
-            Parser parser = new Mp3Parser();
-            ParseContext parseCtx = new ParseContext();
-            parser.parse(input, handler, metadata, parseCtx);
-            input.close();
-            // List all metadata
-            String[] metadataNames = metadata.names();
-
-            information[0] = metadata.get("meta:author");
-            information[1] = metadata.get("meta:aritst");
-            information[2] = metadata.get("title");
-            information[3] = metadata.get("xmpDM:album");
-            information[4] = null;
-            information[5] = null;
-            information[6] = metadata.get("xmpDM:duration");
-            information[7] = metadata.get("xmpDM:genre");
-            information[8] = null;
-            information[9] = null;
-            information[10] = null;
-            information[11] = null;
-            // Retrieve the necessary info from metadata
-            // Names - title, xmpDM:artist etc. - mentioned below may differ based
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (TikaException e) {
-            e.printStackTrace();
-        }
+        Mp3File file = new Mp3File(fileLocation);
+          
 
         return information;
     }
 
-    public ArrayList readAllFIleInPath(String fileAddress, String extend) {
+    public static ArrayList readAllFileInPath(String fileAddress, String extend) {
         File dirFile = new File(fileAddress);
         File[] fileList = dirFile.listFiles();
         ArrayList<String> information = new ArrayList<String>();
@@ -137,7 +104,8 @@ public class FileIO {
             if (tempFile.isFile()) {
                 String tempPath = tempFile.getParent();
                 String tempFileName = tempFile.getName();
-                if (FilePathParser.getExtension(tempFileName).equals("mp3")) {
+                if (FilePathParser.getExtension(tempFileName).equals(extend
+                		)) {
                     information.add(FilePathParser.getFileName(tempFileName));
                 }
             }
@@ -145,7 +113,7 @@ public class FileIO {
         return information;
     }
 
-    private int readLine(String fileAddress, String fileName) {
+    private static int readLine(String fileAddress, String fileName) {
         int lineNum = 0;
 
         String inputLine = new String("");
@@ -185,15 +153,26 @@ public class FileIO {
         return lineNum;
     }
 
-    public void reNameTextFile(String fileAddress, String fileName, String newName) {
+    public static void deleteTextFile(String fileAddress, String fileName){
+    	 File file = new File(fileAddress, fileName + ".txt");
+    	 if (file.delete()) {
+    		 System.out.println("파일을 성공적으로 지웠습니다 : " + fileName);
+    	 } 
+    	 else {
+    		 System.err.println("파일  지우기 실패 : " + fileName);
+    	 }
+    	 
+    }
+    
+    public static void reNameTextFile(String fileAddress, String fileName, String newName) {
         reNameFile(fileAddress, fileName, newName, ".txt");
     }
 
-    public void reNameMP3File(String fileAddress, String fileName, String newName) {
+    public static void reNameMP3File(String fileAddress, String fileName, String newName) {
         reNameFile(fileAddress, fileName, newName, ".mp3");
     }
 
-    private void reNameFile(String fileAddress, String fileName, String newName, String type) {
+    private static void reNameFile(String fileAddress, String fileName, String newName, String type) {
         String path = fileAddress;
         File oldfile = new File(path, fileName + ".txt");
         File newfile = new File(path, newName + ".txt");

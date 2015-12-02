@@ -3,14 +3,13 @@ import java.awt.*;
 
 import javax.swing.*;
 
-
+import FileIO.FileIO;
 public class Main {
     private JFrame mainFrame = new JFrame();
 
     //private JPanel listPanel = new JPanel();
 
     public void init() {
-
         this.mainFrame.setLayout(new BorderLayout());
         this.mainFrame.setSize(800, 450);
         this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,6 +28,7 @@ public class Main {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        Main main= new Main();
+        //Main main= new Main();
+    	FileIO.deleteTextFile("C:\\Users\\woojin\\Documents\\카카오톡 받은 파일", "abc");
     }
 }

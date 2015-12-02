@@ -2,6 +2,8 @@ package Music;
 import java.util.ArrayList;
 import java.io.*;
 
+//import com.mpatric.mp3agic.*;
+
 import FileIO.FileIO;
 
 public class MusicFile {
@@ -19,9 +21,9 @@ public class MusicFile {
 
     private final String musicInformationDelimiter = "/";
     private final int musicDataNum = 12;
-
+	
     public MusicFile() {
-
+    	
     }
 
     public MusicFile(String musicFileId) {
