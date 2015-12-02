@@ -13,8 +13,10 @@ repositories {
 dependencies {
     compile group: 'org.apache.tika', name: 'tika-core', version: '1.+'
     compile group: 'org.apache.tika', name: 'tika-parsers', version: '1.+'
+    compile group: 'com.mpatric', name: 'mp3agic', version: '0.8.+'
+    
 }
 
-mainClassName = "Main"
+[compileJava, compileTestJava]*.options.collect { options -> options.encoding = 'UTF-8' }
 
-// mainClassName = "org.gradle.sample.Main"
+mainClassName = "Main"
