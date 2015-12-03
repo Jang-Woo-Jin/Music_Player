@@ -1,9 +1,13 @@
 package FileIO;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.io.*;
 import java.util.ArrayList;
 
 public class FileIO {
+
+    @Nullable
     public static ArrayList<String> readTextFile(final String fileAddress, final String fileName) {
 
         ArrayList<String> information = new ArrayList<String>();
