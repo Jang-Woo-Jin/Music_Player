@@ -17,37 +17,41 @@ public class MusicFileManager {
     private RecentPlayList recentPlayList = new RecentPlayList();
     private FavoriteMusicList favoriteMusicList = new FavoriteMusicList();
     private ArrayList<MusicFile> choosePlayList = new ArrayList<MusicFile>();
-    
+
     private MusicFileManager() {
-    	
+        // TEST CODE
+        musicFileList.add((new MusicFile("a")));
+        favoriteMusicList.add((new MusicFile("b")));
+        // TEST CODE END
     }
 
     public static MusicFileManager getInstance() {
         if (uniqueInstance == null) {
             uniqueInstance = new MusicFileManager();
         }
+
         return uniqueInstance;
     }
     // Singleton Pattern Applied
-        
-    
+
+
     public void addMusicFile(String fileAddress) {
         ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress, "mp3");
         for (int i = 0; i < musicFileNameList.size(); i++) {
             String fileName = (String) musicFileNameList.get(i);
-           
+
             try {
-				musicFileList.add(new MusicFile(fileAddress,fileName));
-			} catch (UnsupportedTagException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvalidDataException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+                musicFileList.add(new MusicFile(fileAddress, fileName));
+            } catch (UnsupportedTagException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (InvalidDataException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
         favoriteMusicList.FSort();
         for (int i = 0; i < musicFileList.size(); i++) {

@@ -47,7 +47,9 @@ public class MusicFile extends Mp3File {
 		// setMusicInformation();
 		
 	}
-
+	public MusicFile(String a){
+		this.title = title;
+	}
 	public String[] getMusicFileInformation() {
 		String[] tempInformation = FileIO.readTextFile(fileInformationAddress, getName());
 		String[] information = tempInformation[0].split("/");
@@ -110,6 +112,6 @@ public class MusicFile extends Mp3File {
 		this.playCount = playCount;
 	}
 	public String getName(){
-		return id3v1Tag.getArtist();
+		return title;
     }
 }
