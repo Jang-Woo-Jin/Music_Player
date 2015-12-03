@@ -12,22 +12,11 @@ public class FileIO {
 
         ArrayList<String> information = new ArrayList<String>();
         String readLine;
-        File file = new File(fileAddress, fileName + ".txt");
         BufferedReader input;
 
         try {
             input = new BufferedReader(new InputStreamReader(
                     new FileInputStream(fileAddress + "//" + fileName + ".txt"), "UTF-8"));
-        } catch (Exception e) {
-            try {
-                FileWriter fw = new FileWriter(file);
-                fw.close();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-            return null;
-        }
-        try {
             while ((readLine = input.readLine()) != null) {
 
                 if (readLine.startsWith("//") || (readLine.trim()).equals("")) {
@@ -35,11 +24,6 @@ public class FileIO {
                     information.add(readLine);
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
             input.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,16 +42,7 @@ public class FileIO {
                 writer.write(delimiter);
             }
             writer.close();
-
         } catch (IOException e) {
-            FileWriter fw;
-            try {
-                fw = new FileWriter(file);
-                fw.close();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-
             e.printStackTrace();
         }
     }
