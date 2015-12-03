@@ -36,7 +36,6 @@ public class GUI_Toolbar extends JMenuBar {
 
 
         setMenuItem.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser chooser = new JFileChooser();
                 chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
