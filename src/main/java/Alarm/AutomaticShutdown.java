@@ -1,4 +1,4 @@
-package Etc;
+package Alarm;
 
 import java.util.Calendar;
 
