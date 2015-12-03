@@ -14,10 +14,14 @@ public class OSValidator {
     public static boolean isUnix() {
         return (OS.contains("nix")
                 || OS.contains("nux")
-                || OS.indexOf("aix") > 0);
+                || OS.contains("aix"));
     }
 
     public static boolean isSolaris() {
         return (OS.contains("sunos"));
+    }
+
+    public static boolean isPOSIX() {
+        return (isMac() || isUnix() || isSolaris());
     }
 }
