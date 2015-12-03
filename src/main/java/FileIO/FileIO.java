@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class FileIO {
     public static ArrayList<String> readTextFile(final String fileAddress, final String fileName) {
 
-        ArrayList<String> information = new ArrayList<>();
+        ArrayList<String> information = new ArrayList<String>();
         String readLine;
         File file = new File(fileAddress, fileName + ".txt");
         BufferedReader input;
