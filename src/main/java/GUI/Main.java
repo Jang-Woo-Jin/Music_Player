@@ -12,6 +12,7 @@ class Main {
     public static void main(String[] args) {
         Main main = new Main();
         main.init();
+    	
     }
 
     private void init() {
@@ -30,7 +31,7 @@ class Main {
         this.mainFrame.add(new JScrollPane(listPanel), BorderLayout.CENTER);
         this.mainFrame.add(playerPanel, BorderLayout.EAST);
 
-        this.mainFrame.setJMenuBar(new GUI_Toolbar());
+        this.mainFrame.setJMenuBar(new GUI_Toolbar(gui_musicList));
         this.mainFrame.setVisible(true);
     }
 }

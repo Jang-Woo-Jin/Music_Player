@@ -36,7 +36,7 @@ public class MusicFileManager {
             System.out.println(FILEINFOADDRESS);
             System.out.println(fileName);
             try {
-                musicFileList.add(new MusicFile(fileName, fileAddress, getMusicInfoFile(fileName)));
+                musicFileList.add(new MusicFile(fileName, fileAddress, getMusicInfoFile(fileName,fileAddress)));
             } catch (UnsupportedTagException e) {
                 e.printStackTrace();
             } catch (InvalidDataException e) {
@@ -80,15 +80,21 @@ public class MusicFileManager {
             return information;
         }
       */
-    public String[] getMusicInfoFile(final String name) {
-        ArrayList<String> informationString = FileIO.readTextFile(FILEINFOADDRESS, FILEINFONAME);
-        String[] information = new String[informationString.size()];
+    public String[] getMusicInfoFile(final String fileName, final String fileAddress) {
+    	ArrayList<String> informationString = FileIO.readTextFile(FILEINFOADDRESS, FILEINFONAME);
+        String[] information = new String[5];
+        
         for (String iter : informationString) {
-            information = iter.split("/");
-            if (information[0].equals(name)) {
+        	information = iter.split("/");
+            if (information[0].equals(fileName)) {
                 return information;
             }
         }
+        information[0] = "0";
+        information[1] = fileName;
+        information[2] = fileAddress;
+        information[3] = "null";
+        information[4] = "null";
         return information;
     }
 
