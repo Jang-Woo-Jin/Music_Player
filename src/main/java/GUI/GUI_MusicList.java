@@ -48,7 +48,6 @@ public class GUI_MusicList {
 
 
         refreshButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 arrayListToListModel(MusicFileManager.getInstance().getMusicFileList());
                 musicListPanel.updateUI();

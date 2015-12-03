@@ -32,7 +32,7 @@ public class GUI_Tab extends JPanel {
     /* Button Actions Here */
     private void setActionListeners() {
         this.allMusic.addActionListener(new ActionListener() {
-            @Override
+            
             public void actionPerformed(ActionEvent e) {
                 musicList.arrayListToListModel(MusicFileManager.getInstance().getMusicFileList());
                 musicList.createListPanel().updateUI();
@@ -40,7 +40,7 @@ public class GUI_Tab extends JPanel {
         });
 
         this.favoriteMusic.addActionListener(new ActionListener() {
-            @Override
+            
             public void actionPerformed(ActionEvent e) {
                 musicList.arrayListToListModel(MusicFileManager.getInstance().getFavoriteFileList());
                 musicList.createListPanel().updateUI();
@@ -48,7 +48,7 @@ public class GUI_Tab extends JPanel {
         });
 
         this.recentMusic.addActionListener(new ActionListener() {
-            @Override
+            
             public void actionPerformed(ActionEvent e) {
                 //musicList.arrayListToListModel(MusicFileManager.getInstance().getRecentPlayList());
                 musicList.createListPanel().updateUI();
@@ -56,7 +56,7 @@ public class GUI_Tab extends JPanel {
         });
 
         this.chooseMusic.addActionListener(new ActionListener() {
-            @Override
+            
             public void actionPerformed(ActionEvent e) {
                 musicList.arrayListToListModel(MusicFileManager.getInstance().getChoosePlayList());
                 musicList.createListPanel().updateUI();

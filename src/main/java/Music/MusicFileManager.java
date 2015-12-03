@@ -19,7 +19,7 @@ public class MusicFileManager {
     private ArrayList<MusicFile> choosePlayList = new ArrayList<MusicFile>();
 
     private static void MusicFileManager() {
-
+    	
     }
 
     public static MusicFileManager getInstance() {
@@ -45,13 +45,37 @@ public class MusicFileManager {
         }
         ArrayList<String> infoFileInfo = new ArrayList<String>();
         for(MusicFile iter : musicFileList){
-            infoFileInfo.add(iter.getSaveInfo());
+        	infoFileInfo.add(iter.getSaveInfo());
         }
+        
         FileIO.writeTextFile(FILEINFOADDRESS, FILEINFONAME, infoFileInfo, "");
         favoriteMusicList.FSort();
 
     }
 
+    /*
+        private HashMap<String,Integer> checkTextFileAndMusicFile(final String fileAddress){
+            HashMap<String, Integer> information;
+
+            ArrayList<String> mp3files = FileIO.readAllFileInPath(fileAddress, ".mp3");
+            ArrayList<String> saveInfo = FileIO.readTextFile(FILEINFOADDRESS,FILEINFONAME);
+            ArrayList<String> saveNameInfo = new ArrayList<String>();
+
+            for(String iter1 : mp3files){
+                boolean findFlag = false;
+                for(String iter2 : saveNameInfo){
+                    if(iter1 == iter2) {
+                        findFlag = true;
+
+                    }
+                }
+
+            }
+
+
+            return information;
+        }
+      */
     public String[] getMusicInfoFile(final String name) {
         ArrayList<String> informationString = FileIO.readTextFile(FILEINFOADDRESS, FILEINFONAME);
         String[] information = new String[informationString.size()];
