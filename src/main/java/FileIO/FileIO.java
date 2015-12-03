@@ -11,11 +11,9 @@ import java.util.ArrayList;
 ;
 
 public class FileIO {
-    public static String[] readTextFile(String fileAddress, String fileName) {
+    public static ArrayList<String> readTextFile(final String fileAddress, final String fileName) {
 
-        int lineNum = readLine(fileAddress, fileName);
-        String[] information = new String[lineNum];
-        lineNum = 0;
+        ArrayList<String> information = new ArrayList<String>();
         String readLine = new String("");
         File file = new File(fileAddress, fileName + ".txt");
         BufferedReader input;
@@ -37,9 +35,7 @@ public class FileIO {
 
                 if (readLine.startsWith("//") || (readLine.trim()).equals("")) continue; 
                 else {
-                    information[lineNum] = readLine;
-
-                    lineNum++;
+                    information.add(readLine);
                 }
             }
         } catch (IOException e) {
@@ -55,7 +51,7 @@ public class FileIO {
         return information;
     }
 
-    public static void writeTextFile(String fileInformationAddress, String fileName, String[] writeInformation, final String delimiter) {
+    public static void writeTextFile(final String fileInformationAddress, final String fileName, String[] writeInformation, final String delimiter) {
         try {
             File file = new File(fileInformationAddress, fileName + ".txt");
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
@@ -71,7 +67,7 @@ public class FileIO {
         }
     }
 
-    public static ArrayList<String> readAllFileInPath(String fileAddress, String extend) {
+    public static ArrayList<String> readAllFileInPath(final String fileAddress, final String extend) {
         File dirFile = new File(fileAddress);
         File[] fileList = dirFile.listFiles();
         ArrayList<String> information = new ArrayList<String>();
@@ -89,7 +85,7 @@ public class FileIO {
         return information;
     }
 
-    private static int readLine(String fileAddress, String fileName) {
+    private static int readLine(final String fileAddress, final String fileName) {
         int lineNum = 0;
 
         String inputLine = new String("");
@@ -129,29 +125,18 @@ public class FileIO {
         return lineNum;
     }
 
-    public static void deleteTextFile(String fileAddress, String fileName){
-    	 File file = new File(fileAddress+"//"+fileName + ".txt");
-    	 if (file.delete()) {
-    		 System.out.println("파일을 성공적으로 지웠습니다 : " + fileName);
-    	 } 
-    	 else {
-    		 System.err.println("파일  지우기 실패 : " + fileName);
-    	 }
-    	 
-    }
-    
-    public static void reNameTextFile(String fileAddress, String fileName, String newName) {
+    public static void reNameTextFile(final String fileAddress, final String fileName, final String newName) {
         reNameFile(fileAddress, fileName, newName, ".txt");
     }
 
-    public static void reNameMP3File(String fileAddress, String fileName, String newName) {
+    public static void reNameMP3File(final String fileAddress,final  String fileName,final  String newName) {
         reNameFile(fileAddress, fileName, newName, ".mp3");
     }
 
-    private static void reNameFile(String fileAddress, String fileName, String newName, String type) {
+    private static void reNameFile(final String fileAddress,final  String fileName,final  String newName,final  String type) {
         String path = fileAddress;
-        File oldfile = new File(path, fileName + ".txt");
-        File newfile = new File(path, newName + ".txt");
+        File oldfile = new File(path, fileName + type);
+        File newfile = new File(path, newName + type);
         oldfile.renameTo(newfile);
     }
 }

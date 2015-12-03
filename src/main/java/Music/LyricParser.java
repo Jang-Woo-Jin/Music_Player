@@ -1,5 +1,7 @@
 package Music;
 
+import java.util.ArrayList;
+
 import FileIO.FileIO;
 
 public class LyricParser {
@@ -19,9 +21,9 @@ public class LyricParser {
 
     public void splitLrc() {
         FileIO a = new FileIO();
-        String[] b = a.readTextFile("C:", "kimagurestadamu");
-        for (int i = 0; i < b.length; i++) {
-            index = b[i].split("]");
+        ArrayList<String> b = a.readTextFile("C:", "kimagurestadamu");
+        for (int i = 0; i < b.size(); i++) {
+            index = b.get(i).split("]");
             lrctime[i] = index[0];
             lrctime[i] = lrctime[i].replaceAll("\\[", "");
 
