@@ -50,7 +50,7 @@ public class MusicFileManager {
             infoFileInfo.add(iter.getSaveInfo());
 
         }
-        
+        FileIO.mkdir("D:\\music-info\\");
         FileIO.writeTextFile(FILEINFOADDRESS, FILEINFONAME, infoFileInfo, "");
         favoriteMusicList.FSort();
 

@@ -125,7 +125,10 @@ public class FileIO {
     }
 
     public static void mkdir(final String fileAddress){
-    	
+    	File file = new File(fileAddress);
+    	if(!file.mkdir()){
+    		
+    	}
     }
     
     public static void reNameTextFile(final String fileAddress, final String fileName, final String newName) {
