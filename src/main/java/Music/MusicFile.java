@@ -63,6 +63,10 @@ public class MusicFile extends Mp3File {
                 this.fileAddress + "/" + this.lyricsFileName + "/" + this.lyricsFileAddress + "\n";
 
     }
+    
+    public String toString(){
+    	return this.name;
+    }
     // ~~~~~~~~~~~~~~~~ Getter & Setter for private value
 
     public Lyric getLyrics() {
