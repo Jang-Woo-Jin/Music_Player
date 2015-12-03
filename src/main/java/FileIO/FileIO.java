@@ -114,13 +114,11 @@ public class FileIO {
                 lineNum++;
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         try {
             input.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -149,5 +147,3 @@ public class FileIO {
         oldFile.renameTo(newFile);
     }
 }
-
-
