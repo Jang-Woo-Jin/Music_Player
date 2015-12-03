@@ -1,28 +1,24 @@
 package Music;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import FileIO.FileIO;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
-import FileIO.FileIO;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class MusicFileManager {
 
     // Singleton Pattern
     private static MusicFileManager uniqueInstance;
-
+    private final String FILEINFOADDRESS = System.getProperty("user.home") + "/Document/";
+    private final String FILEINFONAME = "MusicInfoFile";
     private ArrayList<MusicFile> musicFileList = new ArrayList<MusicFile>();
     private RecentPlayList recentPlayList = new RecentPlayList();
     private FavoriteMusicList favoriteMusicList = new FavoriteMusicList();
     private ArrayList<MusicFile> choosePlayList = new ArrayList<MusicFile>();
 
-    private final String FILEINFOADDRESS = System.getProperty("user.home") + "/Document/";
-    private final String FILEINFONAME = "MusicInfoFile";
-
-    private static void MusicFileManager(){
+    private static void MusicFileManager() {
 
     }
 
@@ -41,7 +37,7 @@ public class MusicFileManager {
             String fileName = (String) musicFileNameList.get(i);
 
             try {
-                musicFileList.add(new MusicFile(fileAddress,fileName,getMusicInfoFile(fileName)));
+                musicFileList.add(new MusicFile(fileAddress, fileName, getMusicInfoFile(fileName)));
             } catch (UnsupportedTagException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -56,6 +52,7 @@ public class MusicFileManager {
         favoriteMusicList.FSort();
 
     }
+
     /*
         private HashMap<String,Integer> checkTextFileAndMusicFile(final String fileAddress){
             HashMap<String, Integer> information;
@@ -82,9 +79,9 @@ public class MusicFileManager {
     public String[] getMusicInfoFile(final String name) {
         ArrayList<String> informationString = FileIO.readTextFile(FILEINFOADDRESS, FILEINFONAME);
         String[] information = new String[informationString.size()];
-        for(int i=0;i<informationString.size();i++){
+        for (int i = 0; i < informationString.size(); i++) {
             information = informationString.get(i).split("/");
-            if(information[0] == name){
+            if (information[0] == name) {
                 return information;
             }
         }

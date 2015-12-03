@@ -1,15 +1,15 @@
 package GUI;
-import java.awt.event.KeyEvent;
 
 import javax.swing.*;
+import java.awt.event.KeyEvent;
 
 public class GUI_Toolbar extends JMenuBar {
 
-    JMenu fileMenu                      = new JMenu("File Path");
+    JMenu fileMenu = new JMenu("File Path");
 
-    JMenuItem setMenuItem               = new JMenuItem("Set");
+    JMenuItem setMenuItem = new JMenuItem("Set");
 
-    MenuItemListener menuItemListener   = new MenuItemListener();
+    MenuItemListener menuItemListener = new MenuItemListener();
 
     public GUI_Toolbar() {
         onCreate();

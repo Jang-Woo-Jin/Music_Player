@@ -1,21 +1,21 @@
 package GUI;
+
 import Music.MusicFileManager;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
-
 public class GUI_Tab extends JPanel {
-    private JButton allMusic        = new JButton("전체 음악");
-    private JButton favoriteMusic   = new JButton("즐겨찾기");
-    private JButton recentMusic     = new JButton("최근 재생한 곡");
-    private JButton chooseMusic     = new JButton("가장 많이 재생한 곡");
+    private JButton allMusic = new JButton("전체 음악");
+    private JButton favoriteMusic = new JButton("즐겨찾기");
+    private JButton recentMusic = new JButton("최근 재생한 곡");
+    private JButton chooseMusic = new JButton("가장 많이 재생한 곡");
 
     private GUI_MusicList musicList;
 
-    public JPanel createTab(GUI_MusicList musicList)   {
+    public JPanel createTab(GUI_MusicList musicList) {
         setActionListeners();
         this.musicList = musicList;
         this.setLayout(new GridLayout(4, 1, 0, 0));
@@ -63,7 +63,6 @@ public class GUI_Tab extends JPanel {
             }
         });
     }
-
 
 
 }

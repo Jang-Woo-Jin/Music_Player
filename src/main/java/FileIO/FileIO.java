@@ -1,13 +1,8 @@
 package FileIO;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
+
 ;
 
 public class FileIO {
@@ -33,7 +28,7 @@ public class FileIO {
         try {
             while ((readLine = input.readLine()) != null) {
 
-                if (readLine.startsWith("//") || (readLine.trim()).equals("")) continue; 
+                if (readLine.startsWith("//") || (readLine.trim()).equals("")) continue;
                 else {
                     information.add(readLine);
                 }
@@ -77,7 +72,7 @@ public class FileIO {
                 String tempPath = tempFile.getParent();
                 String tempFileName = tempFile.getName();
                 if (FilePathParser.getExtension(tempFileName).equals(extend
-                		)) {
+                )) {
                     information.add(FilePathParser.getFileName(tempFileName));
                 }
             }
@@ -108,7 +103,7 @@ public class FileIO {
         try {
             while ((inputLine = input.readLine()) != null) {
                 System.out.println(inputLine);
-                if (inputLine.startsWith("//") || (inputLine.trim()).equals("")) continue; 
+                if (inputLine.startsWith("//") || (inputLine.trim()).equals("")) continue;
                 lineNum++;
             }
         } catch (IOException e) {
@@ -129,11 +124,11 @@ public class FileIO {
         reNameFile(fileAddress, fileName, newName, ".txt");
     }
 
-    public static void reNameMP3File(final String fileAddress,final  String fileName,final  String newName) {
+    public static void reNameMP3File(final String fileAddress, final String fileName, final String newName) {
         reNameFile(fileAddress, fileName, newName, ".mp3");
     }
 
-    private static void reNameFile(final String fileAddress,final  String fileName,final  String newName,final  String type) {
+    private static void reNameFile(final String fileAddress, final String fileName, final String newName, final String type) {
         String path = fileAddress;
         File oldfile = new File(path, fileName + type);
         File newfile = new File(path, newName + type);

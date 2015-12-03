@@ -1,7 +1,8 @@
 package Music;
 
-import java.util.ArrayList;
 import FileIO.FileIO;
+
+import java.util.ArrayList;
 
 public class LyricParser {
 
@@ -10,12 +11,16 @@ public class LyricParser {
     private String[] lrc = new String[1000];
     private String[] index = new String[10];
 
+    public LyricParser() {
+        splitLrc();
+    }
+
     public int[][] getTime() {
         return time;
     }
 
-    public LyricParser() {
-        splitLrc();
+    public void setTime(int[][] time) {
+        this.time = time;
     }
 
     public void splitLrc() {
@@ -41,10 +46,6 @@ public class LyricParser {
 
         }
 
-    }
-
-    public void setTime(int[][] time) {
-        this.time = time;
     }
 
     public String[] getLrctime() {

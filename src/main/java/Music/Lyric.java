@@ -1,4 +1,5 @@
 package Music;
+
 public class Lyric {
     private int[][] time;
     private String[] lrc;

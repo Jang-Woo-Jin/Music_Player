@@ -1,27 +1,25 @@
 package GUI;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
+
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
-import javafx.scene.*;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.text.*;
-
-import javax.swing.*;
-
 public class GUI_PlayerTab extends JPanel {
 
+    final JFXPanel fxPanel = new JFXPanel();
     File bip;
     Media hit;
     MediaPlayer mediaPlayer;
     JButton playButton;
-    final JFXPanel fxPanel = new JFXPanel();
 
     public GUI_PlayerTab() {
         this.initialize();
@@ -62,7 +60,7 @@ public class GUI_PlayerTab extends JPanel {
     private void setButtons() {
 
         playButton = new JButton("▶");
-    	/* buttons setting */
+        /* buttons setting */
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (playButton.getText().equals("▶")) {
@@ -86,7 +84,7 @@ public class GUI_PlayerTab extends JPanel {
 
     }
 
-        private void setMusic() {
+    private void setMusic() {
         bip = new File(System.getProperty("user.home") + "/Downloads/[와타아메]+모노크로스로드.mp3");
         System.out.println(bip.toURI().toString());
         hit = new Media(bip.toURI().toString());

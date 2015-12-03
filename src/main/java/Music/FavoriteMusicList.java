@@ -1,4 +1,5 @@
 package Music;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -18,10 +19,8 @@ public class FavoriteMusicList extends ArrayList<MusicFile> {
     }
 
     public void FSort() {
-        for (int i = 0; i < this.size(); i++)
-        {
-            for (int j = 0; j < this.size(); j++)
-            {
+        for (int i = 0; i < this.size(); i++) {
+            for (int j = 0; j < this.size(); j++) {
                 if (((MusicFile) this.get(i)).getPlayCount() > ((MusicFile) this.get(j)).getPlayCount())
                     Collections.swap(this, i, j);
             }

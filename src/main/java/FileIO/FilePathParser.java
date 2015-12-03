@@ -1,4 +1,5 @@
 package FileIO;
+
 public class FilePathParser {
 
     public static String getExtension(String fileStr) {

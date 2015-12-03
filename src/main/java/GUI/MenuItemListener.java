@@ -13,13 +13,13 @@ import java.awt.event.ActionListener;
 public class MenuItemListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //TODO
-        final JFrame newFrame                   = new JFrame("\t\t\tsettings\t\t\t");
-        final JTextField mp3Path                = new JTextField();
-        final JButton saveButton                = new JButton("Save");
+        final JFrame newFrame = new JFrame("\t\t\tsettings\t\t\t");
+        final JTextField mp3Path = new JTextField();
+        final JButton saveButton = new JButton("Save");
 
-        newFrame.setSize(600,70);
-        mp3Path.setSize(500,70);
-        saveButton.setSize(100,70);
+        newFrame.setSize(600, 70);
+        mp3Path.setSize(500, 70);
+        saveButton.setSize(100, 70);
 
         //PromptSupport.setPrompt("Bunnies", bunnies);
 
