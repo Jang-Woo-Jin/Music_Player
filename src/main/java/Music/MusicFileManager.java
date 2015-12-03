@@ -15,11 +15,11 @@ public class MusicFileManager {
 
     private ArrayList<MusicFile> musicFileList = new ArrayList<MusicFile>();
     private RecentPlayList recentPlayList = new RecentPlayList();
-    private FavoriteMusicList favoriteMusicList;
+    private FavoriteMusicList favoriteMusicList = new FavoriteMusicList();
     private ArrayList<MusicFile> choosePlayList = new ArrayList<MusicFile>();
     
     private MusicFileManager() {
-    	favoriteMusicList.FSort();
+    	
     }
 
     public static MusicFileManager getInstance() {
@@ -49,6 +49,7 @@ public class MusicFileManager {
 				e.printStackTrace();
 			}
         }
+        favoriteMusicList.FSort();
         for (int i = 0; i < musicFileList.size(); i++) {
             System.out.println(((MusicFile) musicFileList.get(i)).getName());
         }
