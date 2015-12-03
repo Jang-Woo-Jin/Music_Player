@@ -126,15 +126,15 @@ public class FileIO {
         return lineNum;
     }
 
-    public static void reNameTextFile(final String fileAddress, final String fileName, final String newName) {
-        reNameFile(fileAddress, fileName, newName, ".txt");
+    public static void renameTextFile(final String fileAddress, final String fileName, final String newName) {
+        renameFile(fileAddress, fileName, newName, ".txt");
     }
 
-    public static void reNameMP3File(final String fileAddress, final String fileName, final String newName) {
-        reNameFile(fileAddress, fileName, newName, ".mp3");
+    public static void renameMP3File(final String fileAddress, final String fileName, final String newName) {
+        renameFile(fileAddress, fileName, newName, ".mp3");
     }
 
-    private static void reNameFile(final String fileAddress, final String fileName, final String newName, final String type) {
+    private static void renameFile(final String fileAddress, final String fileName, final String newName, final String type) {
         String path = fileAddress;
         File oldfile = new File(path, fileName + type);
         File newfile = new File(path, newName + type);

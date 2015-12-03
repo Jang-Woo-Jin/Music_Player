@@ -11,7 +11,7 @@ public class MusicFileManager {
 
     // Singleton Pattern
     private static MusicFileManager uniqueInstance;
-    private final String FILEINFOADDRESS = "D:\\기타기타기타";//System.getProperty("user.home") + "/Document/";
+    private final String FILEINFOADDRESS = "D:\\";//System.getProperty("user.home") + "/Document/";
     private final String FILEINFONAME = "abc";//"MusicInfoFile";
     private ArrayList<MusicFile> musicFileList = new ArrayList<MusicFile>();
     private RecentPlayList recentPlayList = new RecentPlayList();
@@ -52,23 +52,6 @@ public class MusicFileManager {
 
     }
 
-    /*
-        private HashMap<String,Integer> checkTextFileAndMusicFile(final String fileAddress){
-            HashMap<String, Integer> information;
-            ArrayList<String> mp3files = FileIO.readAllFileInPath(fileAddress, ".mp3");
-            ArrayList<String> saveInfo = FileIO.readTextFile(FILEINFOADDRESS,FILEINFONAME);
-            ArrayList<String> saveNameInfo = new ArrayList<String>();
-            for(String iter1 : mp3files){
-                boolean findFlag = false;
-                for(String iter2 : saveNameInfo){
-                    if(iter1 == iter2) {
-                        findFlag = true;
-                    }
-                }
-            }
-            return information;
-        }
-      */
     public String[] getMusicInfoFile(final String name) {
         ArrayList<String> informationString = FileIO.readTextFile(FILEINFOADDRESS, FILEINFONAME);
         String[] information = new String[informationString.size()];
