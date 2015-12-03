@@ -6,22 +6,15 @@ import Music.MusicFileManager;
 
 import java.awt.*;
 
-public class Main {
-    private JFrame mainFrame = new JFrame();
-
-    //private JPanel listPanel = new JPanel();
-
-    public Main() {
-        init();
-    }
+class Main {
+    private final JFrame mainFrame = new JFrame();
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
         Main main = new Main();
-    	
+        main.init();
     }
 
-    public void init() {
+    private void init() {
 
         GUI_MusicList gui_musicList = new GUI_MusicList();
         JPanel tabPanel = new GUI_Tab().createTab(gui_musicList);

@@ -14,14 +14,14 @@ public class FavoriteMusicList extends ArrayList<MusicFile> {
     }
 
     public void delete(MusicFile musicFile) {//delete favorite PlayList
-        musicFile.setPlayCount(0);
+        musicFile.setPlayCount();
         FSort();
     }
 
     public void FSort() {
         for (int i = 0; i < this.size(); i++) {
             for (int j = 0; j < this.size(); j++) {
-                if (((MusicFile) this.get(i)).getPlayCount() > ((MusicFile) this.get(j)).getPlayCount())
+                if (this.get(i).getPlayCount() > this.get(j).getPlayCount())
                     Collections.swap(this, i, j);
             }
         }

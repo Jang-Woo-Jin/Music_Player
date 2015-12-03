@@ -14,7 +14,7 @@ public class Lyric {
         int msec = 0, sec = 0, min = 0;
     }
 
-    int timeCal(int min, int sec, int msec) {
+    private int timeCal(int min, int sec, int msec) {
         int total = 0;
         total = min * 60 * 100 + sec * 100 + msec;
         return total;
@@ -36,9 +36,10 @@ public class Lyric {
         }
 
         for (int k = 0; k < start; k++) {
-            if (timeCal(min, sec, msec) == timeCal(time[k][0], time[k][1], time[k][2]))
+            if (timeCal(min, sec, msec) == timeCal(time[k][0], time[k][1], time[k][2])) {
                 start = k;
-            break;
+                break;
+            }
         }
         for (int i = 0; i < j; i++) {
             if (timeCal(min, sec, msec) < timeCal(time[i][0], time[i][1], time[i][2])) {

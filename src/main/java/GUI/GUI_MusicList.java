@@ -5,24 +5,22 @@ import Music.MusicFileManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-public class GUI_MusicList {
+class GUI_MusicList {
 
     //Variables
-    private JButton refreshButton = new JButton("refresh list");
-    private JPanel musicListPanel = new JPanel(new BorderLayout());
-    private JList<MusicFile> musicList;
-    private DefaultListModel<MusicFile> listModel = new DefaultListModel<MusicFile>();
+    private final JButton refreshButton = new JButton("refresh list");
+    private final JPanel musicListPanel = new JPanel(new BorderLayout());
+    private final JList<MusicFile> musicList;
+    private DefaultListModel<MusicFile> listModel = new DefaultListModel<>();
 
 
     //Constructors
     public GUI_MusicList() {
-        musicList = new JList<MusicFile>(listModel);
+        musicList = new JList<>(listModel);
         musicList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         musicList.setVisible(true);
@@ -46,12 +44,9 @@ public class GUI_MusicList {
             }
         });
 
-
-        refreshButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                arrayListToListModel(MusicFileManager.getInstance().getMusicFileList());
-                musicListPanel.updateUI();
-            }
+        refreshButton.addActionListener(e -> {
+            arrayListToListModel(MusicFileManager.getInstance().getMusicFileList());
+            musicListPanel.updateUI();
         });
 
     }
@@ -69,7 +64,7 @@ public class GUI_MusicList {
     }
 
     public void arrayListToListModel(ArrayList<MusicFile> list) {
-        listModel = new DefaultListModel<MusicFile>();
+        listModel = new DefaultListModel<>();
         for (MusicFile iter : list) {
             listModel.addElement(iter);
         }

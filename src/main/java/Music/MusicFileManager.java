@@ -16,11 +16,8 @@ public class MusicFileManager {
     private ArrayList<MusicFile> musicFileList = new ArrayList<MusicFile>();
     private RecentPlayList recentPlayList = new RecentPlayList();
     private FavoriteMusicList favoriteMusicList = new FavoriteMusicList();
-    private ArrayList<MusicFile> choosePlayList = new ArrayList<MusicFile>();
 
-    private static void MusicFileManager() {
-    	
-    }
+    private ArrayList<MusicFile> choosePlayList = new ArrayList<>();
 
     public static MusicFileManager getInstance() {
         if (uniqueInstance == null) {
@@ -32,20 +29,26 @@ public class MusicFileManager {
     // Singleton Pattern Applied
 
     public void addMusicFile(final String fileAddress) {
-        ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress, "mp3");
-        for (String iter:musicFileNameList) {
+        ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress);
+        for (String iter : musicFileNameList) {
             String fileName = iter;
             System.out.println(fileAddress);
             System.out.println(fileName);
             try {
                 musicFileList.add(new MusicFile(fileName, fileAddress, getMusicInfoFile(fileName)));
-            } catch (UnsupportedTagException e) {e.printStackTrace();
-            } catch (InvalidDataException e) {e.printStackTrace();
-            } catch (IOException e) {e.printStackTrace();}
+            } catch (UnsupportedTagException e) {
+                e.printStackTrace();
+            } catch (InvalidDataException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         ArrayList<String> infoFileInfo = new ArrayList<String>();
-        for(MusicFile iter : musicFileList){
-        	infoFileInfo.add(iter.getSaveInfo());
+
+        for (MusicFile iter : musicFileList) {
+            infoFileInfo.add(iter.getSaveInfo());
+
         }
         
         FileIO.writeTextFile(FILEINFOADDRESS, FILEINFONAME, infoFileInfo, "");

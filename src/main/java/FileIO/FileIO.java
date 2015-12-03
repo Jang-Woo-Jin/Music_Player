@@ -7,7 +7,7 @@ public class FileIO {
     public static ArrayList<String> readTextFile(final String fileAddress, final String fileName) {
 
         ArrayList<String> information = new ArrayList<String>();
-        String readLine = new String("");
+        String readLine;
         File file = new File(fileAddress, fileName + ".txt");
         BufferedReader input;
 
@@ -26,8 +26,9 @@ public class FileIO {
         try {
             while ((readLine = input.readLine()) != null) {
 
-                if (readLine.startsWith("//") || (readLine.trim()).equals("")) continue;
-                else {
+                if (readLine.startsWith("//") || (readLine.trim()).equals("")) {
+                    continue;
+                } else {
                     information.add(readLine);
                 }
             }
@@ -45,40 +46,37 @@ public class FileIO {
     }
 
     public static void writeTextFile(final String fileInformationAddress, final String fileName, ArrayList<String> writeInformation, final String delimiter) {
-    	File file = new File(fileInformationAddress, fileName + ".txt");
-    	try {
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),"UTF-8"));
-            
-            for (String iter:writeInformation) {
+        File file = new File(fileInformationAddress, fileName + ".txt");
+        try {
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
+
+            for (String iter : writeInformation) {
                 writer.write(iter);
                 writer.write(delimiter);
             }
             writer.close();
 
         } catch (IOException e) {
-        	FileWriter fw;
-			try {
-				fw = new FileWriter(file);
-				 fw.close();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-           
+            FileWriter fw;
+            try {
+                fw = new FileWriter(file);
+                fw.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
             e.printStackTrace();
         }
     }
 
-    public static ArrayList<String> readAllFileInPath(final String fileAddress, final String extend) {
+    public static ArrayList<String> readAllFileInPath(final String fileAddress) {
         File dirFile = new File(fileAddress);
-    	File[] fileList = dirFile.listFiles();
+        File[] fileList = dirFile.listFiles();
         ArrayList<String> information = new ArrayList<String>();
-        int i = 0;
         for (File tempFile : fileList) {
             if (tempFile.isFile()) {
-                String tempPath = tempFile.getParent();
                 String tempFileName = tempFile.getName();
-                if (FilePathParser.getExtension(tempFileName).equals(extend
-                )) {
+                if (FilePathParser.getExtension(tempFileName).equals("mp3")) {
                     information.add(FilePathParser.getFileName(tempFileName));
                 }
             }
@@ -89,7 +87,7 @@ public class FileIO {
     private static int readLine(final String fileAddress, final String fileName) {
         int lineNum = 0;
 
-        String inputLine = new String("");
+        String inputLine;
         File file = new File(fileAddress, fileName + ".txt");
         BufferedReader input;
 
