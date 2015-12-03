@@ -11,7 +11,7 @@ public class MusicFileManager {
 
     // Singleton Pattern
     private static MusicFileManager uniqueInstance;
-    private final String FILEINFOADDRESS = "D:\\";//System.getProperty("user.home") + "/Document/";
+    private final String FILEINFOADDRESS = "D:\\music-info\\";//System.getProperty("user.home") + "/Document/";
     private final String FILEINFONAME = "abc";//"MusicInfoFile";
     private ArrayList<MusicFile> musicFileList = new ArrayList<MusicFile>();
     private RecentPlayList recentPlayList = new RecentPlayList();
