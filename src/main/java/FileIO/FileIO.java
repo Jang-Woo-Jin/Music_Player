@@ -46,12 +46,12 @@ public class FileIO {
         return information;
     }
 
-    public static void writeTextFile(final String fileInformationAddress, final String fileName, String[] writeInformation, final String delimiter) {
+    public static void writeTextFile(final String fileInformationAddress, final String fileName, ArrayList<String> writeInformation, final String delimiter) {
         try {
             File file = new File(fileInformationAddress, fileName + ".txt");
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-            for (int i = 0; i < writeInformation.length; i++) {
-                writer.write(writeInformation[i]);
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),"UTF-8"));
+            for (String iter:writeInformation) {
+                writer.write(iter);
                 writer.write(delimiter);
             }
             writer.close();

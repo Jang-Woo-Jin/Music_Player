@@ -11,8 +11,8 @@ public class MusicFileManager {
 
     // Singleton Pattern
     private static MusicFileManager uniqueInstance;
-    private final String FILEINFOADDRESS = System.getProperty("user.home") + "/Document/";
-    private final String FILEINFONAME = "MusicInfoFile";
+    private final String FILEINFOADDRESS = "D:\\기타기타기타";//System.getProperty("user.home") + "/Document/";
+    private final String FILEINFONAME = "abc";//"MusicInfoFile";
     private ArrayList<MusicFile> musicFileList = new ArrayList<MusicFile>();
     private RecentPlayList recentPlayList = new RecentPlayList();
     private FavoriteMusicList favoriteMusicList = new FavoriteMusicList();
@@ -37,18 +37,16 @@ public class MusicFileManager {
             String fileName = (String) musicFileNameList.get(i);
 
             try {
-                musicFileList.add(new MusicFile(fileAddress, fileName, getMusicInfoFile(fileName)));
-            } catch (UnsupportedTagException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (InvalidDataException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+                musicFileList.add(new MusicFile(fileName, fileAddress, getMusicInfoFile(fileName)));
+            } catch (UnsupportedTagException e) {e.printStackTrace();
+            } catch (InvalidDataException e) {e.printStackTrace();
+            } catch (IOException e) {e.printStackTrace();}
         }
+        ArrayList<String> infoFileInfo = new ArrayList<String>();
+        for(MusicFile iter : musicFileList){
+        	infoFileInfo.add(iter.getSaveInfo());
+        }
+        FileIO.writeTextFile(FILEINFOADDRESS, FILEINFONAME, infoFileInfo, "");
         favoriteMusicList.FSort();
 
     }
