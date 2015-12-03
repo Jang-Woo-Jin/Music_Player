@@ -2,7 +2,7 @@ package Music;
 
 import FileIO.FileIO;
 
-public class Parser {
+public class LyricParser {
 
     private int[][] time = new int[1000][3];// 0:Min  1:Sec   2:0.Sec
     private String[] lrctime = new String[1000];
@@ -13,7 +13,7 @@ public class Parser {
         return time;
     }
 
-    public Parser() {
+    public LyricParser() {
         splitLrc();
     }
 
