@@ -33,8 +33,8 @@ public class MusicFileManager {
 
     public void addMusicFile(final String fileAddress) {
         ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress, "mp3");
-        for (int i = 0; i < musicFileNameList.size(); i++) {
-            String fileName = (String) musicFileNameList.get(i);
+        for (String iter:musicFileNameList) {
+            String fileName = iter;
             System.out.println(fileAddress);
             System.out.println(fileName);
             try {
@@ -45,7 +45,7 @@ public class MusicFileManager {
         }
         ArrayList<String> infoFileInfo = new ArrayList<String>();
         for(MusicFile iter : musicFileList){
-        	infoFileInfo.add(iter.getSaveInfo());
+            infoFileInfo.add(iter.getSaveInfo());
         }
         FileIO.writeTextFile(FILEINFOADDRESS, FILEINFONAME, infoFileInfo, "");
         favoriteMusicList.FSort();
@@ -55,23 +55,17 @@ public class MusicFileManager {
     /*
         private HashMap<String,Integer> checkTextFileAndMusicFile(final String fileAddress){
             HashMap<String, Integer> information;
-
             ArrayList<String> mp3files = FileIO.readAllFileInPath(fileAddress, ".mp3");
             ArrayList<String> saveInfo = FileIO.readTextFile(FILEINFOADDRESS,FILEINFONAME);
             ArrayList<String> saveNameInfo = new ArrayList<String>();
-
             for(String iter1 : mp3files){
                 boolean findFlag = false;
                 for(String iter2 : saveNameInfo){
                     if(iter1 == iter2) {
                         findFlag = true;
-
                     }
                 }
-
             }
-
-
             return information;
         }
       */
@@ -80,7 +74,7 @@ public class MusicFileManager {
         String[] information = new String[informationString.size()];
         for (int i = 0; i < informationString.size(); i++) {
             information = informationString.get(i).split("/");
-            if (information[0] == name) {
+            if (information[0].equals(name)) {
                 return information;
             }
         }
