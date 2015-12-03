@@ -1,0 +1,8 @@
+GUI
+    - Toolbar 기능 -> File Path 설정
+    - List 기능    -> 새로고침
+    - Button 만들기 (Player)
+    - Image 띄우기
+    - Slide Bar
+    - 가사 띄우기 ( 영은이 파트 Merge 필요 )
+    - List Click 할 때 음악 재생
