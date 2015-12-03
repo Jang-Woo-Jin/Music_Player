@@ -71,7 +71,7 @@ class GUI_PlayerTab extends JPanel {
         });
 
         this.add(playButton);
-       
+
         // TODO add event playButton with get and set
     }
 

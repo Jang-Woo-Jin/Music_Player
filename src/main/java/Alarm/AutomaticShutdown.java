@@ -4,7 +4,19 @@ import java.util.Calendar;
 
 class AutomaticShutdown extends Thread {
 
-    public boolean letShutdown(String time) {
+    private long ringring;
+
+    @Override
+    public void run() {
+        try {
+            Thread.sleep(ringring);
+            System.exit(0);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setShutdown(String time) {
 
         int setTime = Integer.parseInt(time);
         long setMilliTime = setTime * 1000 * 60;
@@ -14,13 +26,6 @@ class AutomaticShutdown extends Thread {
 
         shutTime.setTimeInMillis(currentTime.getTimeInMillis() + setMilliTime);
 
-        try {
-            Thread.sleep(shutTime.getTimeInMillis() - currentTime.getTimeInMillis());
-        } catch (InterruptedException e) {
-            return false;
-        }
-
-
-        return true;
+        ringring = shutTime.getTimeInMillis() - currentTime.getTimeInMillis();
     }
 }

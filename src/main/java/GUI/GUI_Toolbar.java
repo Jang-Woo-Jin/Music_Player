@@ -1,6 +1,10 @@
 package GUI;
 
+import Music.MusicFileManager;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 class GUI_Toolbar extends JMenuBar {
@@ -8,8 +12,6 @@ class GUI_Toolbar extends JMenuBar {
     private final JMenu fileMenu = new JMenu("File Path");
 
     private final JMenuItem setMenuItem = new JMenuItem("Set");
-
-    private final MenuItemListener menuItemListener = new MenuItemListener();
 
     public GUI_Toolbar() {
         onCreate();
@@ -22,8 +24,6 @@ class GUI_Toolbar extends JMenuBar {
         setMenuItem.setMnemonic(KeyEvent.VK_N);
         setMenuItem.setActionCommand("Set");
 
-        setMenuItem.addActionListener(menuItemListener);
-
 
         //add menu items to menus
         fileMenu.add(setMenuItem);
@@ -33,6 +33,20 @@ class GUI_Toolbar extends JMenuBar {
 
         //add this to the frame
         this.setVisible(true);
+
+
+        setMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser chooser = new JFileChooser();
+                chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                int returnVal = chooser.showOpenDialog(null);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    System.out.println("You chose to open this Directory: " +
+                            chooser.getSelectedFile().getName());
+                    MusicFileManager.getInstance().addMusicFile(chooser.getSelectedFile().getPath());
+                }
+            }
+        });
     }
 
 

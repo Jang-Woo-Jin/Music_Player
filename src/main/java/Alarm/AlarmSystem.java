@@ -5,9 +5,24 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-class AlarmSystem extends Thread {
+public class AlarmSystem extends Thread {
 
-    public boolean letAlarm(String ampm, String hour, String min) {
+    long ringring;
+
+    @Override
+    public void run() {
+
+        try {
+            if (ringring < 0)
+                throw new InterruptedException();
+            else
+                Thread.sleep(ringring);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setAlarm(String ampm, String hour, String min) {
 
         int setHour = Integer.parseInt(hour);
         int setMin = Integer.parseInt(min);
@@ -25,30 +40,21 @@ class AlarmSystem extends Thread {
             e1.printStackTrace();
         }
 
-        alarmTime.set(Calendar.SECOND, +0);
-        alarmTime.set(Calendar.MINUTE, +setMin);
+        alarmTime.set(today.SECOND, +0);
+        alarmTime.set(today.MINUTE, +setMin);
 
         if (ampm.equals("오전")) {
             if (setHour != 12)
-                alarmTime.set(Calendar.HOUR_OF_DAY, +setHour);
+                alarmTime.set(today.HOUR_OF_DAY, +setHour);
             else
-                alarmTime.set(Calendar.HOUR_OF_DAY, +0);
-        } else {
+                alarmTime.set(today.HOUR_OF_DAY, +0);
+        } else if (ampm.equals("오후")) {
             if (setHour != 12)
-                alarmTime.set(Calendar.HOUR_OF_DAY, +setHour + 12);
+                alarmTime.set(today.HOUR_OF_DAY, +setHour + 12);
             else
-                alarmTime.set(Calendar.HOUR_OF_DAY, +12);
+                alarmTime.set(today.HOUR_OF_DAY, +12);
         }
 
-        try {
-            if (alarmTime.getTimeInMillis() - currentTime.getTimeInMillis() < 0)
-                throw new InterruptedException();
-            else
-                Thread.sleep(alarmTime.getTimeInMillis() - currentTime.getTimeInMillis());
-        } catch (InterruptedException e) {
-            return false;
-        }
-
-        return true;
+        ringring = alarmTime.getTimeInMillis() - currentTime.getTimeInMillis();
     }
 }

@@ -3,7 +3,7 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 
-class Main{
+class Main {
     private final JFrame mainFrame = new JFrame();
 
     public static void main(String[] args) {

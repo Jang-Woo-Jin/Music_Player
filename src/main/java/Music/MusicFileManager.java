@@ -6,14 +6,14 @@ import com.mpatric.mp3agic.UnsupportedTagException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class MusicFileManager {
 
     // Singleton Pattern
     private static MusicFileManager uniqueInstance;
-    private final String FILEINFOADDRESS = System.getProperty("user.home") + "/Document/";
-    private ArrayList<MusicFile> musicFileList = new ArrayList<>();
+    private final String FILEINFOADDRESS = "D:\\기타기타기타";//System.getProperty("user.home") + "/Document/";
+    private final String FILEINFONAME = "abc";//"MusicInfoFile";
+    private ArrayList<MusicFile> musicFileList = new ArrayList<MusicFile>();
     private RecentPlayList recentPlayList = new RecentPlayList();
     private FavoriteMusicList favoriteMusicList = new FavoriteMusicList();
     private ArrayList<MusicFile> choosePlayList = new ArrayList<>();
@@ -29,14 +29,25 @@ public class MusicFileManager {
 
     public void addMusicFile(final String fileAddress) {
         ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress);
-        for (String fileName : musicFileNameList) {
+        for (String iter : musicFileNameList) {
+            String fileName = iter;
+            System.out.println(fileAddress);
+            System.out.println(fileName);
             try {
-                musicFileList.add(new MusicFile(fileAddress, fileName, getMusicInfoFile(fileName)));
-            } catch (UnsupportedTagException | IOException | InvalidDataException e) {
-                // TODO Auto-generated catch block
+                musicFileList.add(new MusicFile(fileName, fileAddress, getMusicInfoFile(fileName)));
+            } catch (UnsupportedTagException e) {
+                e.printStackTrace();
+            } catch (InvalidDataException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        ArrayList<String> infoFileInfo = new ArrayList<String>();
+        for (MusicFile iter : musicFileList) {
+            infoFileInfo.add(iter.getSaveInfo());
+        }
+        FileIO.writeTextFile(FILEINFOADDRESS, FILEINFONAME, infoFileInfo, "");
         favoriteMusicList.FSort();
 
     }
@@ -68,9 +79,9 @@ public class MusicFileManager {
         String FILEINFONAME = "MusicInfoFile";
         ArrayList<String> informationString = FileIO.readTextFile(FILEINFOADDRESS, FILEINFONAME);
         String[] information = new String[informationString.size()];
-        for (String anInformationString : informationString) {
-            information = anInformationString.split("/");
-            if (Objects.equals(information[0], name)) {
+        for (int i = 0; i < informationString.size(); i++) {
+            information = informationString.get(i).split("/");
+            if (information[0].equals(name)) {
                 return information;
             }
         }

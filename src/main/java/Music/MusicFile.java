@@ -20,13 +20,14 @@ public class MusicFile extends Mp3File {
 
     public MusicFile(String musicFileName, String musicFileAddress, String[] infoInfo) throws UnsupportedTagException, InvalidDataException, IOException {
         super(musicFileAddress + "//" + musicFileName + ".mp3");
-        if (infoInfo[0] == null) infoInfo[0] = "0";
-        this.playCount = Integer.parseInt(infoInfo[0]);
-        this.fileName = infoInfo[1];
-        this.fileAddress = infoInfo[2];
-        this.lyricsFileName = infoInfo[3];
-        this.lyricsFileAddress = infoInfo[4];
-
+        if (infoInfo != null) {
+            //  if (infoInfo[0] == null) infoInfo[0] = "0";
+            this.playCount = 1;//Integer.parseInt(infoInfo[0]);
+            this.fileName = "Ab";//infoInfo[1];
+            this.fileAddress = "Ab";//infoInfo[2];
+            this.lyricsFileName = "d";//infoInfo[3];
+            this.lyricsFileAddress = "c";//infoInfo[4];
+        }
         if (this.hasId3v1Tag()) {
             isV1Tag = true;
             id3v1Tag = this.getId3v1Tag();

@@ -45,17 +45,25 @@ public class FileIO {
         return information;
     }
 
-    public static void writeTextFile(final String fileInformationAddress, final String fileName, String[] writeInformation, final String delimiter) {
+    public static void writeTextFile(final String fileInformationAddress, final String fileName, ArrayList<String> writeInformation, final String delimiter) {
+        File file = new File(fileInformationAddress, fileName + ".txt");
         try {
-            File file = new File(fileInformationAddress, fileName + ".txt");
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-            for (String aWriteInformation : writeInformation) {
-                writer.write(aWriteInformation);
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
+
+            for (String iter : writeInformation) {
+                writer.write(iter);
                 writer.write(delimiter);
             }
             writer.close();
 
         } catch (IOException e) {
+            FileWriter fw;
+            try {
+                fw = new FileWriter(file);
+                fw.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
 
             e.printStackTrace();
         }
@@ -64,7 +72,7 @@ public class FileIO {
     public static ArrayList<String> readAllFileInPath(final String fileAddress) {
         File dirFile = new File(fileAddress);
         File[] fileList = dirFile.listFiles();
-        ArrayList<String> information = new ArrayList<>();
+        ArrayList<String> information = new ArrayList<String>();
         for (File tempFile : fileList) {
             if (tempFile.isFile()) {
                 String tempFileName = tempFile.getName();
