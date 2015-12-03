@@ -1,12 +1,16 @@
 package Music;
 
+import FileIO.FilePathParser;
 import com.mpatric.mp3agic.*;
 
 import java.io.IOException;
 
 public class MusicFile extends Mp3File {
-    private final String FILEINFOADDRESS = System.getProperty("user.home") + "\\music-info\\";
-    private final String FILEINFONAME = "MusicInfoFile";
+    private final String FILE_INFO_ADDRESS = System.getProperty("user.home")
+            + FilePathParser.getDirectorySeperator()
+            + "music-info"
+            + FilePathParser.getDirectorySeperator();
+    private final String FILE_INFO_NAME = "MusicInfoFile";
     private int playCount;
     private String fileName, fileAddress;
     private Lyric lyrics;
