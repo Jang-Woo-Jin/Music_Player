@@ -14,15 +14,17 @@ public class Main {
     public void init() {
 
         GUI_MusicList gui_musicList = new GUI_MusicList();
-        JPanel tabPanel         = new GUI_Tab().createTab(gui_musicList);
-        JPanel playerPanel      = new GUI_PlayerTab();
+        JPanel tabPanel             = new GUI_Tab().createTab(gui_musicList);
+        JPanel playerPanel          = new GUI_PlayerTab();
+
+        JPanel listPanel            = gui_musicList.createListPanel();
 
         this.mainFrame.setLayout(new BorderLayout());
         this.mainFrame.setSize(800, 450);
         this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.mainFrame.add(tabPanel, BorderLayout.WEST);
-        this.mainFrame.add(new JScrollPane(gui_musicList.createListPanel()), BorderLayout.CENTER);
+        this.mainFrame.add(new JScrollPane(listPanel), BorderLayout.CENTER);
         this.mainFrame.add(playerPanel, BorderLayout.EAST);
 
         this.mainFrame.setJMenuBar(new GUI_Toolbar());
@@ -35,7 +37,6 @@ public class Main {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        //Main main= new Main();
-    	FileIO.deleteTextFile("C:\\Users\\woojin\\Documents\\카카오톡 받은 파일", "abc");
-    }
+        Main main= new Main();
+    	}
 }

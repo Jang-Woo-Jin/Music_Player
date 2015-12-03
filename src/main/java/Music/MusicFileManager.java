@@ -18,27 +18,24 @@ public class MusicFileManager {
     private RecentPlayList recentPlayList = new RecentPlayList();
     private FavoriteMusicList favoriteMusicList = new FavoriteMusicList();
     private ArrayList<MusicFile> choosePlayList = new ArrayList<MusicFile>();
-    
+  
     private final String FILEINFOADDRESS = System.getProperty("user.home") + "/Document/";
     private final String FILEINFONAME = "MusicInfoFile";
-    
-    private MusicFileManager() {
-    	
-    }
 
     public static MusicFileManager getInstance() {
         if (uniqueInstance == null) {
             uniqueInstance = new MusicFileManager();
         }
+
         return uniqueInstance;
     }
     // Singleton Pattern Applied
-    
+
     public void addMusicFile(final String fileAddress) {
         ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress, "mp3");
         for (int i = 0; i < musicFileNameList.size(); i++) {
             String fileName = (String) musicFileNameList.get(i);
-           
+
             try {
 				musicFileList.add(new MusicFile(fileAddress,fileName,getMusicInfoFile(fileName)));
 			} catch (UnsupportedTagException e) {
@@ -53,9 +50,7 @@ public class MusicFileManager {
 			}
         }
         favoriteMusicList.FSort();
-        for (int i = 0; i < musicFileList.size(); i++) {
-            System.out.println(((MusicFile) musicFileList.get(i)).getName());
-        }
+       
     }
 /*
     private HashMap<String,Integer> checkTextFileAndMusicFile(final String fileAddress){

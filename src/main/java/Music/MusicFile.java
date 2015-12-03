@@ -126,5 +126,5 @@ public class MusicFile extends Mp3File {
 	public void setImagedata(byte[] imagedata) {
 		this.imagedata = imagedata;
 	}
-	
+
 }
