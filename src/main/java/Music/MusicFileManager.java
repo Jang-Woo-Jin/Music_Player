@@ -11,7 +11,7 @@ public class MusicFileManager {
 
     // Singleton Pattern
     private static MusicFileManager uniqueInstance;
-    private final String FILEINFOADDRESS = "D:\\music-info\\";//System.getProperty("user.home") + "/Document/";
+    private final String FILEINFOADDRESS = System.getProperty("user.home")+"\\music-info\\";
     private final String FILEINFONAME = "abc";//"MusicInfoFile";
     private ArrayList<MusicFile> musicFileList = new ArrayList<MusicFile>();
     private RecentPlayList recentPlayList = new RecentPlayList();
@@ -29,10 +29,11 @@ public class MusicFileManager {
     // Singleton Pattern Applied
 
     public void addMusicFile(final String fileAddress) {
-        ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress);
+    	FileIO.mkdir(FILEINFOADDRESS);
+    	ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress);
         for (String iter : musicFileNameList) {
             String fileName = iter;
-            System.out.println(fileAddress);
+            System.out.println(FILEINFOADDRESS);
             System.out.println(fileName);
             try {
                 musicFileList.add(new MusicFile(fileName, fileAddress, getMusicInfoFile(fileName)));
@@ -50,7 +51,7 @@ public class MusicFileManager {
             infoFileInfo.add(iter.getSaveInfo());
 
         }
-        FileIO.mkdir("D:\\music-info\\");
+        
         FileIO.writeTextFile(FILEINFOADDRESS, FILEINFONAME, infoFileInfo, "");
         favoriteMusicList.FSort();
 
@@ -82,8 +83,8 @@ public class MusicFileManager {
     public String[] getMusicInfoFile(final String name) {
         ArrayList<String> informationString = FileIO.readTextFile(FILEINFOADDRESS, FILEINFONAME);
         String[] information = new String[informationString.size()];
-        for (int i = 0; i < informationString.size(); i++) {
-            information = informationString.get(i).split("/");
+        for (String iter : informationString) {
+            information = iter.split("/");
             if (information[0].equals(name)) {
                 return information;
             }

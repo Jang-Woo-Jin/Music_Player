@@ -5,7 +5,7 @@ import com.mpatric.mp3agic.*;
 import java.io.IOException;
 
 public class MusicFile extends Mp3File {
-    private final String FILEINFOADDRESS = System.getProperty("user.home") + "/Document/";
+    private final String FILEINFOADDRESS = System.getProperty("user.home")+"\\music-info\\";
     private final String FILEINFONAME = "MusicInfoFile";
     private int playCount;
     private String fileName, fileAddress;
