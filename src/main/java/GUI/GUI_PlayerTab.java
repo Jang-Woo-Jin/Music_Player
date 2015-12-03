@@ -10,23 +10,21 @@ import javafx.scene.media.MediaPlayer.Status;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
-public class GUI_PlayerTab extends JPanel {
+class GUI_PlayerTab extends JPanel {
 
-    final JFXPanel fxPanel = new JFXPanel();
+    private final JFXPanel fxPanel = new JFXPanel();
     File bip;
     Media hit;
-    MediaPlayer mediaPlayer;
-    JButton playButton;
+    private MediaPlayer mediaPlayer;
+    private JButton playButton;
 
     public GUI_PlayerTab() {
         this.initialize();
     }
 
-    public Container initialize() {
+    private void initialize() {
 
         this.add(fxPanel);
 
@@ -36,14 +34,9 @@ public class GUI_PlayerTab extends JPanel {
         setMusic();
         setButtons();
 
-        Platform.runLater(new Runnable() {
-            public void run() {
-                initFX(fxPanel);
-            }
-        });
+        Platform.runLater(() -> initFX(fxPanel));
 
         this.setVisible(true);
-        return this;
     }
 
     private void initFX(JFXPanel fxPanel) {
@@ -62,37 +55,30 @@ public class GUI_PlayerTab extends JPanel {
 
         playButton = new JButton("▶");
         /* buttons setting */
-        playButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Status status = mediaPlayer.getStatus();
+        playButton.addActionListener((e) -> {
+            Status status = mediaPlayer.getStatus();
 
-                if (status == Status.PAUSED
-                        || status == Status.READY
-                        || status == Status.STOPPED) {
+            if (status == Status.PAUSED
+                    || status == Status.READY
+                    || status == Status.STOPPED) {
 
-                    mediaPlayer.play();
-                    playButton.setText("||");
-                } else {
-                    mediaPlayer.pause();
-                    playButton.setText("▶");
-                }
+                mediaPlayer.play();
+                playButton.setText("||");
+            } else {
+                mediaPlayer.pause();
+                playButton.setText("▶");
             }
         });
 
-
         this.add(playButton);
        
-        
-        /* buttons setting end */
-
-
+        // TODO add event playButton with get and set
     }
 
     private void setMusic() {
-        bip = new File(System.getProperty("user.home") + "/Downloads/[와타아메]+모노크로스로드.mp3");
-        System.out.println(bip.toURI().toString());
-        hit = new Media(bip.toURI().toString());
-        mediaPlayer = new MediaPlayer(hit);
+//        bip = new File(System.getProperty("user.home") + "/Downloads/[와타아메]+모노크로스로드.mp3");
+//        hit = new Media(bip.toURI().toString());
+//        mediaPlayer = new MediaPlayer(hit);
     }
 
 

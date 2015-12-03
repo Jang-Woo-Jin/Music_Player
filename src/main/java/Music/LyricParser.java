@@ -4,7 +4,7 @@ import FileIO.FileIO;
 
 import java.util.ArrayList;
 
-public class LyricParser {
+class LyricParser {
 
     private int[][] time = new int[1000][3];// 0:Min  1:Sec   2:0.Sec
     private String[] lrctime = new String[1000];
@@ -23,9 +23,9 @@ public class LyricParser {
         this.time = time;
     }
 
-    public void splitLrc() {
+    private void splitLrc() {
         FileIO a = new FileIO();
-        ArrayList<String> b = a.readTextFile("C:", "kimagurestadamu");
+        ArrayList<String> b = FileIO.readTextFile("C:", "kimagurestadamu");
         for (int i = 0; i < b.size(); i++) {
             index = b.get(i).split("]");
             lrctime[i] = index[0];

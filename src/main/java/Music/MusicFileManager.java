@@ -6,21 +6,17 @@ import com.mpatric.mp3agic.UnsupportedTagException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MusicFileManager {
 
     // Singleton Pattern
     private static MusicFileManager uniqueInstance;
     private final String FILEINFOADDRESS = System.getProperty("user.home") + "/Document/";
-    private final String FILEINFONAME = "MusicInfoFile";
-    private ArrayList<MusicFile> musicFileList = new ArrayList<MusicFile>();
+    private ArrayList<MusicFile> musicFileList = new ArrayList<>();
     private RecentPlayList recentPlayList = new RecentPlayList();
     private FavoriteMusicList favoriteMusicList = new FavoriteMusicList();
-    private ArrayList<MusicFile> choosePlayList = new ArrayList<MusicFile>();
-
-    private static void MusicFileManager() {
-
-    }
+    private ArrayList<MusicFile> choosePlayList = new ArrayList<>();
 
     public static MusicFileManager getInstance() {
         if (uniqueInstance == null) {
@@ -32,19 +28,11 @@ public class MusicFileManager {
     // Singleton Pattern Applied
 
     public void addMusicFile(final String fileAddress) {
-        ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress, "mp3");
-        for (int i = 0; i < musicFileNameList.size(); i++) {
-            String fileName = (String) musicFileNameList.get(i);
-
+        ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress);
+        for (String fileName : musicFileNameList) {
             try {
                 musicFileList.add(new MusicFile(fileAddress, fileName, getMusicInfoFile(fileName)));
-            } catch (UnsupportedTagException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (InvalidDataException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (UnsupportedTagException | IOException | InvalidDataException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
@@ -76,12 +64,13 @@ public class MusicFileManager {
             return information;
         }
       */
-    public String[] getMusicInfoFile(final String name) {
+    private String[] getMusicInfoFile(final String name) {
+        String FILEINFONAME = "MusicInfoFile";
         ArrayList<String> informationString = FileIO.readTextFile(FILEINFOADDRESS, FILEINFONAME);
         String[] information = new String[informationString.size()];
-        for (int i = 0; i < informationString.size(); i++) {
-            information = informationString.get(i).split("/");
-            if (information[0] == name) {
+        for (String anInformationString : informationString) {
+            information = anInformationString.split("/");
+            if (Objects.equals(information[0], name)) {
                 return information;
             }
         }

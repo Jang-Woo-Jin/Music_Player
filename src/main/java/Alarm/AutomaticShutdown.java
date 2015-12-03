@@ -2,7 +2,7 @@ package Alarm;
 
 import java.util.Calendar;
 
-public class AutomaticShutdown extends Thread {
+class AutomaticShutdown extends Thread {
 
     public boolean letShutdown(String time) {
 

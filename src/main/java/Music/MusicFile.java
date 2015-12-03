@@ -41,7 +41,7 @@ public class MusicFile extends Mp3File {
 
     }
 
-    public void setMusicInformation() {
+    private void setMusicInformation() {
         if (isV1Tag) {
             this.singer = id3v1Tag.getArtist();
             this.composer = null;
@@ -87,8 +87,8 @@ public class MusicFile extends Mp3File {
         return this.playCount;
     }
 
-    public void setPlayCount(int playCount) {
-        this.playCount = playCount;
+    public void setPlayCount() {
+        this.playCount = 0;
     }
 
     public String getSinger() {

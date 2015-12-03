@@ -3,13 +3,13 @@ package GUI;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 
-public class GUI_Toolbar extends JMenuBar {
+class GUI_Toolbar extends JMenuBar {
 
-    JMenu fileMenu = new JMenu("File Path");
+    private final JMenu fileMenu = new JMenu("File Path");
 
-    JMenuItem setMenuItem = new JMenuItem("Set");
+    private final JMenuItem setMenuItem = new JMenuItem("Set");
 
-    MenuItemListener menuItemListener = new MenuItemListener();
+    private final MenuItemListener menuItemListener = new MenuItemListener();
 
     public GUI_Toolbar() {
         onCreate();

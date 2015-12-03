@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AlarmSystem extends Thread {
+class AlarmSystem extends Thread {
 
     public boolean letAlarm(String ampm, String hour, String min) {
 
@@ -25,19 +25,19 @@ public class AlarmSystem extends Thread {
             e1.printStackTrace();
         }
 
-        alarmTime.set(today.SECOND, +0);
-        alarmTime.set(today.MINUTE, +setMin);
+        alarmTime.set(Calendar.SECOND, +0);
+        alarmTime.set(Calendar.MINUTE, +setMin);
 
         if (ampm.equals("오전")) {
             if (setHour != 12)
-                alarmTime.set(today.HOUR_OF_DAY, +setHour);
+                alarmTime.set(Calendar.HOUR_OF_DAY, +setHour);
             else
-                alarmTime.set(today.HOUR_OF_DAY, +0);
+                alarmTime.set(Calendar.HOUR_OF_DAY, +0);
         } else {
             if (setHour != 12)
-                alarmTime.set(today.HOUR_OF_DAY, +setHour + 12);
+                alarmTime.set(Calendar.HOUR_OF_DAY, +setHour + 12);
             else
-                alarmTime.set(today.HOUR_OF_DAY, +12);
+                alarmTime.set(Calendar.HOUR_OF_DAY, +12);
         }
 
         try {

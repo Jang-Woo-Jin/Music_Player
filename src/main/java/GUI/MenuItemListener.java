@@ -7,10 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by Elliad on 2015-12-03.
- */
-public class MenuItemListener implements ActionListener {
+class MenuItemListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //TODO
         final JFrame newFrame = new JFrame("\t\t\tsettings\t\t\t");
@@ -30,13 +27,10 @@ public class MenuItemListener implements ActionListener {
 
         newFrame.setVisible(true);
 
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println(mp3Path.getText());
-                MusicFileManager.getInstance().addMusicFile(mp3Path.getText());
-                newFrame.setVisible(false);
-            }
+        saveButton.addActionListener(e1 -> {
+            System.out.println(mp3Path.getText());
+            MusicFileManager.getInstance().addMusicFile(mp3Path.getText());
+            newFrame.setVisible(false);
         });
     }
 }

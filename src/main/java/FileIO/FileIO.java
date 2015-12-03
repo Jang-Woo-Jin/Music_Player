@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class FileIO {
     public static ArrayList<String> readTextFile(final String fileAddress, final String fileName) {
 
-        ArrayList<String> information = new ArrayList<String>();
-        String readLine = new String("");
+        ArrayList<String> information = new ArrayList<>();
+        String readLine;
         File file = new File(fileAddress, fileName + ".txt");
         BufferedReader input;
 
@@ -26,8 +26,9 @@ public class FileIO {
         try {
             while ((readLine = input.readLine()) != null) {
 
-                if (readLine.startsWith("//") || (readLine.trim()).equals("")) continue;
-                else {
+                if (readLine.startsWith("//") || (readLine.trim()).equals("")) {
+                    continue;
+                } else {
                     information.add(readLine);
                 }
             }
@@ -48,8 +49,8 @@ public class FileIO {
         try {
             File file = new File(fileInformationAddress, fileName + ".txt");
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-            for (int i = 0; i < writeInformation.length; i++) {
-                writer.write(writeInformation[i]);
+            for (String aWriteInformation : writeInformation) {
+                writer.write(aWriteInformation);
                 writer.write(delimiter);
             }
             writer.close();
@@ -60,17 +61,14 @@ public class FileIO {
         }
     }
 
-    public static ArrayList<String> readAllFileInPath(final String fileAddress, final String extend) {
+    public static ArrayList<String> readAllFileInPath(final String fileAddress) {
         File dirFile = new File(fileAddress);
         File[] fileList = dirFile.listFiles();
-        ArrayList<String> information = new ArrayList<String>();
-        int i = 0;
+        ArrayList<String> information = new ArrayList<>();
         for (File tempFile : fileList) {
             if (tempFile.isFile()) {
-                String tempPath = tempFile.getParent();
                 String tempFileName = tempFile.getName();
-                if (FilePathParser.getExtension(tempFileName).equals(extend
-                )) {
+                if (FilePathParser.getExtension(tempFileName).equals("mp3")) {
                     information.add(FilePathParser.getFileName(tempFileName));
                 }
             }
@@ -81,7 +79,7 @@ public class FileIO {
     private static int readLine(final String fileAddress, final String fileName) {
         int lineNum = 0;
 
-        String inputLine = new String("");
+        String inputLine;
         File file = new File(fileAddress, fileName + ".txt");
         BufferedReader input;
 
@@ -127,10 +125,9 @@ public class FileIO {
     }
 
     private static void reNameFile(final String fileAddress, final String fileName, final String newName, final String type) {
-        String path = fileAddress;
-        File oldfile = new File(path, fileName + type);
-        File newfile = new File(path, newName + type);
-        oldfile.renameTo(newfile);
+        File oldFile = new File(fileAddress, fileName + type);
+        File newFile = new File(fileAddress, newName + type);
+        oldFile.renameTo(newFile);
     }
 }
 
