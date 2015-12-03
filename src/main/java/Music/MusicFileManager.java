@@ -22,6 +22,10 @@ public class MusicFileManager {
     private final String FILEINFOADDRESS = System.getProperty("user.home") + "/Document/";
     private final String FILEINFONAME = "MusicInfoFile";
 
+    private static void MusicFileManager(){
+    	
+    }
+    
     public static MusicFileManager getInstance() {
         if (uniqueInstance == null) {
             uniqueInstance = new MusicFileManager();
