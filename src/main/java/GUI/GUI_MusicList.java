@@ -59,9 +59,6 @@ public class GUI_MusicList {
 
     }
 
-    public DefaultListModel<MusicFile> getListModel() {
-        return this.listModel;
-    }
 }
 
 
