@@ -1,5 +1,6 @@
 package Etc;
-import java.util.*;
+
+import java.util.Calendar;
 
 public class AutomaticShutdown extends Thread {
 
