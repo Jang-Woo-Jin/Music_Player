@@ -24,7 +24,7 @@ public class MusicFile extends Mp3File {
 	private final String MUSICINFODELIMITER = "/";
 	private final String INFOFILEADDRESS = "";
 
-	private String singer, composer, title, album, genre, comment;
+	private String singer, composer, name, album, genre, comment;
 	private byte[] imagedata;
 	
 	
@@ -44,11 +44,11 @@ public class MusicFile extends Mp3File {
 		}
 		this.fileAddress = musicFileAddress;
 		this.fileName = musicFileName;
-		// setMusicInformation();
+		setMusicInformation();
 		
 	}
 	public MusicFile(String a){
-		this.title = title;
+		this.fileName = fileName;
 	}
 	public String[] getMusicFileInformation() {
 		String[] tempInformation = FileIO.readTextFile(fileInformationAddress, getName());
@@ -62,11 +62,13 @@ public class MusicFile extends Mp3File {
 				writeInformation, MUSICINFODELIMITER);
 	}
 
-	public void setMusicInformation(String[] information) {
+	public void setMusicInformation() {
 		if(isV1Tag){
+			id3v1Tag.getArtist();
+		}
+		if(isV2Tag){
 			
 		}
-		
 		setMusicFileInformation();
 	}
 
@@ -83,6 +85,7 @@ public class MusicFile extends Mp3File {
 	public void deleteAllRecentPlay() {
 		recentPlay.clear();
 	}
+	
 	// ~~~~~~~~~~~~~~~~ Getter & Setter for private value
 	public Lyric getLyrics() {
 		return lyrics;
@@ -111,7 +114,61 @@ public class MusicFile extends Mp3File {
 	public void setPlayCount(int playCount) {
 		this.playCount = playCount;
 	}
+
 	public String getName(){
-		return title;
+		return this.fileName;
     }
+
+	public String getSinger() {
+		return singer;
+	}
+
+	public void setSinger(String singer) {
+		this.singer = singer;
+	}
+
+	public String getComposer() {
+		return composer;
+	}
+
+	public void setComposer(String composer) {
+		this.composer = composer;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAlbum() {
+		return album;
+	}
+
+	public void setAlbum(String album) {
+		this.album = album;
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public byte[] getImagedata() {
+		return imagedata;
+	}
+
+	public void setImagedata(byte[] imagedata) {
+		this.imagedata = imagedata;
+	}
+
 }

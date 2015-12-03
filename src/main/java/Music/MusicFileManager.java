@@ -34,7 +34,6 @@ public class MusicFileManager {
     }
     // Singleton Pattern Applied
 
-
     public void addMusicFile(String fileAddress) {
         ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress, "mp3");
         for (int i = 0; i < musicFileNameList.size(); i++) {
