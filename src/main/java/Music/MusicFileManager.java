@@ -2,6 +2,10 @@ package Music;
 
 import java.io.IOException;
 import java.util.ArrayList;
+<<<<<<< HEAD
+=======
+import java.util.HashMap;
+>>>>>>> c6c7a654b9d29db9793671750a3ada88b50e1887
 
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.UnsupportedTagException;
@@ -17,6 +21,7 @@ public class MusicFileManager {
     private RecentPlayList recentPlayList = new RecentPlayList();
     private FavoriteMusicList favoriteMusicList = new FavoriteMusicList();
     private ArrayList<MusicFile> choosePlayList = new ArrayList<MusicFile>();
+<<<<<<< HEAD
 
     private MusicFileManager() {
         // TEST CODE
@@ -25,6 +30,16 @@ public class MusicFileManager {
         // TEST CODE END
     }
 
+=======
+  
+    private final String FILEINFOADDRESS = System.getProperty("user.home") + "/Document/";
+    private final String FILEINFONAME = "MusicInfoFile";
+
+    private static void MusicFileManager(){
+    	
+    }
+    
+>>>>>>> c6c7a654b9d29db9793671750a3ada88b50e1887
     public static MusicFileManager getInstance() {
         if (uniqueInstance == null) {
             uniqueInstance = new MusicFileManager();
@@ -40,6 +55,7 @@ public class MusicFileManager {
             String fileName = (String) musicFileNameList.get(i);
 
             try {
+<<<<<<< HEAD
                 musicFileList.add(new MusicFile(fileAddress, fileName));
             } catch (UnsupportedTagException e) {
                 // TODO Auto-generated catch block
@@ -58,6 +74,64 @@ public class MusicFileManager {
         }
     }
 
+=======
+				musicFileList.add(new MusicFile(fileAddress,fileName,getMusicInfoFile(fileName)));
+			} catch (UnsupportedTagException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvalidDataException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+        favoriteMusicList.FSort();
+       
+    }
+/*
+    private HashMap<String,Integer> checkTextFileAndMusicFile(final String fileAddress){
+    	HashMap<String, Integer> information;
+    	
+    	ArrayList<String> mp3files = FileIO.readAllFileInPath(fileAddress, ".mp3");
+    	ArrayList<String> saveInfo = FileIO.readTextFile(FILEINFOADDRESS,FILEINFONAME);
+    	ArrayList<String> saveNameInfo = new ArrayList<String>();
+    	
+    	for(String iter1 : mp3files){
+    		boolean findFlag = false;
+    		for(String iter2 : saveNameInfo){
+    			if(iter1 == iter2) {
+    				findFlag = true;
+    			
+    			}
+    		}
+    		
+    	}
+    	
+    	
+    	return information;
+    }
+  */  
+    public String[] getMusicInfoFile(final String name) {
+		ArrayList<String> informationString = FileIO.readTextFile(FILEINFOADDRESS, FILEINFONAME);
+		String[] information = new String[informationString.size()];
+		for(int i=0;i<informationString.size();i++){
+			information = informationString.get(i).split("/");
+			if(information[0] == name){
+				return information;
+			}
+		}
+		return information;
+	}
+
+	public void setMusicFileInformation() {
+		String[] writeInformation = null;
+		//FileIO.writeTextFile(this.fileInformationAddress, fileName,
+		//		writeInformation, MUSICINFODELIMITER);
+	}
+    
+>>>>>>> c6c7a654b9d29db9793671750a3ada88b50e1887
     //~~~~~~~~~~~~~~ Getter & Setter
     public ArrayList<MusicFile> getMusicFileList() {
         return musicFileList;

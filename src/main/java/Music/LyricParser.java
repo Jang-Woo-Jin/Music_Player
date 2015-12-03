@@ -1,5 +1,10 @@
 package Music;
 
+<<<<<<< HEAD
+=======
+import java.util.ArrayList;
+
+>>>>>>> c6c7a654b9d29db9793671750a3ada88b50e1887
 import FileIO.FileIO;
 
 public class LyricParser {
@@ -19,9 +24,15 @@ public class LyricParser {
 
     public void splitLrc() {
         FileIO a = new FileIO();
+<<<<<<< HEAD
         String[] b = a.readTextFile("C:", "kimagurestadamu");
         for (int i = 0; i < b.length; i++) {
             index = b[i].split("]");
+=======
+        ArrayList<String> b = a.readTextFile("C:", "kimagurestadamu");
+        for (int i = 0; i < b.size(); i++) {
+            index = b.get(i).split("]");
+>>>>>>> c6c7a654b9d29db9793671750a3ada88b50e1887
             lrctime[i] = index[0];
             lrctime[i] = lrctime[i].replaceAll("\\[", "");
 
