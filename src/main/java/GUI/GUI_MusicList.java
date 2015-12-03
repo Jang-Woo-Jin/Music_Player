@@ -44,7 +44,6 @@ class GUI_MusicList {
             }
         });
 
-
         refreshButton.addActionListener(e -> {
             arrayListToListModel(MusicFileManager.getInstance().getMusicFileList());
             musicListPanel.updateUI();

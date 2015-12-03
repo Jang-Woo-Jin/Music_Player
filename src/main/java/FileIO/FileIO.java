@@ -124,11 +124,18 @@ public class FileIO {
         return lineNum;
     }
 
-    public static void renameTextFile(final String fileAddress, final String fileName, final String newName) {
+    public static void mkdir(final String fileAddress){
+    	File file = new File(fileAddress);
+    	if(!file.mkdir()){
+    		
+    	}
+    }
+    
+    public static void reNameTextFile(final String fileAddress, final String fileName, final String newName) {
         renameFile(fileAddress, fileName, newName, ".txt");
     }
 
-    public static void renameMP3File(final String fileAddress, final String fileName, final String newName) {
+    public static void reNameMP3File(final String fileAddress, final String fileName, final String newName) {
         renameFile(fileAddress, fileName, newName, ".mp3");
     }
 

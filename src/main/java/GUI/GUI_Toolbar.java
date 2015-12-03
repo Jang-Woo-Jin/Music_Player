@@ -7,11 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-class GUI_Toolbar extends JMenuBar {
+public class GUI_Toolbar extends JMenuBar {
 
-    private final JMenu fileMenu = new JMenu("File Path");
+    JMenu fileMenu = new JMenu("File Path");
 
-    private final JMenuItem setMenuItem = new JMenuItem("Set");
+    JMenuItem setMenuItem = new JMenuItem("Set");
 
     public GUI_Toolbar() {
         onCreate();
@@ -36,11 +36,12 @@ class GUI_Toolbar extends JMenuBar {
 
 
         setMenuItem.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser chooser = new JFileChooser();
                 chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 int returnVal = chooser.showOpenDialog(null);
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                if(returnVal == JFileChooser.APPROVE_OPTION) {
                     System.out.println("You chose to open this Directory: " +
                             chooser.getSelectedFile().getName());
                     MusicFileManager.getInstance().addMusicFile(chooser.getSelectedFile().getPath());
