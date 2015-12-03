@@ -27,7 +27,6 @@ public class FileIO {
             while ((readLine = input.readLine()) != null) {
 
                 if (readLine.startsWith("//") || (readLine.trim()).equals("")) {
-                    continue;
                 } else {
                     information.add(readLine);
                 }

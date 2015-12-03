@@ -14,6 +14,7 @@ public class GUI_Toolbar extends JMenuBar {
     JMenuItem setMenuItem = new JMenuItem("Set");
 
     GUI_MusicList musicList;
+
     public GUI_Toolbar(GUI_MusicList musicList) {
         onCreate(musicList);
     }
@@ -45,7 +46,7 @@ public class GUI_Toolbar extends JMenuBar {
                 JFileChooser chooser = new JFileChooser();
                 chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 int returnVal = chooser.showOpenDialog(null);
-                if(returnVal == JFileChooser.APPROVE_OPTION) {
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
                     System.out.println("You chose to open this Directory: " +
                             chooser.getSelectedFile().getName());
                     MusicFileManager.getInstance().addMusicFile(chooser.getSelectedFile().getPath());

@@ -29,14 +29,14 @@ public class MusicFileManager {
     // Singleton Pattern Applied
 
     public void addMusicFile(final String fileAddress) {
-    	FileIO.mkdir(FILEINFOADDRESS);
-    	ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress);
+        FileIO.mkdir(FILEINFOADDRESS);
+        ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress);
         for (String iter : musicFileNameList) {
             String fileName = iter;
             System.out.println(FILEINFOADDRESS);
             System.out.println(fileName);
             try {
-                musicFileList.add(new MusicFile(fileName, fileAddress, getMusicInfoFile(fileName,fileAddress)));
+                musicFileList.add(new MusicFile(fileName, fileAddress, getMusicInfoFile(fileName, fileAddress)));
             } catch (UnsupportedTagException e) {
                 e.printStackTrace();
             } catch (InvalidDataException e) {
@@ -51,7 +51,7 @@ public class MusicFileManager {
             infoFileInfo.add(iter.getSaveInfo());
 
         }
-        
+
         FileIO.writeTextFile(FILEINFOADDRESS, FILEINFONAME, infoFileInfo, "");
         favoriteMusicList.FSort();
 
@@ -81,11 +81,11 @@ public class MusicFileManager {
         }
       */
     public String[] getMusicInfoFile(final String fileName, final String fileAddress) {
-    	ArrayList<String> informationString = FileIO.readTextFile(FILEINFOADDRESS, FILEINFONAME);
+        ArrayList<String> informationString = FileIO.readTextFile(FILEINFOADDRESS, FILEINFONAME);
         String[] information = new String[5];
-        
+
         for (String iter : informationString) {
-        	information = iter.split("/");
+            information = iter.split("/");
             if (information[0].equals(fileName)) {
                 return information;
             }
