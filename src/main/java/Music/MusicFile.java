@@ -65,7 +65,7 @@ public class MusicFile extends Mp3File {
     }
     
     public String toString(){
-    	return this.name;
+    	return this.fileName;
     }
     // ~~~~~~~~~~~~~~~~ Getter & Setter for private value
 

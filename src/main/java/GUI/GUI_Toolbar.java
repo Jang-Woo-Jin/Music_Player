@@ -13,11 +13,15 @@ public class GUI_Toolbar extends JMenuBar {
 
     JMenuItem setMenuItem = new JMenuItem("Set");
 
-    public GUI_Toolbar() {
-        onCreate();
+    GUI_MusicList musicList;
+    public GUI_Toolbar(GUI_MusicList musicList) {
+        onCreate(musicList);
     }
 
-    private void onCreate() {
+    private void onCreate(GUI_MusicList musicList) {
+
+        //connect musicList
+        this.musicList = musicList;
 
         //create menu items
 
@@ -45,6 +49,8 @@ public class GUI_Toolbar extends JMenuBar {
                     System.out.println("You chose to open this Directory: " +
                             chooser.getSelectedFile().getName());
                     MusicFileManager.getInstance().addMusicFile(chooser.getSelectedFile().getPath());
+                    musicList.arrayListToListModel(MusicFileManager.getInstance().getMusicFileList());
+                    musicList.createListPanel().updateUI();
                 }
             }
         });
