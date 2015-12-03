@@ -10,8 +10,9 @@ class Main {
     private final JFrame mainFrame = new JFrame();
 
     public static void main(String[] args) {
-        Main main = new Main();
-        main.init();
+        //Main main = new Main();
+        //main.init();
+    	MusicFileManager.getInstance().addMusicFile("D:\\기타기타기타\\Music\\덕후의 기운이 감돌고 있습니다\\Riboot");
     }
 
     private void init() {
