@@ -125,18 +125,20 @@ public class FileIO {
         return lineNum;
     }
 
-    public static void mkdir(final String fileAddress){
-    	File file = new File(fileAddress);
-    	if(!file.mkdir()){
-    		//System.err.println("fileAddress 에 경로 추가 불가");
-    	}
+    public static boolean makeDirectory(final String fileAddress) {
+        try {
+            File file = new File(fileAddress);
+            return file.mkdir();
+        } catch (SecurityException e) {
+            return false;
+        }
     }
-    
-    public static void reNameTextFile(final String fileAddress, final String fileName, final String newName) {
+
+    public static void renameTextfile(final String fileAddress, final String fileName, final String newName) {
         renameFile(fileAddress, fileName, newName, ".txt");
     }
 
-    public static void reNameMP3File(final String fileAddress, final String fileName, final String newName) {
+    public static void renameMP3File(final String fileAddress, final String fileName, final String newName) {
         renameFile(fileAddress, fileName, newName, ".mp3");
     }
 
