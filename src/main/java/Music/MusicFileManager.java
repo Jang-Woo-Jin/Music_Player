@@ -35,7 +35,8 @@ public class MusicFileManager {
         ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress, "mp3");
         for (int i = 0; i < musicFileNameList.size(); i++) {
             String fileName = (String) musicFileNameList.get(i);
-
+            System.out.println(fileAddress);
+            System.out.println(fileName);
             try {
                 musicFileList.add(new MusicFile(fileName, fileAddress, getMusicInfoFile(fileName)));
             } catch (UnsupportedTagException e) {e.printStackTrace();

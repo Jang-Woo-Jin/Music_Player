@@ -6,6 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer.Status;
 
 import javax.swing.*;
 import java.awt.*;
@@ -63,13 +64,16 @@ public class GUI_PlayerTab extends JPanel {
         /* buttons setting */
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (playButton.getText().equals("▶")) {
+                Status status = mediaPlayer.getStatus();
+
+                if (status == Status.PAUSED
+                        || status == Status.READY
+                        || status == Status.STOPPED) {
+
                     mediaPlayer.play();
-                    System.out.println("You clicked the play button");
                     playButton.setText("||");
                 } else {
                     mediaPlayer.pause();
-                    System.out.println("You clicked the pause button");
                     playButton.setText("▶");
                 }
             }

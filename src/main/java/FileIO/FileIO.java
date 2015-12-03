@@ -3,8 +3,6 @@ package FileIO;
 import java.io.*;
 import java.util.ArrayList;
 
-;
-
 public class FileIO {
     public static ArrayList<String> readTextFile(final String fileAddress, final String fileName) {
 
