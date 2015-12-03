@@ -45,9 +45,10 @@ public class FileIO {
     }
 
     public static void writeTextFile(final String fileInformationAddress, final String fileName, ArrayList<String> writeInformation, final String delimiter) {
-        try {
-            File file = new File(fileInformationAddress, fileName + ".txt");
+    	File file = new File(fileInformationAddress, fileName + ".txt");
+    	try {
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),"UTF-8"));
+            
             for (String iter:writeInformation) {
                 writer.write(iter);
                 writer.write(delimiter);
@@ -55,14 +56,21 @@ public class FileIO {
             writer.close();
 
         } catch (IOException e) {
-
+        	FileWriter fw;
+			try {
+				fw = new FileWriter(file);
+				 fw.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+           
             e.printStackTrace();
         }
     }
 
     public static ArrayList<String> readAllFileInPath(final String fileAddress, final String extend) {
         File dirFile = new File(fileAddress);
-        File[] fileList = dirFile.listFiles();
+    	File[] fileList = dirFile.listFiles();
         ArrayList<String> information = new ArrayList<String>();
         int i = 0;
         for (File tempFile : fileList) {

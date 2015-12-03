@@ -33,8 +33,8 @@ public class MusicFileManager {
 
     public void addMusicFile(final String fileAddress) {
         ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress, "mp3");
-        for (int i = 0; i < musicFileNameList.size(); i++) {
-            String fileName = (String) musicFileNameList.get(i);
+        for (String iter:musicFileNameList) {
+            String fileName = iter;
             System.out.println(fileAddress);
             System.out.println(fileName);
             try {
