@@ -80,7 +80,7 @@ public class MusicFileManager {
         String[] information = new String[informationString.size()];
         for (int i = 0; i < informationString.size(); i++) {
             information = informationString.get(i).split("/");
-            if (information[0] == name) {
+            if (information[0].equals(name)) {
                 return information;
             }
         }
