@@ -80,8 +80,8 @@ public class CurrentMusic {
         if (mediaPlayerOptional.isPresent()) {
             MediaPlayer mediaPlayer = mediaPlayerOptional.get();
             Duration duration = mediaPlayer.getCurrentTime();
-            Duration duration5s = new Duration(second * 1000);
-            duration.add(duration5s);
+            Duration delta = new Duration(second * 1000);
+            duration.add(delta);
             mediaPlayer.seek(duration);
         }
     }
