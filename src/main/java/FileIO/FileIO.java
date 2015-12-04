@@ -28,7 +28,7 @@ public class FileIO {
             }
             input.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            File file = new File(fileAddress, fileName + ".txt");
         }
 
         return information;

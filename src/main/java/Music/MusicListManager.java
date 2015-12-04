@@ -31,7 +31,7 @@ public class MusicListManager {
 
     public void addMusicFileInDirectory(final String fileAddress) {
         ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress);
-        FileIO.makeDirectory(FILE_INFO_ADDRESS);
+
         for (String iter : musicFileNameList) {
             String fileName = iter;
             try {
