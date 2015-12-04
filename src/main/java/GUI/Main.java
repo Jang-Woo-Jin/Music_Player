@@ -10,14 +10,15 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        FileIO.makeDirectory(System.getProperty("user.home") + "/Desktop/"+"music-info");
+        FileIO.makeDirectory(System.getProperty("user.home") + "/Desktop/" + "music-info");
         main.init();
     }
 
     private void init() {
-        MusicList gui_musicList = new MusicList();
+        PlayerTab playerPanel = new PlayerTab();
+        MusicList gui_musicList = new MusicList(playerPanel);
         JPanel tabPanel = new Tab().createTab(gui_musicList);
-        JPanel playerPanel = new PlayerTab();
+
 
         JPanel listPanel = gui_musicList.createListPanel();
 

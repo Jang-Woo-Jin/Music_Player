@@ -21,7 +21,7 @@ public class PlayerTab extends JPanel {
     private JSlider volumeSlider;
     private JSlider currentTimeSlider;
 
-    private JPanel  buttonPanel = new JPanel(new GridLayout(2, 3, 30, 10));
+    private JPanel buttonPanel = new JPanel(new GridLayout(2, 3, 30, 10));
 
     public PlayerTab() {
 
@@ -40,9 +40,8 @@ public class PlayerTab extends JPanel {
         buttonPanel.setBackground(Color.black);
         this.add(buttonPanel);
 
-
         Platform.runLater(() -> initFX(fxPanel));
-        fxPanel.setSize(0,0);
+        fxPanel.setSize(0, 0);
 
         this.add(fxPanel);
         this.setVisible(true);
@@ -81,7 +80,6 @@ public class PlayerTab extends JPanel {
         seekNextButton.addActionListener(e -> {
             CurrentMusic currentMusic = CurrentMusic.getInstance();
             currentMusic.seekNext();
-            currentMusic.getCurrentTime().ifPresent(System.out::println);
         });
 
         buttonPanel.add(seekNextButton);
@@ -92,8 +90,7 @@ public class PlayerTab extends JPanel {
 
         seekPreviousButton.addActionListener(e -> {
             CurrentMusic currentMusic = CurrentMusic.getInstance();
-            currentMusic.seekNext();
-
+            currentMusic.seekPrevious();
         });
 
         buttonPanel.add(seekPreviousButton);
@@ -103,8 +100,10 @@ public class PlayerTab extends JPanel {
         stopButton = new JButton("■");
 
         stopButton.addActionListener(e -> {
+
             CurrentMusic currentMusic = CurrentMusic.getInstance();
-            //TODO
+            playButton.setText("▶");
+            currentMusic.stop();
         });
         buttonPanel.add(stopButton);
     }
@@ -139,8 +138,15 @@ public class PlayerTab extends JPanel {
     private void addStarButton() {
         //TODO
         starButton = new JButton("★");
-
         buttonPanel.add(starButton);
+    }
+
+    public void doStop() {
+        stopButton.doClick();
+    }
+
+    public void doPlay() {
+        playButton.doClick();
     }
 
 }

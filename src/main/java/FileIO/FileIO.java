@@ -122,7 +122,7 @@ public class FileIO {
     private static void renameFile(final String fileAddress, final String fileName, final String newName, final String type) {
         String path = fileAddress;
         File oldFile = new File(path, fileName + type);
-        if (oldFile.exists()) {
+        if (oldFile.isFile()) {
             File newFile = new File(path, newName + type);
             oldFile.renameTo(newFile);
         }

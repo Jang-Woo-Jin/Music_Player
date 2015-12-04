@@ -1,5 +1,6 @@
 package Music;
 
+import FileIO.FilePathParser;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
@@ -53,8 +54,8 @@ public class CurrentMusic {
         mediaPlayerOptional.ifPresent(MediaPlayer::stop);
     }
 
-    public boolean set(File file) {
-        if (file.exists()) {
+    public boolean setMedia(File file) {
+        if (file.isFile()) {
             stop();
             mediaPlayerOptional = Optional.of(
                     new MediaPlayer(
@@ -64,16 +65,21 @@ public class CurrentMusic {
         return false;
     }
 
-    public boolean set(String filePath) {
-        return set(new File(filePath));
+    public boolean setVolume(float volume) {
+        if (volume >= 0.0 && volume <= 1.0) {
+            mediaPlayerOptional.ifPresent(mediaPlayer -> setVolume(volume));
+            return true;
+        }
+        return false;
+
+    }
+
+    public boolean setMedia(String filePath) {
+        return setMedia(new File(filePath));
     }
 
     public Optional<Duration> getCurrentTime() {
         return mediaPlayerOptional.map(MediaPlayer::getCurrentTime);
-    }
-
-    public void seekNext() {
-        seek(5);
     }
 
     private void seek(int second) {
@@ -81,12 +87,19 @@ public class CurrentMusic {
             MediaPlayer mediaPlayer = mediaPlayerOptional.get();
             Duration duration = mediaPlayer.getCurrentTime();
             Duration delta = new Duration(second * 1000);
-            duration.add(delta);
-            mediaPlayer.seek(duration);
+            mediaPlayer.seek(duration.add(delta));
         }
+    }
+
+    public void seekNext() {
+        seek(5);
     }
 
     public void seekPrevious() {
         seek(-5);
+    }
+
+    public void toMusic() {
+    //TODO
     }
 }
