@@ -16,7 +16,7 @@ public class MusicFile extends Mp3File {
     private Lyric lyrics;
     private String lyricsFileAddress, lyricsFileName;
     private String singer, composer, name, album;
-    private byte[] imagedata;
+    private byte[] image;
 
     private ID3v1 id3v1Tag;
     private ID3v2 id3v2Tag;
@@ -61,7 +61,7 @@ public class MusicFile extends Mp3File {
             this.composer = id3v2Tag.getComposer();
             this.name = id3v2Tag.getTitle();
             this.album = id3v2Tag.getAlbum();
-            this.imagedata = id3v2Tag.getAlbumImage();
+            this.image = id3v2Tag.getAlbumImage();
         }
     }
 
@@ -135,12 +135,12 @@ public class MusicFile extends Mp3File {
         this.album = album;
     }
 
-    public byte[] getImagedata() {
-        return imagedata;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setImagedata(byte[] imagedata) {
-        this.imagedata = imagedata;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
 }
