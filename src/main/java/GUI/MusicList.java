@@ -32,7 +32,7 @@ public class MusicList {
                 if (evt.getClickCount() == 2) {
                     CurrentMusic.getInstance().stop();
                     CurrentMusic.getInstance().set(list.getSelectedValue().getFilename());
-                    if(CurrentMusic.getInstance().isPlayable()) {
+                    if (CurrentMusic.getInstance().isPlayable()) {
                         CurrentMusic.getInstance().play();
                     }
                     else {

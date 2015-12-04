@@ -17,6 +17,7 @@ public class FilePathParser {
     public static String getDirectorySeperator() {
         return directorySeperator;
     }
+
     public static String getExtension(String fileStr) {
         return fileStr.substring(fileStr.lastIndexOf(".") + 1);
     }

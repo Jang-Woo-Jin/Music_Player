@@ -37,13 +37,6 @@ public class RecursiveFinder {
         Files.walkFileTree(startingDir, finder);
         return finder.done();
     }
-//    public static void main(String[] args)
-//            throws IOException {
-//
-//        Finder finder = new Finder(pattern);
-//        Files.walkFileTree(startingDir, finder);
-//        finder.done();
-//    }
 
     public static class Finder
             extends SimpleFileVisitor<Path> {

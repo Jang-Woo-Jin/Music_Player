@@ -7,125 +7,156 @@ import java.util.ArrayList;
 
 public class FileIO {
 
-    @Nullable
-    public static ArrayList<String> readTextFile(final String fileAddress, final String fileName) {
+	@Nullable
+	public static ArrayList<String> readTextFile(final String fileAddress,
+			final String fileName) {
 
-        ArrayList<String> information = new ArrayList<>();
-        String readLine;
-        BufferedReader input;
+		ArrayList<String> information = new ArrayList<>();
+		String readLine;
+		BufferedReader input;
 
-        try {
-            input = new BufferedReader(new InputStreamReader(
-                    new FileInputStream(fileAddress
-                            + FilePathParser.getDirectorySeperator()
-                            + fileName + ".txt"), "UTF-8"));
-            while ((readLine = input.readLine()) != null) {
+		try {
+			input = new BufferedReader(new InputStreamReader(
+					new FileInputStream(fileAddress
+							+ FilePathParser.getDirectorySeperator() + fileName
+							+ ".txt"), "UTF-8"));
+			while ((readLine = input.readLine()) != null) {
 
-                if (readLine.startsWith("//") || (readLine.trim()).equals("")) {
-                } else {
-                    information.add(readLine);
-                }
-            }
-            input.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+				if (readLine.startsWith("//") || (readLine.trim()).equals("")) {
+				} else {
+					information.add(readLine);
+				}
+			}
+			input.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-        return information;
-    }
+		return information;
+	}
 
-    public static void writeTextFile(final String fileInformationAddress, final String fileName, ArrayList<String> writeInformation, final String delimiter) {
-        File file = new File(fileInformationAddress, fileName + ".txt");
-        try {
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
+	public static void writeTextFile(final String fileInformationAddress,
+			final String fileName, ArrayList<String> writeInformation,
+			final String delimiter) {
+		File file = new File(fileInformationAddress, fileName + ".txt");
+		try {
+			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+					new FileOutputStream(file), "UTF-8"));
 
-            for (String iter : writeInformation) {
-                writer.write(iter);
-                writer.write(delimiter);
-            }
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+			for (String iter : writeInformation) {
+				writer.write(iter);
+				writer.write(delimiter);
+			}
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    public static ArrayList<String> readAllFileInPath(final String fileAddress) {
-        File dirFile = new File(fileAddress);
-        File[] fileList = dirFile.listFiles();
-        ArrayList<String> information = new ArrayList<>();
-        for (File tempFile : fileList) {
-            if (tempFile.isFile()) {
-                String tempFileName = tempFile.getName();
-                if (FilePathParser.getExtension(tempFileName).equals("mp3")) {
-                    information.add(FilePathParser.getFileName(tempFileName));
-                }
-            }
-        }
-        return information;
-    }
+	public static ArrayList<String> readAllFileInPath(final String fileAddress) {
+		File dirFile = new File(fileAddress);
+		File[] fileList = dirFile.listFiles();
+		ArrayList<String> information = new ArrayList<>();
+		for (File tempFile : fileList) {
+			if (tempFile.isFile()) {
+				String tempFileName = tempFile.getName();
+				if (FilePathParser.getExtension(tempFileName).equals("mp3")) {
+					information.add(FilePathParser.getFileName(tempFileName));
+				}
+			}
+		}
+		return information;
+	}
 
-    private static int readLine(final String fileAddress, final String fileName) {
-        int lineNum = 0;
+	private static int readLine(final String fileAddress, final String fileName) {
+		int lineNum = 0;
 
-        String inputLine;
-        File file = new File(fileAddress, fileName + ".txt");
-        BufferedReader input;
+		String inputLine;
+		File file = new File(fileAddress, fileName + ".txt");
+		BufferedReader input;
 
-        try {
-            input = new BufferedReader(new InputStreamReader(
-                    new FileInputStream(fileAddress
-                            + FilePathParser.getDirectorySeperator()
-                            + fileName + ".txt"), "UTF-8"));
-        } catch (Exception e) {
-            try {
-                FileWriter fw = new FileWriter(file);
-                fw.close();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-            return 0;
-        }
+		try {
+			input = new BufferedReader(new InputStreamReader(
+					new FileInputStream(fileAddress
+							+ FilePathParser.getDirectorySeperator() + fileName
+							+ ".txt"), "UTF-8"));
+		} catch (Exception e) {
+			try {
+				FileWriter fw = new FileWriter(file);
+				fw.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			return 0;
+		}
 
-        try {
-            while ((inputLine = input.readLine()) != null) {
-                if (inputLine.startsWith("//") || (inputLine.trim()).equals("")) continue;
-                lineNum++;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            input.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		try {
+			while ((inputLine = input.readLine()) != null) {
+				if (inputLine.startsWith("//") || (inputLine.trim()).equals(""))
+					continue;
+				lineNum++;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			input.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-        return lineNum;
-    }
+		return lineNum;
+	}
 
-    public static boolean makeDirectory(final String fileAddress) {
-        try {
-            File file = new File(fileAddress);
-            return file.mkdir();
-        } catch (SecurityException e) {
-            return false;
-        }
-    }
+	public static byte[] imageReader(String fileAddress, String fileName) {
+		String fullName = fileAddress + fileName;
+		FileInputStream in;
+		byte[] b_code = null;
+		try {
+			in = new FileInputStream(fullName);
 
-    public static void renameTextFile(final String fileAddress, final String fileName, final String newName) {
-        renameFile(fileAddress, fileName, newName, ".txt");
-    }
+			try {
+				int i = 0;
+				while ((b_code[i] = (byte) in.read()) != -1) {
+					b_code[i] = (byte) in.read();
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return b_code;
+	}
 
-    public static void renameMP3File(final String fileAddress, final String fileName, final String newName) {
-        renameFile(fileAddress, fileName, newName, ".mp3");
-    }
+	public static boolean makeDirectory(final String fileAddress) {
+		try {
+			File file = new File(fileAddress);
+			return file.mkdir();
+		} catch (SecurityException e) {
+			return false;
+		}
+	}
 
-    private static void renameFile(final String fileAddress, final String fileName, final String newName, final String type) {
-        String path = fileAddress;
-        File oldFile = new File(path, fileName + type);
-        if (oldFile.exists()) {
-            File newFile = new File(path, newName + type);
-            oldFile.renameTo(newFile);
-        }
-    }
+	public static void renameTextFile(final String fileAddress,
+			final String fileName, final String newName) {
+		renameFile(fileAddress, fileName, newName, ".txt");
+	}
+
+	public static void renameMP3File(final String fileAddress,
+			final String fileName, final String newName) {
+		renameFile(fileAddress, fileName, newName, ".mp3");
+	}
+
+	private static void renameFile(final String fileAddress,
+			final String fileName, final String newName, final String type) {
+		String path = fileAddress;
+		File oldFile = new File(path, fileName + type);
+		if (oldFile.exists()) {
+			File newFile = new File(path, newName + type);
+			oldFile.renameTo(newFile);
+		}
+	}
 }

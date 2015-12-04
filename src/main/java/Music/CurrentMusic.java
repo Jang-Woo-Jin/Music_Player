@@ -56,7 +56,9 @@ public class CurrentMusic {
     public boolean set(File file) {
         if (file.exists()) {
             stop();
-            mediaPlayerOptional = Optional.of(new MediaPlayer(new Media(file.toURI().toString())));
+            mediaPlayerOptional = Optional.of(
+                    new MediaPlayer(
+                            new Media(file.toURI().toString())));
             return true;
         }
         return false;
@@ -71,30 +73,20 @@ public class CurrentMusic {
     }
 
     public void seekNext() {
-        seekNext(5);
+        seek(5);
     }
 
-    private void seekNext(int Second) {
+    private void seek(int second) {
         if (mediaPlayerOptional.isPresent()) {
             MediaPlayer mediaPlayer = mediaPlayerOptional.get();
             Duration duration = mediaPlayer.getCurrentTime();
-            Duration duration5s = new Duration(Second * 1000);
-            duration.add(duration5s);
-            mediaPlayer.seek(duration);
-        }
-    }
-
-    private void seekPrevious(int Second) {
-        if (mediaPlayerOptional.isPresent()) {
-            MediaPlayer mediaPlayer = mediaPlayerOptional.get();
-            Duration duration = mediaPlayer.getCurrentTime();
-            Duration duration5s = new Duration(Second * 1000);
-            duration.subtract(duration5s);
+            Duration delta = new Duration(second * 1000);
+            duration.add(delta);
             mediaPlayer.seek(duration);
         }
     }
 
     public void seekPrevious() {
-        seekPrevious(5);
+        seek(-5);
     }
 }
