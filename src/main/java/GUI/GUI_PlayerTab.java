@@ -46,7 +46,7 @@ class GUI_PlayerTab extends JPanel {
     private void setButtons() {
         playButton = new JButton("▶");
         /* buttons setting */
-        playButton.addActionListener((e) -> {
+        playButton.addActionListener(e -> {
             CurrentMusic currentMusic = CurrentMusic.getInstance();
             if (currentMusic.isPlayable()) {
                 CurrentMusic.getInstance().play();

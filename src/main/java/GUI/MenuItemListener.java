@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 class MenuItemListener implements ActionListener {
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent event) {
         //TODO
         final JFrame newFrame = new JFrame("\t\t\tsettings\t\t\t");
         final JTextField mp3Path = new JTextField();
@@ -27,7 +27,7 @@ class MenuItemListener implements ActionListener {
 
         newFrame.setVisible(true);
 
-        saveButton.addActionListener(e1 -> {
+        saveButton.addActionListener(e -> {
             System.out.println(mp3Path.getText());
             MusicFileManager.getInstance().addMusicFile(mp3Path.getText());
             newFrame.setVisible(false);

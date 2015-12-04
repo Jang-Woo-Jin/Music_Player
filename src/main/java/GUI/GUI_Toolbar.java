@@ -25,10 +25,8 @@ public class GUI_Toolbar extends JMenuBar {
         this.musicList = musicList;
 
         //create menu items
-
         setMenuItem.setMnemonic(KeyEvent.VK_N);
         setMenuItem.setActionCommand("Set");
-
 
         //add menu items to menus
         fileMenu.add(setMenuItem);

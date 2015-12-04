@@ -88,7 +88,6 @@ public class FileIO {
 
         try {
             while ((inputLine = input.readLine()) != null) {
-                System.out.println(inputLine);
                 if (inputLine.startsWith("//") || (inputLine.trim()).equals("")) continue;
                 lineNum++;
             }

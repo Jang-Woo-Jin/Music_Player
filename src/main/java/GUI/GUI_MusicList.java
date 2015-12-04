@@ -31,11 +31,11 @@ class GUI_MusicList {
         musicList.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 JList<MusicFile> list = (JList<MusicFile>) evt.getSource();
-                System.out.println(list.getSelectedValue().getName());
                 if (evt.getClickCount() == 2) {
 
                     // Double-click detected
                     int index = list.locationToIndex(evt.getPoint());
+
                 } else if (evt.getClickCount() == 3) {
 
                     // Triple-click detected
