@@ -20,7 +20,11 @@ public class MusicListManager {
 
     public static MusicListManager getInstance() {
         if (uniqueInstance == null) {
-            uniqueInstance = new MusicListManager();
+            synchronized (MusicListManager.class) {
+                if (uniqueInstance == null) {
+                    uniqueInstance = new MusicListManager();
+                }
+            }
         }
         return uniqueInstance;
     }
