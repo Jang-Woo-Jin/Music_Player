@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class MusicListManager {
-
-    // Singleton Pattern
     private static MusicListManager uniqueInstance;
 
     private final String FILE_INFO_ADDRESS = System.getProperty("user.home") + "/Desktop/"+"music-info";
@@ -22,7 +20,11 @@ public class MusicListManager {
 
     public static MusicListManager getInstance() {
         if (uniqueInstance == null) {
-            uniqueInstance = new MusicListManager();
+            synchronized (MusicListManager.class) {
+                if (uniqueInstance == null) {
+                    uniqueInstance = new MusicListManager();
+                }
+            }
         }
         return uniqueInstance;
     }
@@ -45,8 +47,7 @@ public class MusicListManager {
         }
 
         FileIO.writeTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME, infoFileInfo, "");
-        favoriteMusicList.FSort();
-
+        favoriteMusicList.sort();
     }
 
     private String[] getMusicInfoFile(final String fileName, final String fileAddress) {
@@ -73,10 +74,17 @@ public class MusicListManager {
         //		writeInformation, MUSICINFODELIMITER);
     }
 
-    public void addMusicFile(String filepath) {
+    public void addMusic(String filepath) {
         File file = new File(filepath);
-        if (file.exists()) {
-
+        if (file.isFile()) {
+            String fileName = filepath.substring(filepath.lastIndexOf(File.separatorChar) + 1, filepath.lastIndexOf("."));
+            String fileAddress = filepath.substring(0, filepath.lastIndexOf(File.separatorChar));
+            System.out.println(fileAddress);
+            try {
+                musicList.add(new Music(fileName, fileAddress, getMusicInfoFile(fileName, fileAddress)));
+            } catch (InvalidDataException | IOException | UnsupportedTagException e) {
+                e.printStackTrace();
+            }
         }
     }
 

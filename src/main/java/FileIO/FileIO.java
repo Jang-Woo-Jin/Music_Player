@@ -17,7 +17,7 @@ public class FileIO {
         try {
             input = new BufferedReader(new InputStreamReader(
                     new FileInputStream(fileAddress
-                            + FilePathParser.getDirectorySeperator()
+                            + File.separatorChar
                             + fileName + ".txt"), "UTF-8"));
             while ((readLine = input.readLine()) != null) {
 
@@ -74,7 +74,7 @@ public class FileIO {
         try {
             input = new BufferedReader(new InputStreamReader(
                     new FileInputStream(fileAddress
-                            + FilePathParser.getDirectorySeperator()
+                            + File.separatorChar
                             + fileName + ".txt"), "UTF-8"));
         } catch (Exception e) {
             try {
