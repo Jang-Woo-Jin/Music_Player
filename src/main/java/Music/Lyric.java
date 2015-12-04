@@ -13,18 +13,18 @@ public class Lyric {
 	}
 	int timeCal(int min, int sec, int msec){
 		int total=0;
-		total = min * 60 * 100 + sec * 100 + msec;	//0.01ÃÊ´ÜÀ§·Î ÇöÀç½Ã°£À» °è»ê(?)
+		total = min * 60 * 100 + sec * 100 + msec;	//0.01ì´ˆ ë‹¨ìœ„ë¡œ í‘œí˜„?
 		return total;
 	}
 	
 	
 	public void lyricShow(int min, int sec, int msec){
-		System.out.println(min+" : "+sec+" : "+msec+" »óÅÂÀÇ °¡»ç¸¦ ½ÇÇàÇÕ´Ï´Ù");
+		System.out.println(min+" : "+sec+" : "+msec+" ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ç¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½");
 		int j=1, start=0, finish=0;
-		while(lrc[j]!=null){	//ÅØ½ºÆ®ÆÄÀÏ ÁÙ ¼ö
+		while(lrc[j]!=null){	//í…ìŠ¤íŠ¸ íŒŒì¼ì˜ ì´ ì¤„ìˆ˜
 			j++;
 		}
-		//¹ØºÎºĞ: °°Àº ½Ã°£¿¡ ¿©·¯°³ÀÇ °¡»ç°¡ ÀÖÀ»¶§ Ã³¸®
+		//ì¶œë ¥ ì•Œê³ ë¦¬ì¦˜
 		for(int i = 0; i < j; i++){
 			if(timeCal(min, sec, msec) >= timeCal(time[i][0], time[i][1], time[i][2])){
 				start = i;

@@ -10,17 +10,17 @@ public class Lyric_Repeat extends Thread {
     		Lyric_Parser b= new Lyric_Parser();
     		Lyric c = new Lyric(b.getTime(),b.getLrc());
     		
-    		msec = timetest.getTG()%100;	//0.01ÃÊ´ÜÀ§
-    		sec = ((timetest.getTG()-msec)/100)%60;	//1ÃÊ´ÜÀ§
-    		min = (timetest.getTG()-sec*100-msec)/60/100; //1ºÐ´ÜÀ§.
-    		//½Ã°£À» 00:00:00 Çü½ÄÀ¸·Î Àß¶ó³¿
+    		msec = timetest.getTG()%100;	//0.01ì´ˆ
+    		sec = ((timetest.getTG()-msec)/100)%60;	//1ì´ˆ
+    		min = (timetest.getTG()-sec*100-msec)/60/100; //1ë¶„.
+    		//ï¿½Ã°ï¿½ï¿½ï¿½ 00:00:00 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß¶ï¿½
     		try {
 				this.sleep(10);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-    		c.lyricShow(min, sec, msec);//½Ã°£ ¹Þ¾Æ¿Í¼­ »ç¿ëÇÔ. ½Ã°£ºÎºÐ ¿Ï¼ºÇÏ¸é °íÄ£´Ù~
+    		c.lyricShow(min, sec, msec);//ï¿½Ã°ï¿½ ï¿½Þ¾Æ¿Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½Ã°ï¿½ï¿½Îºï¿½ ï¿½Ï¼ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½Ä£ï¿½ï¿½~
     	}
     }
 

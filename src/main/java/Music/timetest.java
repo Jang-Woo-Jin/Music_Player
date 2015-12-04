@@ -1,14 +1,14 @@
 package Music;
 
-import  java.lang.Thread;//½ÇÇè¿ëÀÔ´Ï´Ù***for test
+import  java.lang.Thread;//for test
 public class timetest extends Thread {
 	static int timeget=0;
     public void run() {
         timeget=0;
         
-        while(true){//¿øÁØÀÌ°¡ ¾ÆÁ÷ ½Ã°£º¸³»ÁÖ´Â°É ´ú¿Ï¼ºÇØ¼­ ÀÓ½Ã·Î ½Ã°£µ¹¾Æ°¡´Â°Å ¸¸µé¾î³ğ
+        while(true){//í…ŒìŠ¤íŠ¸ìš©ìœ¼ë¡œ ì‹œê°„ í˜ëŸ¬ê°€ëŠ”ì ˆ ë§Œë“¤ì–´ì¤Œ
         	try {
-				this.sleep(10);	//0.01ÃÊ¸¶´Ù ¾÷µ¥ÀÌÆ®µÇ´Â ½Ã°è
+				this.sleep(10);	//0.01ì´ˆ ë‹¨ìœ„ë¡œ í˜ëŸ¬ê°
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
