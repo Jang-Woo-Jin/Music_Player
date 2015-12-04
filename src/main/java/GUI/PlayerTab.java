@@ -21,7 +21,7 @@ public class PlayerTab extends JPanel {
     private JSlider volumeSlider;
     private JSlider currentTimeSlider;
 
-    private JPanel  buttonPanel = new JPanel(new GridLayout(2, 3, 30, 10));
+    private JPanel buttonPanel = new JPanel(new GridLayout(2, 3, 30, 10));
 
     public PlayerTab() {
 
@@ -41,7 +41,7 @@ public class PlayerTab extends JPanel {
         this.add(buttonPanel);
 
         Platform.runLater(() -> initFX(fxPanel));
-        fxPanel.setSize(0,0);
+        fxPanel.setSize(0, 0);
 
         this.add(fxPanel);
         this.setVisible(true);
@@ -80,7 +80,6 @@ public class PlayerTab extends JPanel {
         seekNextButton.addActionListener(e -> {
             CurrentMusic currentMusic = CurrentMusic.getInstance();
             currentMusic.seekNext();
-            currentMusic.getCurrentTime().ifPresent(System.out::println);
         });
 
         buttonPanel.add(seekNextButton);
@@ -92,7 +91,6 @@ public class PlayerTab extends JPanel {
         seekPreviousButton.addActionListener(e -> {
             CurrentMusic currentMusic = CurrentMusic.getInstance();
             currentMusic.seekPrevious();
-
         });
 
         buttonPanel.add(seekPreviousButton);

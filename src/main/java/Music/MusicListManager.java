@@ -33,9 +33,8 @@ public class MusicListManager {
         ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress);
 
         for (String iter : musicFileNameList) {
-            String fileName = iter;
             try {
-                musicList.add(new Music(fileName, fileAddress, getMusicInfoFile(fileName, fileAddress)));
+                musicList.add(new Music(iter, fileAddress, getMusicInfoFile(iter, fileAddress)));
             } catch (UnsupportedTagException | IOException | InvalidDataException e) {
                 e.printStackTrace();
             }

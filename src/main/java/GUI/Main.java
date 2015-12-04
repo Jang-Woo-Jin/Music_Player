@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        FileIO.makeDirectory(System.getProperty("user.home") + "/Desktop/"+"music-info");
+        FileIO.makeDirectory(System.getProperty("user.home") + "/Desktop/" + "music-info");
         main.init();
     }
 
