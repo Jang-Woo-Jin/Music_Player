@@ -16,7 +16,9 @@ public class FileIO {
 
         try {
             input = new BufferedReader(new InputStreamReader(
-                    new FileInputStream(fileAddress + "//" + fileName + ".txt"), "UTF-8"));
+                    new FileInputStream(fileAddress
+                            + FilePathParser.getDirectorySeperator()
+                            + fileName + ".txt"), "UTF-8"));
             while ((readLine = input.readLine()) != null) {
 
                 if (readLine.startsWith("//") || (readLine.trim()).equals("")) {
@@ -71,7 +73,9 @@ public class FileIO {
 
         try {
             input = new BufferedReader(new InputStreamReader(
-                    new FileInputStream(fileAddress + "//" + fileName + ".txt"), "UTF-8"));
+                    new FileInputStream(fileAddress
+                            + FilePathParser.getDirectorySeperator()
+                            + fileName + ".txt"), "UTF-8"));
         } catch (Exception e) {
             try {
                 FileWriter fw = new FileWriter(file);

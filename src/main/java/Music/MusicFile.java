@@ -23,7 +23,10 @@ public class MusicFile extends Mp3File {
     private boolean isV1Tag = false, isV2Tag = false;
 
     public MusicFile(String musicFileName, String musicFileAddress, String[] infoInfo) throws UnsupportedTagException, InvalidDataException, IOException {
-        super(musicFileAddress + "//" + musicFileName + ".mp3");
+        super(musicFileAddress
+                + FilePathParser.getDirectorySeperator()
+                + musicFileName
+                + ".mp3");
         if (infoInfo != null) {
             if (infoInfo[0] == null) infoInfo[0] = "0";
             this.playCount = Integer.parseInt(infoInfo[0]);
