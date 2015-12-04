@@ -16,7 +16,7 @@ public class PlayerTab extends JPanel {
     private JButton seekNextButton;
     private JButton seekPreviousButton;
     private JButton stopButton;
-    private JButton playmodeButton; // this button can change play mode ( all music play, all music play repeatly, one music repeatly )
+    private JButton playModeButton; // this button can change play mode ( all music play, all music play repeatly, one music repeatly )
     private JSlider volumeSlider;
     private JSlider currentTimeSlider;
 
@@ -43,9 +43,8 @@ public class PlayerTab extends JPanel {
 
     private Scene initScene() {
         Group root = new Group();
-        Scene scene = new Scene(root, javafx.scene.paint.Color.GREENYELLOW);
 
-        return (scene);
+        return (new Scene(root, javafx.scene.paint.Color.GREENYELLOW));
     }
 
     private void addPlayButton() {
@@ -86,5 +85,41 @@ public class PlayerTab extends JPanel {
         });
 
         this.add(seekPreviousButton);
+    }
+
+    private void addStopButton() {
+        stopButton = new JButton("■");
+
+        stopButton.addActionListener(e -> {
+            CurrentMusic currentMusic = CurrentMusic.getInstance();
+            //TODO
+        });
+        this.add(stopButton);
+    }
+
+    private void addPlayModeButton() {
+        playModeButton = new JButton("all");
+
+        playModeButton.addActionListener(e -> {
+            CurrentMusic currentMusic = CurrentMusic.getInstance();
+            //TODO
+        });
+        this.add(playModeButton);
+    }
+
+    private void addVolumeSlider() {
+        //TODO
+        //vertical plz
+        volumeSlider = new JSlider();
+
+        this.add(volumeSlider);
+    }
+
+    private void addCurrentTimeSlider() {
+        //TODO
+        //horizontal plz
+        currentTimeSlider = new JSlider();
+
+        this.add(currentTimeSlider);
     }
 }
