@@ -1,5 +1,4 @@
 GUI
-    - Toolbar 기능 -> File Path 설정
     - List 기능    -> 새로고침
     - Button 만들기 (Player)
     - Image 띄우기
