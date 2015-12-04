@@ -12,7 +12,7 @@ public class CurrentMusic {
     private static CurrentMusic uniqueInstance;
     private Optional<MediaPlayer> mediaPlayerOptional;
 
-    public CurrentMusic() {
+    private CurrentMusic() {
         this.mediaPlayerOptional = Optional.empty();
     }
 
@@ -76,7 +76,7 @@ public class CurrentMusic {
         seekNext(5);
     }
 
-    public void seekNext(int Second) {
+    private void seekNext(int Second) {
         if (mediaPlayerOptional.isPresent()) {
             MediaPlayer mediaPlayer = mediaPlayerOptional.get();
             Duration duration = mediaPlayer.getCurrentTime();
@@ -86,7 +86,7 @@ public class CurrentMusic {
         }
     }
 
-    public void seekPrevious(int Second) {
+    private void seekPrevious(int Second) {
         if (mediaPlayerOptional.isPresent()) {
             MediaPlayer mediaPlayer = mediaPlayerOptional.get();
             Duration duration = mediaPlayer.getCurrentTime();

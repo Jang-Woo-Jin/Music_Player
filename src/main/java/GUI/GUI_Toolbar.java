@@ -1,19 +1,17 @@
 package GUI;
 
 import Music.MusicFileManager;
+import OS.RecursiveFinder;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.nio.file.Path;
 
 public class GUI_Toolbar extends JMenuBar {
-
-    JMenu fileMenu = new JMenu("File Path");
-
-    JMenuItem setMenuItem = new JMenuItem("Set");
-
-    GUI_MusicList musicList;
+    private final JMenu fileMenu = new JMenu("File Path");
+    private final JMenuItem setMenuItem = new JMenuItem("Set");
+    private GUI_MusicList musicList;
 
     public GUI_Toolbar(GUI_MusicList musicList) {
         onCreate(musicList);
@@ -37,19 +35,31 @@ public class GUI_Toolbar extends JMenuBar {
         //add this to the frame
         this.setVisible(true);
 
+        setMenuItem.addActionListener(e -> {
+            JFileChooser chooser = new JFileChooser();
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int returnVal = chooser.showOpenDialog(null);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                System.out.println("You chose to open this Directory: " +
+                        chooser.getSelectedFile().getName());
 
-        setMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser chooser = new JFileChooser();
-                chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                int returnVal = chooser.showOpenDialog(null);
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    System.out.println("You chose to open this Directory: " +
-                            chooser.getSelectedFile().getName());
-                    MusicFileManager.getInstance().addMusicFileInDirectory(chooser.getSelectedFile().getPath());
+                try {
+                    RecursiveFinder finder = new RecursiveFinder(
+                            chooser.getSelectedFile().getPath(), "*.mp3");
+                    String[] paths =
+                            finder.find()
+                                    .stream()
+                                    .map(Path::toAbsolutePath)
+                                    .map(Path::toString)
+                                    .toArray(String[]::new);
+
+                    for (String path : paths) {
+                        MusicFileManager.getInstance().addMusicFile(path);
+                    }
                     musicList.arrayListToListModel(MusicFileManager.getInstance().getMusicFileList());
                     musicList.createListPanel().updateUI();
+                } catch (IOException exception) {
+                    exception.printStackTrace();
                 }
             }
         });

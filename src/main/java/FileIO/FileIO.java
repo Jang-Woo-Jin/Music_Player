@@ -10,7 +10,7 @@ public class FileIO {
     @Nullable
     public static ArrayList<String> readTextFile(final String fileAddress, final String fileName) {
 
-        ArrayList<String> information = new ArrayList<String>();
+        ArrayList<String> information = new ArrayList<>();
         String readLine;
         BufferedReader input;
 
@@ -52,7 +52,7 @@ public class FileIO {
     public static ArrayList<String> readAllFileInPath(final String fileAddress) {
         File dirFile = new File(fileAddress);
         File[] fileList = dirFile.listFiles();
-        ArrayList<String> information = new ArrayList<String>();
+        ArrayList<String> information = new ArrayList<>();
         for (File tempFile : fileList) {
             if (tempFile.isFile()) {
                 String tempFileName = tempFile.getName();
@@ -112,7 +112,7 @@ public class FileIO {
         }
     }
 
-    public static void renameTextfile(final String fileAddress, final String fileName, final String newName) {
+    public static void renameTextFile(final String fileAddress, final String fileName, final String newName) {
         renameFile(fileAddress, fileName, newName, ".txt");
     }
 

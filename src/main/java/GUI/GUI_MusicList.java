@@ -11,14 +11,11 @@ import java.util.ArrayList;
 
 class GUI_MusicList {
 
-    //Variables
     private final JButton refreshButton = new JButton("refresh list");
     private final JPanel musicListPanel = new JPanel(new BorderLayout());
     private final JList<MusicFile> musicList;
     private DefaultListModel<MusicFile> listModel = new DefaultListModel<>();
 
-
-    //Constructors
     public GUI_MusicList() {
         musicList = new JList<>(listModel);
         musicList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -54,7 +51,6 @@ class GUI_MusicList {
 
     //Functions
     public JPanel createListPanel() {
-        System.out.println(musicListPanel.getComponentCount());
         if (musicListPanel.getComponentCount() == 0) {
             musicListPanel.add(musicList, BorderLayout.NORTH);
             musicListPanel.add(refreshButton, BorderLayout.SOUTH);

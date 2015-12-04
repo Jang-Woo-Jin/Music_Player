@@ -4,6 +4,7 @@ import OS.OSValidator;
 
 public class FilePathParser {
     private static String directorySeperator;
+
     static {
         if (OSValidator.isWindows()) {
             directorySeperator = "\\";

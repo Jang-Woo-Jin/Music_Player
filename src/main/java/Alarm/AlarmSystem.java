@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class AlarmSystem extends Thread {
 
-    long ringring;
+    private long ringring;
 
     @Override
     public void run() {
@@ -40,19 +40,19 @@ public class AlarmSystem extends Thread {
             e1.printStackTrace();
         }
 
-        alarmTime.set(today.SECOND, +0);
-        alarmTime.set(today.MINUTE, +setMin);
+        alarmTime.set(Calendar.SECOND, +0);
+        alarmTime.set(Calendar.MINUTE, +setMin);
 
         if (ampm.equals("오전")) {
             if (setHour != 12)
-                alarmTime.set(today.HOUR_OF_DAY, +setHour);
+                alarmTime.set(Calendar.HOUR_OF_DAY, +setHour);
             else
-                alarmTime.set(today.HOUR_OF_DAY, +0);
+                alarmTime.set(Calendar.HOUR_OF_DAY, +0);
         } else if (ampm.equals("오후")) {
             if (setHour != 12)
-                alarmTime.set(today.HOUR_OF_DAY, +setHour + 12);
+                alarmTime.set(Calendar.HOUR_OF_DAY, +setHour + 12);
             else
-                alarmTime.set(today.HOUR_OF_DAY, +12);
+                alarmTime.set(Calendar.HOUR_OF_DAY, +12);
         }
 
         ringring = alarmTime.getTimeInMillis() - currentTime.getTimeInMillis();

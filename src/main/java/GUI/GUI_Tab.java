@@ -26,8 +26,6 @@ class GUI_Tab extends JPanel {
         return this;
     }
 
-
-    /* Button Actions Here */
     private void setActionListeners() {
         this.allMusic.addActionListener(e -> {
             musicList.arrayListToListModel(MusicFileManager.getInstance().getMusicFileList());
@@ -49,6 +47,4 @@ class GUI_Tab extends JPanel {
             musicList.createListPanel().updateUI();
         });
     }
-
-
 }

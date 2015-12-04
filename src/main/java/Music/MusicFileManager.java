@@ -4,8 +4,10 @@ import FileIO.FileIO;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class MusicFileManager {
 
@@ -23,10 +25,8 @@ public class MusicFileManager {
         if (uniqueInstance == null) {
             uniqueInstance = new MusicFileManager();
         }
-
         return uniqueInstance;
     }
-    // Singleton Pattern Applied
 
     public void addMusicFileInDirectory(final String fileAddress) {
         ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress);
@@ -35,11 +35,7 @@ public class MusicFileManager {
             String fileName = iter;
             try {
                 musicFileList.add(new MusicFile(fileName, fileAddress, getMusicInfoFile(fileName, fileAddress)));
-            } catch (UnsupportedTagException e) {
-                e.printStackTrace();
-            } catch (InvalidDataException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (UnsupportedTagException | IOException | InvalidDataException e) {
                 e.printStackTrace();
             }
         }
@@ -54,14 +50,14 @@ public class MusicFileManager {
 
     }
 
-    public String[] getMusicInfoFile(final String fileName, final String fileAddress) {
+    private String[] getMusicInfoFile(final String fileName, final String fileAddress) {
         ArrayList<String> informationString = FileIO.readTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME);
         String[] information = new String[5];
 
         for (String iter : informationString) {
             information = iter.split("/");
             if (information[1].equals(fileName)) {
-            	return information;
+                return information;
             }
         }
         information[0] = "0";

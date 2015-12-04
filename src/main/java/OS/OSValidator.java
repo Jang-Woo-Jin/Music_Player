@@ -11,17 +11,17 @@ public class OSValidator {
         return (OS.contains("win"));
     }
 
-    public static boolean isMac() {
+    private static boolean isMac() {
         return (OS.contains("mac"));
     }
 
-    public static boolean isUnix() {
+    private static boolean isUnix() {
         return (OS.contains("nix")
                 || OS.contains("nux")
                 || OS.contains("aix"));
     }
 
-    public static boolean isSolaris() {
+    private static boolean isSolaris() {
         return (OS.contains("sunos"));
     }
 
