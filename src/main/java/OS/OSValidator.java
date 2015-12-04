@@ -1,5 +1,9 @@
 package OS;
 
+
+/**
+ * http://www.mkyong.com/java/how-to-detect-os-in-java-systemgetpropertyosname/
+ */
 public class OSValidator {
     private static final String OS = System.getProperty("os.name").toLowerCase();
 
