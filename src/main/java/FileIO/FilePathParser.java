@@ -8,10 +8,10 @@ public class FilePathParser {
     }
 
     public static String getPath(String fileStr) {
-        return fileStr.substring(0, fileStr.lastIndexOf(File.pathSeparator));
+        return fileStr.substring(0, fileStr.lastIndexOf(File.separatorChar));
     }
 
     public static String getFileName(String fileStr) {
-        return fileStr.substring(fileStr.lastIndexOf(File.pathSeparator) + 1, fileStr.lastIndexOf("."));
+        return fileStr.substring(fileStr.lastIndexOf(File.separatorChar) + 1, fileStr.lastIndexOf("."));
     }
 }

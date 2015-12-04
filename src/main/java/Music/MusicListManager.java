@@ -74,10 +74,17 @@ public class MusicListManager {
         //		writeInformation, MUSICINFODELIMITER);
     }
 
-    public void addMusicFile(String filepath) {
+    public void addMusic(String filepath) {
         File file = new File(filepath);
-        if (file.exists()) {
-
+        if (file.isFile()) {
+            String fileName = filepath.substring(filepath.lastIndexOf(File.separatorChar) + 1, filepath.lastIndexOf("."));
+            String fileAddress = filepath.substring(0, filepath.lastIndexOf(File.separatorChar));
+            System.out.println(fileAddress);
+            try {
+                musicList.add(new Music(fileName, fileAddress, getMusicInfoFile(fileName, fileAddress)));
+            } catch (InvalidDataException | IOException | UnsupportedTagException e) {
+                e.printStackTrace();
+            }
         }
     }
 

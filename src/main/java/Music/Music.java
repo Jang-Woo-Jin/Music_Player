@@ -8,9 +8,9 @@ import java.io.IOException;
 
 public class Music extends Mp3File {
     private final String FILE_INFO_ADDRESS = System.getProperty("user.home")
-            + File.pathSeparator
+            + File.separatorChar
             + "music-info"
-            + File.pathSeparator;
+            + File.separatorChar;
     private final String FILE_INFO_NAME = "MusicInfoFile";
     private int playCount;
     private String fileName, fileAddress;
@@ -25,7 +25,7 @@ public class Music extends Mp3File {
 
     public Music(String musicFileName, String musicFileAddress, String[] infoInfo) throws UnsupportedTagException, InvalidDataException, IOException {
         super(musicFileAddress
-                + File.pathSeparator
+                + File.separatorChar
                 + musicFileName
                 + ".mp3");
         if (infoInfo != null) {
