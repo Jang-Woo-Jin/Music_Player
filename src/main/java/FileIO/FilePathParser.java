@@ -6,9 +6,9 @@ public class FilePathParser {
     private static String directorySeperator;
     static {
         if (OSValidator.isWindows()) {
-            directorySeperator = new String("\\");
+            directorySeperator = "\\";
         } else if (OSValidator.isPOSIX()) {
-            directorySeperator = new String("/");
+            directorySeperator = "/";
         }
     }
 
