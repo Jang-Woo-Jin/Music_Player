@@ -13,18 +13,17 @@ class GUI_PlayerTab extends JPanel {
 
     private final JFXPanel fxPanel = new JFXPanel();
     private JButton playButton;
+    private JButton seekNextButton;
+    private JButton seekPreviousButton;
 
     public GUI_PlayerTab() {
-        this.initialize();
-    }
-
-    private void initialize() {
         this.add(fxPanel);
 
         this.setPreferredSize(new Dimension(400, 300));
         this.setBackground(Color.BLACK);
 
-        setButtons();
+        addPlayButton();
+        addSeekNextButton();
 
         Platform.runLater(() -> initFX(fxPanel));
 
@@ -43,7 +42,7 @@ class GUI_PlayerTab extends JPanel {
         return (scene);
     }
 
-    private void setButtons() {
+    private void addPlayButton() {
         playButton = new JButton("▶");
         /* buttons setting */
         playButton.addActionListener(e -> {
@@ -57,5 +56,17 @@ class GUI_PlayerTab extends JPanel {
             }
         });
         this.add(playButton);
+    }
+
+    private void addSeekNextButton() {
+        seekNextButton = new JButton(">>");
+
+        seekNextButton.addActionListener(e -> {
+            CurrentMusic currentMusic = CurrentMusic.getInstance();
+            currentMusic.seekNext();
+            currentMusic.getCurrentTime().ifPresent(System.out::println);
+        });
+
+        this.add(seekNextButton);
     }
 }
