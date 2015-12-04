@@ -39,11 +39,9 @@ public class MusicListManager {
                 e.printStackTrace();
             }
         }
-        ArrayList<String> infoFileInfo = new ArrayList<String>();
-
-        for (Music iter : musicList) {
-            infoFileInfo.add(iter.getSaveInfo());
-        }
+        ArrayList<String> infoFileInfo = musicList.stream()
+                .map(iter -> iter.getSaveInfo())
+                .collect(Collectors.toCollection(ArrayList::new));
 
         FileIO.writeTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME, infoFileInfo, "");
         favoriteMusicList.sort();
