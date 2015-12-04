@@ -40,7 +40,6 @@ public class PlayerTab extends JPanel {
         buttonPanel.setBackground(Color.black);
         this.add(buttonPanel);
 
-
         Platform.runLater(() -> initFX(fxPanel));
         fxPanel.setSize(0,0);
 
@@ -92,7 +91,7 @@ public class PlayerTab extends JPanel {
 
         seekPreviousButton.addActionListener(e -> {
             CurrentMusic currentMusic = CurrentMusic.getInstance();
-            currentMusic.seekNext();
+            currentMusic.seekPrevious();
 
         });
 
@@ -103,8 +102,10 @@ public class PlayerTab extends JPanel {
         stopButton = new JButton("■");
 
         stopButton.addActionListener(e -> {
+
             CurrentMusic currentMusic = CurrentMusic.getInstance();
-            //TODO
+            playButton.setText("▶");
+            currentMusic.stop();
         });
         buttonPanel.add(stopButton);
     }
@@ -139,8 +140,15 @@ public class PlayerTab extends JPanel {
     private void addStarButton() {
         //TODO
         starButton = new JButton("★");
-
         buttonPanel.add(starButton);
+    }
+
+    public void doStop() {
+        stopButton.doClick();
+    }
+
+    public void doPlay() {
+        playButton.doClick();
     }
 
 }

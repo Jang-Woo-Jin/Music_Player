@@ -1,5 +1,6 @@
 package Music;
 
+import FileIO.FilePathParser;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
@@ -96,5 +97,9 @@ public class CurrentMusic {
 
     public void seekPrevious() {
         seek(-5);
+    }
+
+    public void toMusic() {
+    //TODO
     }
 }

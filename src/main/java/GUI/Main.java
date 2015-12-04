@@ -15,9 +15,10 @@ public class Main {
     }
 
     private void init() {
-        MusicList gui_musicList = new MusicList();
+        PlayerTab playerPanel = new PlayerTab();
+        MusicList gui_musicList = new MusicList(playerPanel);
         JPanel tabPanel = new Tab().createTab(gui_musicList);
-        JPanel playerPanel = new PlayerTab();
+
 
         JPanel listPanel = gui_musicList.createListPanel();
 
