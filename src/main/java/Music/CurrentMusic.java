@@ -55,7 +55,7 @@ public class CurrentMusic {
     }
 
     public boolean setMedia(File file) {
-        if (file.exists()) {
+        if (file.isFile()) {
             stop();
             mediaPlayerOptional = Optional.of(
                     new MediaPlayer(
