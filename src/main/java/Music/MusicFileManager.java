@@ -29,8 +29,8 @@ public class MusicFileManager {
     // Singleton Pattern Applied
 
     public void addMusicFile(final String fileAddress) {
-        FileIO.makeDirectory(FILE_INFO_ADDRESS);
         ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress);
+        
         for (String iter : musicFileNameList) {
             String fileName = iter;
             System.out.println(FILE_INFO_ADDRESS);
@@ -49,7 +49,6 @@ public class MusicFileManager {
 
         for (MusicFile iter : musicFileList) {
             infoFileInfo.add(iter.getSaveInfo());
-
         }
 
         FileIO.writeTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME, infoFileInfo, "");
@@ -57,37 +56,14 @@ public class MusicFileManager {
 
     }
 
-    /*
-        private HashMap<String,Integer> checkTextFileAndMusicFile(final String fileAddress){
-            HashMap<String, Integer> information;
-
-            ArrayList<String> mp3files = FileIO.readAllFileInPath(fileAddress, ".mp3");
-            ArrayList<String> saveInfo = FileIO.readTextFile(FILE_INFO_ADDRESS,FILE_INFO_NAME);
-            ArrayList<String> saveNameInfo = new ArrayList<String>();
-
-            for(String iter1 : mp3files){
-                boolean findFlag = false;
-                for(String iter2 : saveNameInfo){
-                    if(iter1 == iter2) {
-                        findFlag = true;
-
-                    }
-                }
-
-            }
-
-
-            return information;
-        }
-      */
     public String[] getMusicInfoFile(final String fileName, final String fileAddress) {
         ArrayList<String> informationString = FileIO.readTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME);
         String[] information = new String[5];
 
         for (String iter : informationString) {
             information = iter.split("/");
-            if (information[0].equals(fileName)) {
-                return information;
+            if (information[1].equals(fileName)) {
+            	return information;
             }
         }
         information[0] = "0";
