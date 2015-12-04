@@ -74,6 +74,13 @@ public class MusicFileManager {
         //		writeInformation, MUSICINFODELIMITER);
     }
 
+    public void addMusicFile(String filepath) {
+        File file = new File(filepath);
+        if (file.exists()) {
+            
+        }
+    }
+
     //~~~~~~~~~~~~~~ Getter & Setter
     public ArrayList<MusicFile> getMusicFileList() {
         return musicFileList;
