@@ -65,14 +65,9 @@ public class MusicListManager {
         return information;
     }
 
-    public void setMusicFileInformation() {
-        String[] writeInformation = null;
-        //FileIO.writeTextFile(this.fileInformationAddress, fileName,
-        //		writeInformation, MUSICINFODELIMITER);
-    }
-
     public void addMusic(String filepath) {
         File file = new File(filepath);
+
         if (file.isFile()) {
             String fileName = filepath.substring(filepath.lastIndexOf(File.separatorChar) + 1, filepath.lastIndexOf("."));
             String fileAddress = filepath.substring(0, filepath.lastIndexOf(File.separatorChar));

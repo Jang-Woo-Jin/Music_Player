@@ -3,6 +3,7 @@ package FileIO;
 import java.io.File;
 
 public class FilePathParser {
+
     public static String getExtension(String fileStr) {
         return fileStr.substring(fileStr.lastIndexOf(".") + 1);
     }

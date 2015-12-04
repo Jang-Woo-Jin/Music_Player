@@ -6,7 +6,6 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class FileIO {
-
     @Nullable
     public static ArrayList<String> readTextFile(final String fileAddress, final String fileName) {
 
@@ -62,45 +61,6 @@ public class FileIO {
             }
         }
         return information;
-    }
-
-    private static int readLine(final String fileAddress, final String fileName) {
-        int lineNum = 0;
-
-        String inputLine;
-        File file = new File(fileAddress, fileName + ".txt");
-        BufferedReader input;
-
-        try {
-            input = new BufferedReader(new InputStreamReader(
-                    new FileInputStream(fileAddress
-                            + File.separatorChar
-                            + fileName + ".txt"), "UTF-8"));
-        } catch (Exception e) {
-            try {
-                FileWriter fw = new FileWriter(file);
-                fw.close();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-            return 0;
-        }
-
-        try {
-            while ((inputLine = input.readLine()) != null) {
-                if (inputLine.startsWith("//") || (inputLine.trim()).equals("")) continue;
-                lineNum++;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            input.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return lineNum;
     }
 
     public static boolean makeDirectory(final String fileAddress) {
