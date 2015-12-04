@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javax.swing.*;
 import java.awt.*;
 
-class GUI_PlayerTab extends JPanel {
+public class GUI_PlayerTab extends JPanel {
 
     private final JFXPanel fxPanel = new JFXPanel();
     private JButton playButton;
