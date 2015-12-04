@@ -1,8 +1,8 @@
 package GUI;
 
 import Music.CurrentMusic;
-import Music.MusicFile;
-import Music.MusicFileManager;
+import Music.Music;
+import Music.MusicListManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,8 +14,8 @@ public class MusicList {
 
     private final JButton refreshButton = new JButton("refresh list");
     private final JPanel musicListPanel = new JPanel(new BorderLayout());
-    private final JList<MusicFile> musicList;
-    private DefaultListModel<MusicFile> listModel = new DefaultListModel<>();
+    private final JList<Music> musicList;
+    private DefaultListModel<Music> listModel = new DefaultListModel<>();
 
     public MusicList() {
         musicList = new JList<>(listModel);
@@ -28,7 +28,7 @@ public class MusicList {
 
         musicList.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                JList<MusicFile> list = (JList<MusicFile>) evt.getSource();
+                JList<Music> list = (JList<Music>) evt.getSource();
                 if (evt.getClickCount() == 2) {
                     CurrentMusic.getInstance().set(list.getSelectedValue().getFilename());
                     if(CurrentMusic.getInstance().isPlayable()) {
@@ -43,7 +43,7 @@ public class MusicList {
         });
 
         refreshButton.addActionListener(e -> {
-            arrayListToListModel(MusicFileManager.getInstance().getMusicFileList());
+            arrayListToListModel(MusicListManager.getInstance().getMusicList());
             musicListPanel.updateUI();
         });
 
@@ -60,9 +60,9 @@ public class MusicList {
         return musicListPanel;
     }
 
-    public void arrayListToListModel(ArrayList<MusicFile> list) {
+    public void arrayListToListModel(ArrayList<Music> list) {
         listModel = new DefaultListModel<>();
-        for (MusicFile iter : list) {
+        for (Music iter : list) {
             listModel.addElement(iter);
         }
         musicList.setModel(listModel);

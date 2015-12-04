@@ -1,6 +1,6 @@
 package GUI;
 
-import Music.MusicFileManager;
+import Music.MusicListManager;
 import OS.RecursiveFinder;
 
 import javax.swing.*;
@@ -54,9 +54,9 @@ public class Toolbar extends JMenuBar {
                                     .toArray(String[]::new);
 
                     for (String path : paths) {
-                        MusicFileManager.getInstance().addMusicFile(path);
+                        MusicListManager.getInstance().addMusicFile(path);
                     }
-                    musicList.arrayListToListModel(MusicFileManager.getInstance().getMusicFileList());
+                    musicList.arrayListToListModel(MusicListManager.getInstance().getMusicList());
                     musicList.createListPanel().updateUI();
                 } catch (IOException exception) {
                     exception.printStackTrace();

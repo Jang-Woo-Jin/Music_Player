@@ -7,23 +7,22 @@ import com.mpatric.mp3agic.UnsupportedTagException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
-public class MusicFileManager {
+public class MusicListManager {
 
     // Singleton Pattern
-    private static MusicFileManager uniqueInstance;
+    private static MusicListManager uniqueInstance;
 
     private final String FILE_INFO_ADDRESS = System.getProperty("user.home") + "/Desktop/";
     private final String FILE_INFO_NAME = "abc";//"MusicInfoFile";
-    private ArrayList<MusicFile> musicFileList = new ArrayList<MusicFile>();
+    private ArrayList<Music> musicList = new ArrayList<Music>();
     private RecentPlayList recentPlayList = new RecentPlayList();
     private FavoriteMusicList favoriteMusicList = new FavoriteMusicList();
-    private ArrayList<MusicFile> choosePlayList = new ArrayList<MusicFile>();
+    private ArrayList<Music> choosePlayList = new ArrayList<Music>();
 
-    public static MusicFileManager getInstance() {
+    public static MusicListManager getInstance() {
         if (uniqueInstance == null) {
-            uniqueInstance = new MusicFileManager();
+            uniqueInstance = new MusicListManager();
         }
         return uniqueInstance;
     }
@@ -34,14 +33,14 @@ public class MusicFileManager {
         for (String iter : musicFileNameList) {
             String fileName = iter;
             try {
-                musicFileList.add(new MusicFile(fileName, fileAddress, getMusicInfoFile(fileName, fileAddress)));
+                musicList.add(new Music(fileName, fileAddress, getMusicInfoFile(fileName, fileAddress)));
             } catch (UnsupportedTagException | IOException | InvalidDataException e) {
                 e.printStackTrace();
             }
         }
         ArrayList<String> infoFileInfo = new ArrayList<String>();
 
-        for (MusicFile iter : musicFileList) {
+        for (Music iter : musicList) {
             infoFileInfo.add(iter.getSaveInfo());
         }
 
@@ -82,12 +81,12 @@ public class MusicFileManager {
     }
 
     //~~~~~~~~~~~~~~ Getter & Setter
-    public ArrayList<MusicFile> getMusicFileList() {
-        return musicFileList;
+    public ArrayList<Music> getMusicList() {
+        return musicList;
     }
 
-    public void setMusicFileList(ArrayList<MusicFile> musicFileList) {
-        this.musicFileList = musicFileList;
+    public void setMusicList(ArrayList<Music> musicList) {
+        this.musicList = musicList;
     }
 
     public RecentPlayList getRecentPlayList() {
@@ -106,15 +105,15 @@ public class MusicFileManager {
         this.favoriteMusicList = favoriteMusicList;
     }
 
-    public ArrayList<MusicFile> getChoosePlayList() {
+    public ArrayList<Music> getChoosePlayList() {
         return choosePlayList;
     }
 
-    public void setChoosePlayList(ArrayList<MusicFile> choosePlayList) {
+    public void setChoosePlayList(ArrayList<Music> choosePlayList) {
         this.choosePlayList = choosePlayList;
     }
 
     public int getMusicFileNum() {
-        return this.musicFileList.size();
+        return this.musicList.size();
     }
 }
