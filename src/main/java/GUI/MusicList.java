@@ -30,14 +30,15 @@ public class MusicList {
             public void mouseClicked(MouseEvent evt) {
                 JList<Music> list = (JList<Music>) evt.getSource();
                 if (evt.getClickCount() == 2) {
+                    CurrentMusic.getInstance().stop();
                     CurrentMusic.getInstance().set(list.getSelectedValue().getFilename());
                     if(CurrentMusic.getInstance().isPlayable()) {
                         CurrentMusic.getInstance().play();
                     }
-                } else if (evt.getClickCount() == 3) {
+                    else {
+                        System.out.println("ERROR");
+                    }
 
-                    // Triple-click detected
-                    int index = list.locationToIndex(evt.getPoint());
                 }
             }
         });

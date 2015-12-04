@@ -13,7 +13,7 @@ public class MusicListManager {
     // Singleton Pattern
     private static MusicListManager uniqueInstance;
 
-    private final String FILE_INFO_ADDRESS = System.getProperty("user.home") + "/Desktop/";
+    private final String FILE_INFO_ADDRESS = System.getProperty("user.home") + "/Desktop/"+"music-info";
     private final String FILE_INFO_NAME = "abc";//"MusicInfoFile";
     private ArrayList<Music> musicList = new ArrayList<Music>();
     private RecentPlayList recentPlayList = new RecentPlayList();
