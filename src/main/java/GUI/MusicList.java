@@ -31,11 +31,10 @@ public class MusicList {
                 JList<Music> list = (JList<Music>) evt.getSource();
                 if (evt.getClickCount() == 2) {
                     CurrentMusic.getInstance().stop();
-                    CurrentMusic.getInstance().set(list.getSelectedValue().getFilename());
+                    CurrentMusic.getInstance().setMedia(list.getSelectedValue().getFilename());
                     if (CurrentMusic.getInstance().isPlayable()) {
                         CurrentMusic.getInstance().play();
-                    }
-                    else {
+                    } else {
                         System.out.println("ERROR");
                     }
 
