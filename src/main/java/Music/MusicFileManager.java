@@ -28,13 +28,11 @@ public class MusicFileManager {
     }
     // Singleton Pattern Applied
 
-    public void addMusicFile(final String fileAddress) {
+    public void addMusicFileInDirectory(final String fileAddress) {
         ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress);
-        
+        FileIO.makeDirectory(FILE_INFO_ADDRESS);
         for (String iter : musicFileNameList) {
             String fileName = iter;
-            System.out.println(FILE_INFO_ADDRESS);
-            System.out.println(fileName);
             try {
                 musicFileList.add(new MusicFile(fileName, fileAddress, getMusicInfoFile(fileName, fileAddress)));
             } catch (UnsupportedTagException e) {
