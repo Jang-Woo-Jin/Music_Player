@@ -3,19 +3,20 @@ package Music;
 import FileIO.FilePathParser;
 import com.mpatric.mp3agic.*;
 
+import java.io.File;
 import java.io.IOException;
 
 public class Music extends Mp3File {
     private final String FILE_INFO_ADDRESS = System.getProperty("user.home")
-            + FilePathParser.getDirectorySeperator()
+            + File.pathSeparator
             + "music-info"
-            + FilePathParser.getDirectorySeperator();
+            + File.pathSeparator;
     private final String FILE_INFO_NAME = "MusicInfoFile";
     private int playCount;
     private String fileName, fileAddress;
     private Lyric lyrics;
     private String lyricsFileAddress, lyricsFileName;
-    private String singer, composer, name, album;
+    private String artist, composer, name, album;
     private byte[] image;
 
     private ID3v1 id3v1Tag;
@@ -24,7 +25,7 @@ public class Music extends Mp3File {
 
     public Music(String musicFileName, String musicFileAddress, String[] infoInfo) throws UnsupportedTagException, InvalidDataException, IOException {
         super(musicFileAddress
-                + FilePathParser.getDirectorySeperator()
+                + File.pathSeparator
                 + musicFileName
                 + ".mp3");
         if (infoInfo != null) {
@@ -51,13 +52,13 @@ public class Music extends Mp3File {
 
     private void setMusicInformation() {
         if (isV1Tag) {
-            this.singer = id3v1Tag.getArtist();
+            this.artist = id3v1Tag.getArtist();
             this.composer = null;
             this.name = id3v1Tag.getTitle();
             this.album = id3v1Tag.getAlbum();
         }
         if (isV2Tag) {
-            this.singer = id3v2Tag.getArtist();
+            this.artist = id3v2Tag.getArtist();
             this.composer = id3v2Tag.getComposer();
             this.name = id3v2Tag.getTitle();
             this.album = id3v2Tag.getAlbum();
@@ -74,19 +75,6 @@ public class Music extends Mp3File {
     public String toString() {
         return this.fileName;
     }
-    // ~~~~~~~~~~~~~~~~ Getter & Setter for private value
-
-    public Lyric getLyrics() {
-        return lyrics;
-    }
-
-    public String getLyricsFileAddress() {
-        return lyricsFileAddress;
-    }
-
-    public String getLyricsFileName() {
-        return lyricsFileName;
-    }
 
     public void setLyrics(Lyric lyrics, String lyricsFileName,
                           String lyricsFileAddress) {
@@ -102,45 +90,4 @@ public class Music extends Mp3File {
     public void setPlayCount() {
         this.playCount = 0;
     }
-
-    public String getSinger() {
-        return singer;
-    }
-
-    public void setSinger(String singer) {
-        this.singer = singer;
-    }
-
-    public String getComposer() {
-        return composer;
-    }
-
-    public void setComposer(String composer) {
-        this.composer = composer;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAlbum() {
-        return album;
-    }
-
-    public void setAlbum(String album) {
-        this.album = album;
-    }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
 }
