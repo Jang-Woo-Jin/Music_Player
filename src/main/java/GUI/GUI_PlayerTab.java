@@ -22,6 +22,7 @@ class GUI_PlayerTab extends JPanel {
         this.setPreferredSize(new Dimension(400, 300));
         this.setBackground(Color.BLACK);
 
+        addSeekPreviousButton();
         addPlayButton();
         addSeekNextButton();
 
@@ -68,5 +69,17 @@ class GUI_PlayerTab extends JPanel {
         });
 
         this.add(seekNextButton);
+    }
+
+    private void addSeekPreviousButton() {
+        seekPreviousButton = new JButton("<<");
+
+        seekPreviousButton.addActionListener(e -> {
+            CurrentMusic currentMusic = CurrentMusic.getInstance();
+            currentMusic.seekNext();
+
+        });
+
+        this.add(seekPreviousButton);
     }
 }
