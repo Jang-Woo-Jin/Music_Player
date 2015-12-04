@@ -49,8 +49,13 @@ public class CurrentMusic {
         mediaPlayerOptional.ifPresent(MediaPlayer::pause);
     }
 
+    public void stop() {
+        mediaPlayerOptional.ifPresent(MediaPlayer::stop);
+    }
+
     public boolean set(File file) {
         if (file.exists()) {
+            stop();
             mediaPlayerOptional = Optional.of(new MediaPlayer(new Media(file.toURI().toString())));
             return true;
         }
@@ -58,14 +63,7 @@ public class CurrentMusic {
     }
 
     public boolean set(String filePath) {
-        File file = new File(filePath);
-        if (file.exists()) {
-            mediaPlayerOptional = Optional.of(
-                    new MediaPlayer(
-                            new Media(file.toURI().toString())));
-            return true;
-        }
-        return false;
+        return set(new File(filePath));
     }
 
     public Optional<Duration> getCurrentTime() {
