@@ -13,12 +13,12 @@ public class FavoriteMusicList extends ArrayList<Music> {
         super(list);
     }
 
-    public void delete(Music music) {//delete favorite PlayList
+    public void delete(Music music) {
         music.setPlayCount();
-        FSort();
+        sort();
     }
 
-    public void FSort() {
+    public void sort() {
         for (int i = 0; i < this.size(); i++) {
             for (int j = 0; j < this.size(); j++) {
                 if (this.get(i).getPlayCount() > this.get(j).getPlayCount())

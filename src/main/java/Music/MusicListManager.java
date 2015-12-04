@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class MusicListManager {
-
-    // Singleton Pattern
     private static MusicListManager uniqueInstance;
 
     private final String FILE_INFO_ADDRESS = System.getProperty("user.home") + "/Desktop/"+"music-info";
@@ -45,8 +43,7 @@ public class MusicListManager {
         }
 
         FileIO.writeTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME, infoFileInfo, "");
-        favoriteMusicList.FSort();
-
+        favoriteMusicList.sort();
     }
 
     private String[] getMusicInfoFile(final String fileName, final String fileAddress) {
