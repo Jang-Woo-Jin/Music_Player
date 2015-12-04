@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class FavoriteMusicList extends ArrayList<MusicFile> {
+public class FavoriteMusicList extends ArrayList<Music> {
     FavoriteMusicList() {
         super();
     }
 
-    FavoriteMusicList(ArrayList<MusicFile> list) {
+    FavoriteMusicList(ArrayList<Music> list) {
         super(list);
     }
 
-    public void delete(MusicFile musicFile) {//delete favorite PlayList
-        musicFile.setPlayCount();
+    public void delete(Music music) {//delete favorite PlayList
+        music.setPlayCount();
         FSort();
     }
 

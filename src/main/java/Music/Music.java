@@ -5,7 +5,7 @@ import com.mpatric.mp3agic.*;
 
 import java.io.IOException;
 
-public class MusicFile extends Mp3File {
+public class Music extends Mp3File {
     private final String FILE_INFO_ADDRESS = System.getProperty("user.home")
             + FilePathParser.getDirectorySeperator()
             + "music-info"
@@ -22,7 +22,7 @@ public class MusicFile extends Mp3File {
     private ID3v2 id3v2Tag;
     private boolean isV1Tag = false, isV2Tag = false;
 
-    public MusicFile(String musicFileName, String musicFileAddress, String[] infoInfo) throws UnsupportedTagException, InvalidDataException, IOException {
+    public Music(String musicFileName, String musicFileAddress, String[] infoInfo) throws UnsupportedTagException, InvalidDataException, IOException {
         super(musicFileAddress
                 + FilePathParser.getDirectorySeperator()
                 + musicFileName

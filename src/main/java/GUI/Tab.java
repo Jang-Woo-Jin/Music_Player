@@ -1,6 +1,6 @@
 package GUI;
 
-import Music.MusicFileManager;
+import Music.MusicListManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,22 +28,22 @@ public class Tab extends JPanel {
 
     private void setActionListeners() {
         this.allMusic.addActionListener(e -> {
-            musicList.arrayListToListModel(MusicFileManager.getInstance().getMusicFileList());
+            musicList.arrayListToListModel(MusicListManager.getInstance().getMusicList());
             musicList.createListPanel().updateUI();
         });
 
         this.favoriteMusic.addActionListener(e -> {
-            musicList.arrayListToListModel(MusicFileManager.getInstance().getFavoriteFileList());
+            musicList.arrayListToListModel(MusicListManager.getInstance().getFavoriteFileList());
             musicList.createListPanel().updateUI();
         });
 
         this.recentMusic.addActionListener(e -> {
-            //musicList.arrayListToListModel(MusicFileManager.getInstance().getRecentPlayList());
+            //musicList.arrayListToListModel(MusicListManager.getInstance().getRecentPlayList());
             musicList.createListPanel().updateUI();
         });
 
         this.chooseMusic.addActionListener(e -> {
-            musicList.arrayListToListModel(MusicFileManager.getInstance().getChoosePlayList());
+            musicList.arrayListToListModel(MusicListManager.getInstance().getChoosePlayList());
             musicList.createListPanel().updateUI();
         });
     }
