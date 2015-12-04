@@ -31,7 +31,7 @@ public class MusicList {
                 JList<Music> list = (JList<Music>) evt.getSource();
                 if (evt.getClickCount() == 2) {
                     CurrentMusic.getInstance().set(list.getSelectedValue().getFilename());
-                    if(CurrentMusic.getInstance().isPlayable()) {
+                    if (CurrentMusic.getInstance().isPlayable()) {
                         CurrentMusic.getInstance().play();
                     }
                 } else if (evt.getClickCount() == 3) {
