@@ -17,6 +17,7 @@ public class PlayerTab extends JPanel {
     private JButton seekPreviousButton;
     private JButton stopButton;
     private JButton playModeButton; // this button can change play mode ( all music play, all music play repeatly, one music repeatly )
+    private JButton starButton;         //for favorite
     private JSlider volumeSlider;
     private JSlider currentTimeSlider;
 
@@ -121,5 +122,10 @@ public class PlayerTab extends JPanel {
         currentTimeSlider = new JSlider();
 
         this.add(currentTimeSlider);
+    }
+
+    private void addStarButton() {
+        //TODO
+        starButton = new JButton("star icon need");
     }
 }
