@@ -8,16 +8,16 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.nio.file.Path;
 
-public class GUI_Toolbar extends JMenuBar {
+public class Toolbar extends JMenuBar {
     private final JMenu fileMenu = new JMenu("File Path");
     private final JMenuItem setMenuItem = new JMenuItem("Set");
-    private GUI_MusicList musicList;
+    private MusicList musicList;
 
-    public GUI_Toolbar(GUI_MusicList musicList) {
+    public Toolbar(MusicList musicList) {
         onCreate(musicList);
     }
 
-    private void onCreate(GUI_MusicList musicList) {
+    private void onCreate(MusicList musicList) {
 
         //connect musicList
         this.musicList = musicList;

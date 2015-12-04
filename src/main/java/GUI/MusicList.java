@@ -10,14 +10,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-public class GUI_MusicList {
+public class MusicList {
 
     private final JButton refreshButton = new JButton("refresh list");
     private final JPanel musicListPanel = new JPanel(new BorderLayout());
     private final JList<MusicFile> musicList;
     private DefaultListModel<MusicFile> listModel = new DefaultListModel<>();
 
-    public GUI_MusicList() {
+    public MusicList() {
         musicList = new JList<>(listModel);
         musicList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -32,9 +32,7 @@ public class GUI_MusicList {
                 if (evt.getClickCount() == 2) {
                     CurrentMusic.getInstance().set(list.getSelectedValue().getFilename());
                     if(CurrentMusic.getInstance().isPlayable()) {
-
                         CurrentMusic.getInstance().play();
-
                     }
                 } else if (evt.getClickCount() == 3) {
 

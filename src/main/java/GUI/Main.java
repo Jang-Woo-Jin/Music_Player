@@ -12,9 +12,9 @@ public class Main {
     }
 
     private void init() {
-        GUI_MusicList gui_musicList = new GUI_MusicList();
-        JPanel tabPanel = new GUI_Tab().createTab(gui_musicList);
-        JPanel playerPanel = new GUI_PlayerTab();
+        MusicList gui_musicList = new MusicList();
+        JPanel tabPanel = new Tab().createTab(gui_musicList);
+        JPanel playerPanel = new PlayerTab();
 
         JPanel listPanel = gui_musicList.createListPanel();
 
@@ -26,7 +26,7 @@ public class Main {
         this.mainFrame.add(new JScrollPane(listPanel), BorderLayout.CENTER);
         this.mainFrame.add(playerPanel, BorderLayout.EAST);
 
-        this.mainFrame.setJMenuBar(new GUI_Toolbar(gui_musicList));
+        this.mainFrame.setJMenuBar(new Toolbar(gui_musicList));
         this.mainFrame.setVisible(true);
     }
 }

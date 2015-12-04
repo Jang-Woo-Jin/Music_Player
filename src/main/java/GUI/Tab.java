@@ -5,15 +5,15 @@ import Music.MusicFileManager;
 import javax.swing.*;
 import java.awt.*;
 
-public class GUI_Tab extends JPanel {
+public class Tab extends JPanel {
     private final JButton allMusic = new JButton("전체 음악");
     private final JButton favoriteMusic = new JButton("즐겨찾기");
     private final JButton recentMusic = new JButton("최근 재생한 곡");
     private final JButton chooseMusic = new JButton("가장 많이 재생한 곡");
 
-    private GUI_MusicList musicList;
+    private MusicList musicList;
 
-    public JPanel createTab(GUI_MusicList musicList) {
+    public JPanel createTab(MusicList musicList) {
         setActionListeners();
         this.musicList = musicList;
         this.setLayout(new GridLayout(4, 1, 0, 0));

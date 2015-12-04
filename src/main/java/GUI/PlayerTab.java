@@ -9,14 +9,19 @@ import javafx.scene.Scene;
 import javax.swing.*;
 import java.awt.*;
 
-public class GUI_PlayerTab extends JPanel {
+public class PlayerTab extends JPanel {
 
     private final JFXPanel fxPanel = new JFXPanel();
     private JButton playButton;
     private JButton seekNextButton;
     private JButton seekPreviousButton;
+    private JButton stopButton;
+    private JButton playmodeButton; // this button can change play mode ( all music play, all music play repeatly, one music repeatly )
+    private JSlider volumeSlider;
+    private JSlider currentTimeSlider;
 
-    public GUI_PlayerTab() {
+
+    public PlayerTab() {
         this.add(fxPanel);
 
         this.setPreferredSize(new Dimension(400, 300));
