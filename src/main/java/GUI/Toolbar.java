@@ -54,7 +54,7 @@ public class Toolbar extends JMenuBar {
                                     .toArray(String[]::new);
 
                     for (String path : paths) {
-                        MusicListManager.getInstance().addMusicFile(path);
+                        MusicListManager.getInstance().addMusic(path);
                     }
                     musicList.arrayListToListModel(MusicListManager.getInstance().getMusicList());
                     musicList.createListPanel().updateUI();

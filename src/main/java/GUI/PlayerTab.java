@@ -21,19 +21,30 @@ public class PlayerTab extends JPanel {
     private JSlider volumeSlider;
     private JSlider currentTimeSlider;
 
+    private JPanel  buttonPanel = new JPanel(new GridLayout(2, 3, 30, 10));
 
     public PlayerTab() {
-        this.add(fxPanel);
 
-        this.setPreferredSize(new Dimension(400, 300));
+        this.setPreferredSize(new Dimension(240, 300));
         this.setBackground(Color.BLACK);
+
+        addCurrentTimeSlider();
 
         addSeekPreviousButton();
         addPlayButton();
         addSeekNextButton();
 
-        Platform.runLater(() -> initFX(fxPanel));
+        addPlayModeButton();
+        addStopButton();
+        addStarButton();
+        buttonPanel.setBackground(Color.black);
+        this.add(buttonPanel);
 
+
+        Platform.runLater(() -> initFX(fxPanel));
+        fxPanel.setSize(0,0);
+
+        this.add(fxPanel);
         this.setVisible(true);
     }
 
@@ -61,7 +72,7 @@ public class PlayerTab extends JPanel {
                 playButton.setText("▶");
             }
         });
-        this.add(playButton);
+        buttonPanel.add(playButton);
     }
 
     private void addSeekNextButton() {
@@ -73,7 +84,7 @@ public class PlayerTab extends JPanel {
             currentMusic.getCurrentTime().ifPresent(System.out::println);
         });
 
-        this.add(seekNextButton);
+        buttonPanel.add(seekNextButton);
     }
 
     private void addSeekPreviousButton() {
@@ -85,7 +96,7 @@ public class PlayerTab extends JPanel {
 
         });
 
-        this.add(seekPreviousButton);
+        buttonPanel.add(seekPreviousButton);
     }
 
     private void addStopButton() {
@@ -95,7 +106,7 @@ public class PlayerTab extends JPanel {
             CurrentMusic currentMusic = CurrentMusic.getInstance();
             //TODO
         });
-        this.add(stopButton);
+        buttonPanel.add(stopButton);
     }
 
     private void addPlayModeButton() {
@@ -105,7 +116,7 @@ public class PlayerTab extends JPanel {
             CurrentMusic currentMusic = CurrentMusic.getInstance();
             //TODO
         });
-        this.add(playModeButton);
+        buttonPanel.add(playModeButton);
     }
 
     private void addVolumeSlider() {
@@ -121,11 +132,15 @@ public class PlayerTab extends JPanel {
         //horizontal plz
         currentTimeSlider = new JSlider();
 
+
         this.add(currentTimeSlider);
     }
 
     private void addStarButton() {
         //TODO
-        starButton = new JButton("star icon need");
+        starButton = new JButton("★");
+
+        buttonPanel.add(starButton);
     }
+
 }
