@@ -1,5 +1,6 @@
 package GUI;
 
+import Music.CurrentMusic;
 import Music.MusicFile;
 import Music.MusicFileManager;
 
@@ -29,10 +30,12 @@ public class GUI_MusicList {
             public void mouseClicked(MouseEvent evt) {
                 JList<MusicFile> list = (JList<MusicFile>) evt.getSource();
                 if (evt.getClickCount() == 2) {
+                    CurrentMusic.getInstance().set(list.getSelectedValue().getFilename());
+                    if(CurrentMusic.getInstance().isPlayable()) {
 
-                    // Double-click detected
-                    int index = list.locationToIndex(evt.getPoint());
+                        CurrentMusic.getInstance().play();
 
+                    }
                 } else if (evt.getClickCount() == 3) {
 
                     // Triple-click detected
