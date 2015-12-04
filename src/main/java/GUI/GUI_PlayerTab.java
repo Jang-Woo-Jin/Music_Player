@@ -12,7 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-class GUI_PlayerTab extends JPanel {
+public class GUI_PlayerTab extends JPanel {
 
     private final JFXPanel fxPanel = new JFXPanel();
     File bip;

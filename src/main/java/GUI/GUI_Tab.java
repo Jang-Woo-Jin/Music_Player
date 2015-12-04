@@ -5,7 +5,7 @@ import Music.MusicFileManager;
 import javax.swing.*;
 import java.awt.*;
 
-class GUI_Tab extends JPanel {
+public class GUI_Tab extends JPanel {
     private final JButton allMusic = new JButton("전체 음악");
     private final JButton favoriteMusic = new JButton("즐겨찾기");
     private final JButton recentMusic = new JButton("최근 재생한 곡");

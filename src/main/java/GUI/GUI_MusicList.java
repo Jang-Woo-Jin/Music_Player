@@ -9,7 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-class GUI_MusicList {
+public class GUI_MusicList {
 
     //Variables
     private final JButton refreshButton = new JButton("refresh list");

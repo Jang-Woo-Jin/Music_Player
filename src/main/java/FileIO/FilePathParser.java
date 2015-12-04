@@ -1,6 +1,6 @@
 package FileIO;
 
-class FilePathParser {
+public class FilePathParser {
 
     public static String getExtension(String fileStr) {
         return fileStr.substring(fileStr.lastIndexOf(".") + 1, fileStr.length());

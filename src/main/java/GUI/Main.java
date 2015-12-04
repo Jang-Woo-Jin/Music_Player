@@ -6,7 +6,7 @@ import Music.MusicFileManager;
 
 import java.awt.*;
 
-class Main {
+public class Main {
     private final JFrame mainFrame = new JFrame();
 
     public static void main(String[] args) {
