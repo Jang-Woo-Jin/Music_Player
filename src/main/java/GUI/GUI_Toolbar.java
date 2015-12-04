@@ -46,7 +46,8 @@ public class GUI_Toolbar extends JMenuBar {
                 try {
                     RecursiveFinder finder = new RecursiveFinder(
                             chooser.getSelectedFile().getPath(), "*.mp3");
-                    String[] paths = finder.find()
+                    String[] paths =
+                            finder.find()
                                     .stream()
                                     .map(Path::toAbsolutePath)
                                     .map(Path::toString)
