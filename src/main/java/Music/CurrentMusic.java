@@ -82,10 +82,6 @@ public class CurrentMusic {
         return mediaPlayerOptional.map(MediaPlayer::getCurrentTime);
     }
 
-    public void seekNext() {
-        seek(5);
-    }
-
     private void seek(int second) {
         if (mediaPlayerOptional.isPresent()) {
             MediaPlayer mediaPlayer = mediaPlayerOptional.get();
@@ -93,6 +89,10 @@ public class CurrentMusic {
             Duration delta = new Duration(second * 1000);
             mediaPlayer.seek(duration.add(delta));
         }
+    }
+
+    public void seekNext() {
+        seek(5);
     }
 
     public void seekPrevious() {
