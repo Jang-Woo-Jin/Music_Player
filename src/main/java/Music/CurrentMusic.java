@@ -3,12 +3,18 @@ package Music;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
+import javafx.util.Duration;
 
 import java.io.File;
+import java.util.Optional;
 
 public class CurrentMusic {
     private static CurrentMusic uniqueInstance;
-    private MediaPlayer mediaPlayer;
+    private Optional<MediaPlayer> mediaPlayerOptional;
+
+    public CurrentMusic() {
+        this.mediaPlayerOptional = Optional.empty();
+    }
 
     public static CurrentMusic getInstance() {
         if (uniqueInstance == null) {
@@ -22,32 +28,75 @@ public class CurrentMusic {
     }
 
     public boolean isPlayable() {
-        Status status = mediaPlayer.getStatus();
-        return (status == Status.READY
-                || status == Status.PAUSED
-                || status == Status.STOPPED);
+        if (mediaPlayerOptional.isPresent()) {
+            Status status = mediaPlayerOptional.get().getStatus();
+            return (status == Status.READY
+                    || status == Status.PAUSED
+                    || status == Status.STOPPED);
+        }
+        return false;
     }
 
     public void play() {
-        if (isPlayable()) {
-            mediaPlayer.play();
-        }
+        mediaPlayerOptional.ifPresent(mediaPlayer -> {
+            if (isPlayable()) {
+                mediaPlayer.play();
+            }
+        });
     }
 
     public void pause() {
-        mediaPlayer.pause();
+        mediaPlayerOptional.ifPresent(MediaPlayer::pause);
     }
 
-    public void set(File file) {
+    public boolean set(File file) {
         if (file.exists()) {
-            mediaPlayer = new MediaPlayer(new Media(file.toURI().toString()));
+            mediaPlayerOptional = Optional.of(new MediaPlayer(new Media(file.toURI().toString())));
+            return true;
         }
+        return false;
     }
 
-    public void set(String filePath) {
+    public boolean set(String filePath) {
         File file = new File(filePath);
         if (file.exists()) {
-            mediaPlayer = new MediaPlayer(new Media(file.toURI().toString()));
+            mediaPlayerOptional = Optional.of(
+                    new MediaPlayer(
+                            new Media(file.toURI().toString())));
+            return true;
         }
+        return false;
+    }
+
+    public Optional<Duration> getCurrentTime() {
+        return mediaPlayerOptional.map(MediaPlayer::getCurrentTime);
+    }
+
+    public void seekNext() {
+        seekNext(5);
+    }
+
+    public void seekNext(int Second) {
+        if (mediaPlayerOptional.isPresent()) {
+            MediaPlayer mediaPlayer = mediaPlayerOptional.get();
+            Duration duration = mediaPlayer.getCurrentTime();
+            Duration duration5s = new Duration(Second * 1000);
+            duration.add(duration5s);
+            mediaPlayer.seek(duration);
+        }
+    }
+
+    public void seekPrevious(int Second) {
+        if (mediaPlayerOptional.isPresent()) {
+            MediaPlayer mediaPlayer = mediaPlayerOptional.get();
+            Duration duration = mediaPlayer.getCurrentTime();
+            Duration duration5s = new Duration(Second * 1000);
+            duration.subtract(duration5s);
+            mediaPlayer.seek(duration);
+        }
+    }
+
+    public void seekPrevious() {
+        seekPrevious(5);
     }
 }
