@@ -80,40 +80,15 @@ public class MusicListManager {
         }
     }
 
-    //~~~~~~~~~~~~~~ Getter & Setter
     public ArrayList<Music> getMusicList() {
         return musicList;
-    }
-
-    public void setMusicList(ArrayList<Music> musicList) {
-        this.musicList = musicList;
-    }
-
-    public RecentPlayList getRecentPlayList() {
-        return recentPlayList;
-    }
-
-    public void setRecentPlayList(RecentPlayList recentPlayList) {
-        this.recentPlayList = recentPlayList;
     }
 
     public FavoriteMusicList getFavoriteFileList() {
         return favoriteMusicList;
     }
 
-    public void setFavoriteFileList(FavoriteMusicList favoriteMusicList) {
-        this.favoriteMusicList = favoriteMusicList;
-    }
-
     public ArrayList<Music> getChoosePlayList() {
         return choosePlayList;
-    }
-
-    public void setChoosePlayList(ArrayList<Music> choosePlayList) {
-        this.choosePlayList = choosePlayList;
-    }
-
-    public int getMusicFileNum() {
-        return this.musicList.size();
     }
 }
