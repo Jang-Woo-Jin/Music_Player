@@ -1,25 +1,32 @@
 package Music;
 
+import FileIO.FilePathParser;
 import com.mpatric.mp3agic.*;
 
 import java.io.IOException;
 
 public class MusicFile extends Mp3File {
-    private final String FILEINFOADDRESS = System.getProperty("user.home")+"\\music-info\\";
-    private final String FILEINFONAME = "MusicInfoFile";
+    private final String FILE_INFO_ADDRESS = System.getProperty("user.home")
+            + FilePathParser.getDirectorySeperator()
+            + "music-info"
+            + FilePathParser.getDirectorySeperator();
+    private final String FILE_INFO_NAME = "MusicInfoFile";
     private int playCount;
     private String fileName, fileAddress;
     private Lyric lyrics;
     private String lyricsFileAddress, lyricsFileName;
     private String singer, composer, name, album;
-    private byte[] imagedata;
+    private byte[] image;
 
     private ID3v1 id3v1Tag;
     private ID3v2 id3v2Tag;
     private boolean isV1Tag = false, isV2Tag = false;
 
     public MusicFile(String musicFileName, String musicFileAddress, String[] infoInfo) throws UnsupportedTagException, InvalidDataException, IOException {
-        super(musicFileAddress + "//" + musicFileName + ".mp3");
+        super(musicFileAddress
+                + FilePathParser.getDirectorySeperator()
+                + musicFileName
+                + ".mp3");
         if (infoInfo != null) {
             if (infoInfo[0] == null) infoInfo[0] = "0";
             this.playCount = Integer.parseInt(infoInfo[0]);
@@ -54,7 +61,7 @@ public class MusicFile extends Mp3File {
             this.composer = id3v2Tag.getComposer();
             this.name = id3v2Tag.getTitle();
             this.album = id3v2Tag.getAlbum();
-            this.imagedata = id3v2Tag.getAlbumImage();
+            this.image = id3v2Tag.getAlbumImage();
         }
     }
 
@@ -63,9 +70,9 @@ public class MusicFile extends Mp3File {
                 this.fileAddress + "/" + this.lyricsFileName + "/" + this.lyricsFileAddress + "\n";
 
     }
-    
-    public String toString(){
-    	return this.fileName;
+
+    public String toString() {
+        return this.fileName;
     }
     // ~~~~~~~~~~~~~~~~ Getter & Setter for private value
 
@@ -128,12 +135,12 @@ public class MusicFile extends Mp3File {
         this.album = album;
     }
 
-    public byte[] getImagedata() {
-        return imagedata;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setImagedata(byte[] imagedata) {
-        this.imagedata = imagedata;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
 }

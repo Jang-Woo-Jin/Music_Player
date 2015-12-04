@@ -1,9 +1,6 @@
 package GUI;
 
 import javax.swing.*;
-
-import Music.MusicFileManager;
-
 import java.awt.*;
 
 public class Main {
@@ -12,11 +9,9 @@ public class Main {
     public static void main(String[] args) {
         Main main = new Main();
         main.init();
-    	
     }
 
     private void init() {
-
         GUI_MusicList gui_musicList = new GUI_MusicList();
         JPanel tabPanel = new GUI_Tab().createTab(gui_musicList);
         JPanel playerPanel = new GUI_PlayerTab();

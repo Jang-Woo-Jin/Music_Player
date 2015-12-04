@@ -1,42 +1,31 @@
 package FileIO;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.io.*;
 import java.util.ArrayList;
 
 public class FileIO {
+
+    @Nullable
     public static ArrayList<String> readTextFile(final String fileAddress, final String fileName) {
 
         ArrayList<String> information = new ArrayList<String>();
         String readLine;
-        File file = new File(fileAddress, fileName + ".txt");
         BufferedReader input;
 
         try {
             input = new BufferedReader(new InputStreamReader(
-                    new FileInputStream(fileAddress + "//" + fileName + ".txt"), "UTF-8"));
-        } catch (Exception e) {
-            try {
-                FileWriter fw = new FileWriter(file);
-                fw.close();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-            return null;
-        }
-        try {
+                    new FileInputStream(fileAddress
+                            + FilePathParser.getDirectorySeperator()
+                            + fileName + ".txt"), "UTF-8"));
             while ((readLine = input.readLine()) != null) {
 
                 if (readLine.startsWith("//") || (readLine.trim()).equals("")) {
-                    continue;
                 } else {
                     information.add(readLine);
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
             input.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -55,16 +44,7 @@ public class FileIO {
                 writer.write(delimiter);
             }
             writer.close();
-
         } catch (IOException e) {
-            FileWriter fw;
-            try {
-                fw = new FileWriter(file);
-                fw.close();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-
             e.printStackTrace();
         }
     }
@@ -93,7 +73,9 @@ public class FileIO {
 
         try {
             input = new BufferedReader(new InputStreamReader(
-                    new FileInputStream(fileAddress + "//" + fileName + ".txt"), "UTF-8"));
+                    new FileInputStream(fileAddress
+                            + FilePathParser.getDirectorySeperator()
+                            + fileName + ".txt"), "UTF-8"));
         } catch (Exception e) {
             try {
                 FileWriter fw = new FileWriter(file);
@@ -106,45 +88,44 @@ public class FileIO {
 
         try {
             while ((inputLine = input.readLine()) != null) {
-                System.out.println(inputLine);
                 if (inputLine.startsWith("//") || (inputLine.trim()).equals("")) continue;
                 lineNum++;
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         try {
             input.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
         return lineNum;
     }
 
-    public static void mkdir(final String fileAddress){
-    	File file = new File(fileAddress);
-    	if(!file.mkdir()){
-    		//System.err.println("fileAddress 에 경로 추가 불가");
-    	}
+    public static boolean makeDirectory(final String fileAddress) {
+        try {
+            File file = new File(fileAddress);
+            return file.mkdir();
+        } catch (SecurityException e) {
+            return false;
+        }
     }
-    
-    public static void reNameTextFile(final String fileAddress, final String fileName, final String newName) {
+
+    public static void renameTextfile(final String fileAddress, final String fileName, final String newName) {
         renameFile(fileAddress, fileName, newName, ".txt");
     }
 
-    public static void reNameMP3File(final String fileAddress, final String fileName, final String newName) {
+    public static void renameMP3File(final String fileAddress, final String fileName, final String newName) {
         renameFile(fileAddress, fileName, newName, ".mp3");
     }
 
     private static void renameFile(final String fileAddress, final String fileName, final String newName, final String type) {
         String path = fileAddress;
         File oldFile = new File(path, fileName + type);
-        File newFile = new File(path, newName + type);
-        oldFile.renameTo(newFile);
+        if (oldFile.exists()) {
+            File newFile = new File(path, newName + type);
+            oldFile.renameTo(newFile);
+        }
     }
 }
-
-

@@ -12,8 +12,8 @@ public class MusicFileManager {
     // Singleton Pattern
     private static MusicFileManager uniqueInstance;
 
-    private final String FILEINFOADDRESS = System.getProperty("user.home") + "/Desktop/";
-    private final String FILEINFONAME = "abc";//"MusicInfoFile";
+    private final String FILE_INFO_ADDRESS = System.getProperty("user.home") + "/Desktop/";
+    private final String FILE_INFO_NAME = "abc";//"MusicInfoFile";
     private ArrayList<MusicFile> musicFileList = new ArrayList<MusicFile>();
     private RecentPlayList recentPlayList = new RecentPlayList();
     private FavoriteMusicList favoriteMusicList = new FavoriteMusicList();
@@ -28,15 +28,13 @@ public class MusicFileManager {
     }
     // Singleton Pattern Applied
 
-    public void addMusicFile(final String fileAddress) {
-    	FileIO.mkdir(FILEINFOADDRESS);
-    	ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress);
+    public void addMusicFileInDirectory(final String fileAddress) {
+        ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress);
+        FileIO.makeDirectory(FILE_INFO_ADDRESS);
         for (String iter : musicFileNameList) {
             String fileName = iter;
-            System.out.println(FILEINFOADDRESS);
-            System.out.println(fileName);
             try {
-                musicFileList.add(new MusicFile(fileName, fileAddress, getMusicInfoFile(fileName,fileAddress)));
+                musicFileList.add(new MusicFile(fileName, fileAddress, getMusicInfoFile(fileName, fileAddress)));
             } catch (UnsupportedTagException e) {
                 e.printStackTrace();
             } catch (InvalidDataException e) {
@@ -49,45 +47,21 @@ public class MusicFileManager {
 
         for (MusicFile iter : musicFileList) {
             infoFileInfo.add(iter.getSaveInfo());
-
         }
-        
-        FileIO.writeTextFile(FILEINFOADDRESS, FILEINFONAME, infoFileInfo, "");
+
+        FileIO.writeTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME, infoFileInfo, "");
         favoriteMusicList.FSort();
 
     }
 
-    /*
-        private HashMap<String,Integer> checkTextFileAndMusicFile(final String fileAddress){
-            HashMap<String, Integer> information;
-
-            ArrayList<String> mp3files = FileIO.readAllFileInPath(fileAddress, ".mp3");
-            ArrayList<String> saveInfo = FileIO.readTextFile(FILEINFOADDRESS,FILEINFONAME);
-            ArrayList<String> saveNameInfo = new ArrayList<String>();
-
-            for(String iter1 : mp3files){
-                boolean findFlag = false;
-                for(String iter2 : saveNameInfo){
-                    if(iter1 == iter2) {
-                        findFlag = true;
-
-                    }
-                }
-
-            }
-
-
-            return information;
-        }
-      */
     public String[] getMusicInfoFile(final String fileName, final String fileAddress) {
-    	ArrayList<String> informationString = FileIO.readTextFile(FILEINFOADDRESS, FILEINFONAME);
+        ArrayList<String> informationString = FileIO.readTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME);
         String[] information = new String[5];
-        
+
         for (String iter : informationString) {
-        	information = iter.split("/");
-            if (information[0].equals(fileName)) {
-                return information;
+            information = iter.split("/");
+            if (information[1].equals(fileName)) {
+            	return information;
             }
         }
         information[0] = "0";
