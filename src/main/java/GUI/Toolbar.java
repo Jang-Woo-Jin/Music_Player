@@ -40,9 +40,6 @@ public class Toolbar extends JMenuBar {
             chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             int returnVal = chooser.showOpenDialog(null);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-                System.out.println("You chose to open this Directory: " +
-                        chooser.getSelectedFile().getName());
-
                 try {
                     RecursiveFinder finder = new RecursiveFinder(
                             chooser.getSelectedFile().getPath(), "*.mp3");

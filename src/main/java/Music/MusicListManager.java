@@ -73,9 +73,9 @@ public class MusicListManager {
         File file = new File(filepath);
 
         if (file.isFile()) {
-            String fileName = filepath.substring(filepath.lastIndexOf(File.separatorChar) + 1, filepath.lastIndexOf("."));
+            String fileName = filepath.substring(filepath.lastIndexOf(File.separatorChar) + 1,
+                    filepath.lastIndexOf("."));
             String fileAddress = filepath.substring(0, filepath.lastIndexOf(File.separatorChar));
-            System.out.println(fileAddress);
             try {
                 musicList.add(new Music(fileName, fileAddress, getMusicInfoFile(fileName, fileAddress)));
             } catch (InvalidDataException | IOException | UnsupportedTagException e) {
