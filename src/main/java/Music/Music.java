@@ -1,5 +1,8 @@
 package Music;
 
+import FileIO.FilePathParser;
+
+import com.googlecode.mp4parser.util.Path;
 import com.mpatric.mp3agic.*;
 
 import java.io.File;
@@ -49,6 +52,13 @@ public class Music extends Mp3File {
 
     }
 
+    public Music(File file) throws UnsupportedTagException, InvalidDataException, IOException{
+    	super(file.getAbsolutePath());
+    	String path = file.getAbsolutePath();
+    	this.fileName = FilePathParser.getFileName(path);
+    	this.fileAddress = FilePathParser.getPath(path);
+    	
+    }
     private void setMusicInformation() {
         if (isV1Tag) {
             this.artist = id3v1Tag.getArtist();
@@ -63,6 +73,8 @@ public class Music extends Mp3File {
             this.album = id3v2Tag.getAlbum();
             this.image = id3v2Tag.getAlbumImage();
         }
+        for(int i=0;i<image.length;i++)
+        	System.out.println(this.image[i]);
     }
 
     public String getSaveInfo() {
