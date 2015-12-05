@@ -20,7 +20,7 @@ public class Main {
         JPanel tabPanel = new Tab().createTab(gui_musicList);
 
 
-        JPanel listPanel = gui_musicList.createListPanel();
+        JPanel listPanel = gui_musicList.getPanel();
 
         this.mainFrame.setLayout(new BorderLayout());
         this.mainFrame.setSize(800, 450);

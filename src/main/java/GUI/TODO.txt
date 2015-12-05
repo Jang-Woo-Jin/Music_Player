@@ -5,3 +5,6 @@ GUI
     - Slide Bar
     - 가사 띄우기 ( 영은이 파트 Merge 필요 )
     - 자동으로 다음곡 재생
+
+
+    = recentPlayList

@@ -1,13 +1,17 @@
 package GUI;
 
 import Music.CurrentMusic;
+import Music.Music;
+import Music.MusicListManager;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import org.omg.CORBA.Current;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class PlayerTab extends JPanel {
 
@@ -66,6 +70,7 @@ public class PlayerTab extends JPanel {
             if (currentMusic.isPlayable()) {
                 CurrentMusic.getInstance().play();
                 playButton.setText("||");
+                MusicListManager.getInstance().getRecentPlayList().add(CurrentMusic.getInstance().toMusic());
             } else {
                 CurrentMusic.getInstance().pause();
                 playButton.setText("▶");

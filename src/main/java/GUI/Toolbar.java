@@ -57,7 +57,7 @@ public class Toolbar extends JMenuBar {
                         MusicListManager.getInstance().addMusic(path);
                     }
                     musicList.arrayListToListModel(MusicListManager.getInstance().getMusicList());
-                    musicList.createListPanel().updateUI();
+                    musicList.getPanel().updateUI();
                 } catch (IOException exception) {
                     exception.printStackTrace();
                 }

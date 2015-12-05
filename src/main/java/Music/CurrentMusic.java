@@ -43,6 +43,7 @@ public class CurrentMusic {
         mediaPlayerOptional.ifPresent(mediaPlayer -> {
             if (isPlayable()) {
                 mediaPlayer.play();
+                MusicListManager.getInstance().getRecentPlayList().add(this.toMusic());
             }
         });
     }
@@ -102,7 +103,10 @@ public class CurrentMusic {
 
     public Music toMusic() {
     	String filePath = mediaPlayerOptional.get().getMedia().getSource();
-    	Music music = MusicListManager.getInstance().find(filePath);
-    	return music;
+        filePath = filePath.substring(6, filePath.length());
+        filePath = filePath.replaceAll("/","\\\\");
+        filePath = filePath.replaceAll("%20", " ");
+        Music music = MusicListManager.getInstance().find(filePath);
+        return music;
     }
 }

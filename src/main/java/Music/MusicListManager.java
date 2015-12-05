@@ -82,12 +82,19 @@ public class MusicListManager {
                 e.printStackTrace();
             }
         }
+        ArrayList<String> infoFileInfo = new ArrayList<String>();
+
+        for (Music iter : musicList) {
+            infoFileInfo.add(iter.getSaveInfo());
+        }
+
+        FileIO.writeTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME, infoFileInfo, "");
+
     }
     
-    @Nullable
     public Music find(String filePath){
     	for(Music iter : musicList){
-    		if(iter.toString().equals(FilePathParser.getFileName(filePath))){
+            if(iter.getFilename().equals(filePath)){
     			return iter;
     		}
     	}
@@ -105,4 +112,6 @@ public class MusicListManager {
     public ArrayList<Music> getChoosePlayList() {
         return choosePlayList;
     }
+
+    public RecentPlayList<Music> getRecentPlayList() { return recentPlayList; }
 }

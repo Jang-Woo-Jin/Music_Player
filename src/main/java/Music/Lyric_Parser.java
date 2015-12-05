@@ -4,7 +4,7 @@ import FileIO.FileIO;
 
 import java.util.ArrayList;
 
-class Lyric_Parser {
+public class Lyric_Parser {
 
     private int[][] time = new int[1000][3];// 0:Min  1:Sec   2:0.Sec
     private String[] lrctime = new String[1000];
