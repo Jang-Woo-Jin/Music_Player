@@ -43,12 +43,11 @@ public class Toolbar extends JMenuBar {
                 try {
                     RecursiveFinder finder = new RecursiveFinder(
                             chooser.getSelectedFile().getPath(), "*.mp3");
-                    String[] paths =
-                            finder.find()
-                                    .stream()
-                                    .map(Path::toAbsolutePath)
-                                    .map(Path::toString)
-                                    .toArray(String[]::new);
+                    String[] paths = finder.find()
+                            .stream()
+                            .map(Path::toAbsolutePath)
+                            .map(Path::toString)
+                            .toArray(String[]::new);
 
                     for (String path : paths) {
                         MusicListManager.getInstance().addMusic(path);
