@@ -1,12 +1,16 @@
 package Music;
 
 import FileIO.FileIO;
+import FileIO.FilePathParser;
+
+import com.beust.jcommander.internal.Nullable;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class MusicListManager {
     private static MusicListManager uniqueInstance;
@@ -79,7 +83,17 @@ public class MusicListManager {
             }
         }
     }
-
+    
+    @Nullable
+    public Music find(String filePath){
+    	for(Music iter : musicList){
+    		if(iter.toString().equals(FilePathParser.getFileName(filePath))){
+    			return iter;
+    		}
+    	}
+    	return null;
+    }
+    
     public ArrayList<Music> getMusicList() {
         return musicList;
     }

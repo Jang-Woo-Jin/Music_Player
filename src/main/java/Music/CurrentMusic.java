@@ -35,6 +35,7 @@ public class CurrentMusic {
                     || status == Status.PAUSED
                     || status == Status.STOPPED);
         }
+        
         return false;
     }
 
@@ -99,7 +100,9 @@ public class CurrentMusic {
         seek(-5);
     }
 
-    public void toMusic() {
-    //TODO
+    public Music toMusic() {
+    	String filePath = mediaPlayerOptional.get().getMedia().getSource();
+    	Music music = MusicListManager.getInstance().find(filePath);
+    	return music;
     }
 }
