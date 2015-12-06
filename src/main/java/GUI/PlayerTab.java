@@ -1,17 +1,27 @@
 package GUI;
 
 import Music.CurrentMusic;
+import Music.MusicListManager;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class PlayerTab extends JPanel {
 
     private final JFXPanel fxPanel = new JFXPanel();
+
+    private JPanel      musicInfoPanel;
+    private JLabel      musicName;
+    private Image       musicImage;
+    private JLabel      musicImageLabel;
+
     private JButton playButton;
     private JButton seekNextButton;
     private JButton seekPreviousButton;
@@ -27,6 +37,8 @@ public class PlayerTab extends JPanel {
 
         this.setPreferredSize(new Dimension(240, 300));
         this.setBackground(Color.BLACK);
+
+        addImageLabel();
 
         addCurrentTimeSlider();
 
@@ -66,6 +78,7 @@ public class PlayerTab extends JPanel {
             if (currentMusic.isPlayable()) {
                 CurrentMusic.getInstance().play();
                 playButton.setText("||");
+                MusicListManager.getInstance().getRecentPlayList().add(CurrentMusic.getInstance().toMusic());
             } else {
                 CurrentMusic.getInstance().pause();
                 playButton.setText("▶");
@@ -130,6 +143,7 @@ public class PlayerTab extends JPanel {
         //TODO
         //horizontal plz
         currentTimeSlider = new JSlider();
+        currentTimeSlider.setEnabled(false);
 
 
         this.add(currentTimeSlider);
@@ -138,7 +152,36 @@ public class PlayerTab extends JPanel {
     private void addStarButton() {
         //TODO
         starButton = new JButton("★");
+
+        starButton.addActionListener(e -> {
+            MusicListManager.getInstance().getFavoriteFileList().add(CurrentMusic.getInstance().toMusic());
+        });
+
         buttonPanel.add(starButton);
+    }
+
+    private void addImageLabel() {
+        //try {
+        //    musicImage = ImageIO.read(new File(System.getProperty("user.home") + "/Desktop/" + "defaultImage.jpg"));
+        //    musicImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
+        //    musicImageLabel     = new JLabel(new ImageIcon(musicImage));
+            musicInfoPanel      = new JPanel();
+
+        //    musicInfoPanel.add(musicImageLabel);
+
+            musicName           = new JLabel();
+
+            musicName.setText("Ready");
+            musicName.setBackground(Color.darkGray);
+            musicName.setOpaque(true);
+            musicInfoPanel.setSize(30, 30);
+            musicInfoPanel.add(musicName);
+
+            this.add(musicInfoPanel);
+
+        //} catch (IOException e) {
+        //   e.printStackTrace();
+        //}
     }
 
     public void doStop() {

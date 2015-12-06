@@ -18,6 +18,7 @@ public class MusicList {
     private DefaultListModel<Music> listModel = new DefaultListModel<>();
     private PlayerTab player;
 
+    public static int listNum = 0;
 
     public MusicList(PlayerTab playerTab) {
         this.player = playerTab;
@@ -35,7 +36,9 @@ public class MusicList {
                     JList<Music> list = (JList<Music>) evt.getSource();
                     player.doStop();
                     CurrentMusic.getInstance().setMedia(list.getSelectedValue().getFilename());
+                    MusicListManager.getInstance().getRecentPlayList().add(CurrentMusic.getInstance().toMusic());
                     player.doPlay();
+                    listNum = Tab.listNum;
 
 
                 }
@@ -51,7 +54,7 @@ public class MusicList {
 
 
     //Functions
-    public JPanel createListPanel() {
+    public JPanel getPanel() {
         if (musicListPanel.getComponentCount() == 0) {
             musicListPanel.add(musicList, BorderLayout.NORTH);
             musicListPanel.add(refreshButton, BorderLayout.SOUTH);

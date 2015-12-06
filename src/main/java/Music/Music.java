@@ -1,5 +1,8 @@
 package Music;
 
+import FileIO.FilePathParser;
+
+import com.googlecode.mp4parser.util.Path;
 import com.mpatric.mp3agic.*;
 
 import java.io.File;
@@ -17,7 +20,7 @@ public class Music extends Mp3File {
     private String lyricsFileAddress, lyricsFileName;
     private String artist, composer, name, album;
     private byte[] image;
-
+    private boolean favorite;
     private ID3v1 id3v1Tag;
     private ID3v2 id3v2Tag;
     private boolean isV1Tag = false, isV2Tag = false;
@@ -27,6 +30,7 @@ public class Music extends Mp3File {
                 + File.separatorChar
                 + musicFileName
                 + ".mp3");
+        favorite = false;
         if (infoInfo != null) {
             if (infoInfo[0] == null) infoInfo[0] = "0";
             this.playCount = Integer.parseInt(infoInfo[0]);
@@ -49,6 +53,13 @@ public class Music extends Mp3File {
 
     }
 
+    public Music(File file) throws UnsupportedTagException, InvalidDataException, IOException{
+    	super(file.getAbsolutePath());
+    	String path = file.getAbsolutePath();
+    	this.fileName = FilePathParser.getFileName(path);
+    	this.fileAddress = FilePathParser.getPath(path);
+    	
+    }
     private void setMusicInformation() {
         if (isV1Tag) {
             this.artist = id3v1Tag.getArtist();
@@ -89,4 +100,8 @@ public class Music extends Mp3File {
     public void setPlayCount() {
         this.playCount = 0;
     }
+
+    public boolean getFavorite() { return this.favorite; }
+
+    public void setFavorite() { this.favorite = !this.favorite; }
 }

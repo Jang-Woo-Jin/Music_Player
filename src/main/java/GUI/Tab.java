@@ -13,6 +13,8 @@ public class Tab extends JPanel {
 
     private MusicList musicList;
 
+    public static int listNum = 0;
+
     public JPanel createTab(MusicList musicList) {
         setActionListeners();
         this.musicList = musicList;
@@ -29,22 +31,27 @@ public class Tab extends JPanel {
     private void setActionListeners() {
         this.allMusic.addActionListener(e -> {
             musicList.arrayListToListModel(MusicListManager.getInstance().getMusicList());
-            musicList.createListPanel().updateUI();
+            musicList.getPanel().updateUI();
+            listNum = 0;
         });
 
         this.favoriteMusic.addActionListener(e -> {
             musicList.arrayListToListModel(MusicListManager.getInstance().getFavoriteFileList());
-            musicList.createListPanel().updateUI();
+            musicList.getPanel().updateUI();
+            listNum = 1;
         });
 
         this.recentMusic.addActionListener(e -> {
-            //musicList.arrayListToListModel(MusicListManager.getInstance().getRecentPlayList());
-            musicList.createListPanel().updateUI();
+            musicList.arrayListToListModel(MusicListManager.getInstance().getRecentPlayList());
+            musicList.getPanel().updateUI();
+            listNum = 2;
         });
 
         this.chooseMusic.addActionListener(e -> {
             musicList.arrayListToListModel(MusicListManager.getInstance().getChoosePlayList());
-            musicList.createListPanel().updateUI();
+            musicList.getPanel().updateUI();
+            listNum = 3;
         });
     }
+
 }
