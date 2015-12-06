@@ -1,12 +1,14 @@
 package Music;
 
 import FileIO.FileIO;
+
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class MusicListManager {
     private static MusicListManager uniqueInstance;
