@@ -16,25 +16,27 @@ import java.io.IOException;
 
 public class PlayerTab extends JPanel {
 
-    private final JFXPanel fxPanel = new JFXPanel();
+	private final JFXPanel fxPanel = new JFXPanel();
 
-    private JPanel      musicInfoPanel;
-    private JLabel      musicName;
-    private Image       musicImage;
-    private JLabel      musicImageLabel;
+	private JPanel musicInfoPanel;
+	private JLabel musicName;
+	private Image musicImage;
+	private JLabel musicImageLabel;
 
-    private JButton playButton;
-    private JButton seekNextButton;
-    private JButton seekPreviousButton;
-    private JButton stopButton;
-    private JButton playModeButton; // this button can change play mode ( all music play, all music play repeatly, one music repeatly )
-    private JButton starButton;         //for favorite
-    private JSlider volumeSlider;
-    private JSlider currentTimeSlider;
+	private JButton playButton;
+	private JButton seekNextButton;
+	private JButton seekPreviousButton;
+	private JButton stopButton;
+	private JButton playModeButton; // this button can change play mode ( all
+									// music play, all music play repeatly, one
+									// music repeatly )
+	private JButton starButton; // for favorite
+	private JSlider volumeSlider;
+	private JSlider currentTimeSlider;
 
-    private JPanel buttonPanel = new JPanel(new GridLayout(2, 3, 30, 10));
+	private JPanel buttonPanel = new JPanel(new GridLayout(2, 3, 30, 10));
 
-    public PlayerTab() {
+	public PlayerTab() {
 
         this.setPreferredSize(new Dimension(240, 300));
         this.setBackground(Color.BLACK);
@@ -60,18 +62,18 @@ public class PlayerTab extends JPanel {
         this.setVisible(true);
     }
 
-    private void initFX(JFXPanel fxPanel) {
-        Scene scene = initScene();
-        fxPanel.setScene(scene);
-    }
+	private void initFX(JFXPanel fxPanel) {
+		Scene scene = initScene();
+		fxPanel.setScene(scene);
+	}
 
-    private Scene initScene() {
-        Group root = new Group();
+	private Scene initScene() {
+		Group root = new Group();
 
-        return (new Scene(root, javafx.scene.paint.Color.GREENYELLOW));
-    }
+		return (new Scene(root, javafx.scene.paint.Color.GREENYELLOW));
+	}
 
-    private void addPlayButton() {
+	private void addPlayButton() {
         playButton = new JButton("▶");
         /* buttons setting */
         playButton.addActionListener(e -> {
@@ -88,7 +90,7 @@ public class PlayerTab extends JPanel {
         buttonPanel.add(playButton);
     }
 
-    private void addSeekNextButton() {
+	private void addSeekNextButton() {
         seekNextButton = new JButton(">>");
 
         seekNextButton.addActionListener(e -> {
@@ -99,7 +101,7 @@ public class PlayerTab extends JPanel {
         buttonPanel.add(seekNextButton);
     }
 
-    private void addSeekPreviousButton() {
+	private void addSeekPreviousButton() {
         seekPreviousButton = new JButton("<<");
 
         seekPreviousButton.addActionListener(e -> {
@@ -110,7 +112,7 @@ public class PlayerTab extends JPanel {
         buttonPanel.add(seekPreviousButton);
     }
 
-    private void addStopButton() {
+	private void addStopButton() {
         stopButton = new JButton("■");
 
         stopButton.addActionListener(e -> {
@@ -122,7 +124,7 @@ public class PlayerTab extends JPanel {
         buttonPanel.add(stopButton);
     }
 
-    private void addPlayModeButton() {
+	private void addPlayModeButton() {
         playModeButton = new JButton("all");
 
         playModeButton.addActionListener(e -> {
@@ -132,25 +134,24 @@ public class PlayerTab extends JPanel {
         buttonPanel.add(playModeButton);
     }
 
-    private void addVolumeSlider() {
-        //TODO
-        //vertical plz
-        volumeSlider = new JSlider();
+	private void addVolumeSlider() {
+		// TODO
+		// vertical plz
+		volumeSlider = new JSlider();
 
-        this.add(volumeSlider);
-    }
+		this.add(volumeSlider);
+	}
 
-    private void addCurrentTimeSlider() {
-        //TODO
-        //horizontal plz
-        currentTimeSlider = new JSlider();
-        currentTimeSlider.setEnabled(false);
+	private void addCurrentTimeSlider() {
+		// TODO
+		// horizontal plz
+		currentTimeSlider = new JSlider();
+		currentTimeSlider.setEnabled(false);
 
+		this.add(currentTimeSlider);
+	}
 
-        this.add(currentTimeSlider);
-    }
-
-    private void addStarButton() {
+	private void addStarButton() {
         //TODO
         starButton = new JButton("★");
 
@@ -170,37 +171,40 @@ public class PlayerTab extends JPanel {
         buttonPanel.add(starButton);
     }
 
-    private void addImageLabel() {
-        //try {
-        //    musicImage = ImageIO.read(new File(System.getProperty("user.home") + "/Desktop/" + "defaultImage.jpg"));
-        //    musicImage.getScaledInstance(30, 30, Image.SCALE_DEFAULT);
-        //    musicImageLabel     = new JLabel(new ImageIcon(musicImage));
-            musicInfoPanel      = new JPanel();
+	private void addImageLabel() {
+		try {
+			musicImage = ImageIO.read(new File(System.getProperty("user.home")
+					+ "/Desktop/" + "defaultImage.jpg"));
+			musicImage = musicImage.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
+			musicImageLabel = new JLabel(new ImageIcon(musicImage));
+			musicInfoPanel = new JPanel();
+			musicInfoPanel.setLayout(new BorderLayout());
+			musicInfoPanel.add(musicImageLabel,BorderLayout.CENTER);
 
-        //    musicInfoPanel.add(musicImageLabel);
+			musicName = new JLabel();
 
-            musicName           = new JLabel();
+			musicName.setText("Ready");
+			musicName.setBackground(Color.darkGray);
+			musicName.setOpaque(true);
+			musicInfoPanel.setSize(30, 30);
+			musicInfoPanel.add(musicName,BorderLayout.SOUTH);
 
-            musicName.setText("Ready");
-            musicName.setBackground(Color.darkGray);
-            musicName.setOpaque(true);
-            musicInfoPanel.setSize(30, 30);
-            musicInfoPanel.add(musicName);
+			this.add(musicInfoPanel);
 
-            this.add(musicInfoPanel);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+    
+	public void doStop() {
+		stopButton.doClick();
+	}
 
-        //} catch (IOException e) {
-        //   e.printStackTrace();
-        //}
-    }
+	public void doPlay() {
+		playButton.doClick();
+	}
 
-    public void doStop() {
-        stopButton.doClick();
-    }
-
-    public void doPlay() {
-        playButton.doClick();
-    }
-
-    public void doStar() { starButton.doClick(); }
+	public void doStar() {
+		starButton.doClick();
+	}
 }
