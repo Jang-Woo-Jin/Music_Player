@@ -113,7 +113,7 @@ public class PlayerTab extends JPanel {
 
         buttonPanel.add(seekPreviousButton);
     }
-
+//
 	private void addStopButton() {
         stopButton = new JButton("■");
 
