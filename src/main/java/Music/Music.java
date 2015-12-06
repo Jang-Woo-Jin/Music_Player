@@ -22,7 +22,7 @@ public class Music extends Mp3File {
     private String lyricsFileAddress, lyricsFileName;
     private String artist, composer, name, album;
     private byte[] image;
-
+    private boolean favorite;
     private ID3v1 id3v1Tag;
     private ID3v2 id3v2Tag;
     private boolean isV1Tag = false, isV2Tag = false;
@@ -32,6 +32,7 @@ public class Music extends Mp3File {
                 + File.separatorChar
                 + musicFileName
                 + ".mp3");
+        favorite = false;
         if (infoInfo != null) {
             if (infoInfo[0] == null) infoInfo[0] = "0";
             this.playCount = Integer.parseInt(infoInfo[0]);
@@ -116,11 +117,7 @@ public class Music extends Mp3File {
         this.lyricsFileAddress = lyricsFileAddress;
     }
 
-    public int getPlayCount() {
-        return this.playCount;
-    }
+    public boolean getFavorite() { return this.favorite; }
 
-    public void setPlayCount() {
-        this.playCount = 0;
-    }
+    public void setFavorite() { this.favorite = !this.favorite; }
 }

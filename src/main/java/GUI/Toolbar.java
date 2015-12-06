@@ -1,5 +1,6 @@
 package GUI;
 
+import Music.Music;
 import Music.MusicListManager;
 import OS.RecursiveFinder;
 
@@ -40,24 +41,21 @@ public class Toolbar extends JMenuBar {
             chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             int returnVal = chooser.showOpenDialog(null);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-                System.out.println("You chose to open this Directory: " +
-                        chooser.getSelectedFile().getName());
-
                 try {
                     RecursiveFinder finder = new RecursiveFinder(
                             chooser.getSelectedFile().getPath(), "*.mp3");
-                    String[] paths =
-                            finder.find()
-                                    .stream()
-                                    .map(Path::toAbsolutePath)
-                                    .map(Path::toString)
-                                    .toArray(String[]::new);
+                    String[] paths = finder.find()
+                            .stream()
+                            .map(Path::toAbsolutePath)
+                            .map(Path::toString)
+                            .toArray(String[]::new);
 
                     for (String path : paths) {
                         MusicListManager.getInstance().addMusic(path);
                     }
                     musicList.arrayListToListModel(MusicListManager.getInstance().getMusicList());
-                    musicList.createListPanel().updateUI();
+
+                    musicList.getPanel().updateUI();
                 } catch (IOException exception) {
                     exception.printStackTrace();
                 }

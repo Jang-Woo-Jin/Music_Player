@@ -4,4 +4,11 @@ GUI
     - Image 띄우기
     - Slide Bar
     - 가사 띄우기 ( 영은이 파트 Merge 필요 )
-    - 자동으로 다음곡 재생
+    - 자동으로 다음곡 재생 -------
+        - all
+        - all/repeat
+        - one
+    - playCountSort() 구현 필요
+        -> fewMusicList
+
+    = recentPlayList

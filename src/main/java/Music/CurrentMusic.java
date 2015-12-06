@@ -1,6 +1,7 @@
 package Music;
 
 import FileIO.FilePathParser;
+import GUI.PlayerTab;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
@@ -12,9 +13,11 @@ import java.util.Optional;
 public class CurrentMusic {
     private static CurrentMusic uniqueInstance;
     private Optional<MediaPlayer> mediaPlayerOptional;
-
+    private PlayerTab playerTab;
+    private Music thisMusic;
     private CurrentMusic() {
         this.mediaPlayerOptional = Optional.empty();
+
     }
 
     public static CurrentMusic getInstance() {
@@ -35,7 +38,7 @@ public class CurrentMusic {
                     || status == Status.PAUSED
                     || status == Status.STOPPED);
         }
-        
+
         return false;
     }
 
@@ -43,8 +46,21 @@ public class CurrentMusic {
         mediaPlayerOptional.ifPresent(mediaPlayer -> {
             if (isPlayable()) {
                 mediaPlayer.play();
+                MusicListManager.getInstance().addToRecentPlayList(this.toMusic());
             }
         });
+        mediaPlayerOptional.get().setOnEndOfMedia(new Runnable() {
+            public void run() {
+                Media media = mediaPlayerOptional.get().getMedia();
+                int i = MusicListManager.getInstance().findIndex(FilePathParser.parseSeparator(media.getSource()));
+                if(i == MusicListManager.getInstance().nowList().size() - 1) i = 0;
+                else i++;
+                playerTab.doStop();
+                setMedia(MusicListManager.getInstance().at(i).getFilename());
+                playerTab.doPlay();
+            }
+        });
+
     }
 
     public void pause() {
@@ -57,7 +73,6 @@ public class CurrentMusic {
 
     public boolean setMedia(File file) {
         if (file.isFile()) {
-            stop();
             mediaPlayerOptional = Optional.of(
                     new MediaPlayer(
                             new Media(file.toURI().toString())));
@@ -93,16 +108,25 @@ public class CurrentMusic {
     }
 
     public void seekNext() {
-        seek(5);
+        seek(10);
     }
 
     public void seekPrevious() {
-        seek(-5);
+        seek(-10);
     }
 
     public Music toMusic() {
     	String filePath = mediaPlayerOptional.get().getMedia().getSource();
-    	Music music = MusicListManager.getInstance().find(filePath);
-    	return music;
+        filePath = FilePathParser.parseSeparator(filePath);
+        thisMusic = MusicListManager.getInstance().find(filePath);
+        return thisMusic;
+    }
+
+    public Status getStatus() {
+        return mediaPlayerOptional.get().getStatus();
+    }
+
+    public void setPlayerTab(PlayerTab playerTab) {
+        this.playerTab = playerTab;
     }
 }

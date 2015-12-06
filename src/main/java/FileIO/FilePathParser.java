@@ -15,4 +15,11 @@ public class FilePathParser {
     public static String getFileName(String fileStr) {
         return fileStr.substring(fileStr.lastIndexOf(File.separatorChar) + 1, fileStr.lastIndexOf("."));
     }
+
+    public static String parseSeparator(String filePath) {
+        filePath = filePath.substring(6, filePath.length());
+        filePath = filePath.replaceAll("/","\\\\");
+        filePath = filePath.replaceAll("%20", " ");
+        return filePath;
+    }
 }
