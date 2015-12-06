@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class MusicListManager {
@@ -22,8 +23,8 @@ public class MusicListManager {
     private final String FILE_INFO_ADDRESS = System.getProperty("user.home") + "/Desktop/"+"music-info";
     private final String FILE_INFO_NAME = "abc";//"MusicInfoFile";
     private ArrayList<Music> musicList = new ArrayList<Music>();
-    private RecentPlayList recentPlayList = new RecentPlayList();
-    private FavoriteMusicList favoriteMusicList = new FavoriteMusicList();
+    private ArrayList<Music> recentPlayList = new ArrayList<Music>();
+    private ArrayList<Music> favoriteMusicList = new ArrayList<Music>();
 
     public static MusicListManager getInstance() {
         if (uniqueInstance == null) {
@@ -78,6 +79,7 @@ public class MusicListManager {
     }
     
     public Music find(String filePath){
+
         Music temp = musicList.get(findIndex(filePath));
         if(temp != null) return temp;
         else return null;
@@ -87,8 +89,11 @@ public class MusicListManager {
         switch(MusicList.listNum) {
             case 0 :
                 for(Music iter : musicList){
+
+                    System.out.println(filePath);
+                    System.out.println(iter.getFilename());
+
                     if(iter.getFilename().equals(filePath)){
-                        if(musicList.indexOf(iter) == musicList.size() - 1) return -1;
                         return musicList.indexOf(iter);
                     }
                 }
@@ -96,22 +101,20 @@ public class MusicListManager {
             case 1 :
                 for(Music iter : favoriteMusicList){
                     if(iter.getFilename().equals(filePath)){
-                        if(musicList.indexOf(iter) == favoriteMusicList.size() - 1) return -1;
                         return musicList.indexOf(iter);
                     }
                 }
                 break;
             case 2 :
-                for(Object iter : recentPlayList){
-                    if(((Music)iter).getFilename().equals(filePath)){
-                        if(musicList.indexOf(iter) == recentPlayList.size() - 1) return -1;
+                for(Music iter : recentPlayList){
+                    if(iter.getFilename().equals(filePath)){
                         return musicList.indexOf(iter);
                     }
                 }
                 break;
         }
 
-        return -1;
+        return -2;
     }
 
     public Music at(int i) {
@@ -122,7 +125,7 @@ public class MusicListManager {
             case 1 :
                 return favoriteMusicList.get(i);
             case 2 :
-                return (Music)recentPlayList.get(i);
+                return recentPlayList.get(i);
         }
         return null;
     }
@@ -131,9 +134,53 @@ public class MusicListManager {
         return musicList;
     }
 
-    public FavoriteMusicList getFavoriteFileList() {
+    public ArrayList<Music> getFavoriteFileList() {
         return favoriteMusicList;
     }
 
-    public RecentPlayList<Music> getRecentPlayList() { return recentPlayList; }
+    public ArrayList<Music> getRecentPlayList() { return recentPlayList; }
+
+    public boolean addToRecentPlayList(Music music) {
+        if (recentPlayList.contains(music)) recentPlayList.remove(music);
+        return recentPlayList.add(music);
+    }
+
+    public boolean addToFavoriteMusicList(Music music) {
+        if(!isExist(music))
+            return favoriteMusicList.add(music);
+        else return false;
+    }
+
+    public boolean deleteToFavoriteMusicList(Music music) {
+        if(isExist(music)) {
+            favoriteMusicList.remove(MusicListManager.getInstance().find(music.getFilename()));
+            return true;
+        }
+        else return false;
+    }
+
+    public boolean isExist(Music music) {
+        int temp = MusicList.listNum;
+        MusicList.listNum = 1;
+        if (MusicListManager.getInstance().findIndex(music.getFilename()) != -1) {
+            MusicList.listNum = temp;
+            return true;
+        }
+        else {
+            MusicList.listNum = temp;
+            return false;
+        }
+    }
+
+    public ArrayList<Music> nowList() {
+        switch(MusicList.listNum) {
+            case 0 :
+                return musicList;
+            case 1 :
+                return favoriteMusicList;
+            case 2 :
+                return recentPlayList;
+        }
+        return null;
+    }
 }

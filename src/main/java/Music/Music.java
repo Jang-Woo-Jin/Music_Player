@@ -93,14 +93,6 @@ public class Music extends Mp3File {
         this.lyricsFileAddress = lyricsFileAddress;
     }
 
-    public int getPlayCount() {
-        return this.playCount;
-    }
-
-    public void setPlayCount() {
-        this.playCount = 0;
-    }
-
     public boolean getFavorite() { return this.favorite; }
 
     public void setFavorite() { this.favorite = !this.favorite; }

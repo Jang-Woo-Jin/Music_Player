@@ -36,10 +36,9 @@ public class MusicList {
                     JList<Music> list = (JList<Music>) evt.getSource();
                     playerTab.doStop();
                     CurrentMusic.getInstance().setMedia(list.getSelectedValue().getFilename());
-                    MusicListManager.getInstance().getRecentPlayList().add(CurrentMusic.getInstance().toMusic());
+                    MusicListManager.getInstance().addToRecentPlayList(CurrentMusic.getInstance().toMusic());
                     playerTab.doPlay();
                     listNum = Tab.listNum;
-                    playerTab.doStar();
                     playerTab.updateUI();
                 }
             }

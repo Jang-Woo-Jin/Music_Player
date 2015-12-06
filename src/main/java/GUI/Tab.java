@@ -17,7 +17,7 @@ public class Tab extends JPanel {
     public JPanel createTab(MusicList musicList) {
         setActionListeners();
         this.musicList = musicList;
-        this.setLayout(new GridLayout(4, 1, 0, 0));
+        this.setLayout(new GridLayout(3, 1, 0, 0));
 
         this.add(allMusic);
         this.add(favoriteMusic);

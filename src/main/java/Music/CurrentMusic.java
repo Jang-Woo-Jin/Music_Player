@@ -46,18 +46,18 @@ public class CurrentMusic {
         mediaPlayerOptional.ifPresent(mediaPlayer -> {
             if (isPlayable()) {
                 mediaPlayer.play();
-                MusicListManager.getInstance().getRecentPlayList().add(this.toMusic());
+                MusicListManager.getInstance().addToRecentPlayList(this.toMusic());
             }
         });
         mediaPlayerOptional.get().setOnEndOfMedia(new Runnable() {
             public void run() {
                 Media media = mediaPlayerOptional.get().getMedia();
-                int i = MusicListManager.getInstance().findIndex(media.getSource());
-                i++;
+                int i = MusicListManager.getInstance().findIndex(FilePathParser.parseSeparator(media.getSource()));
+                if(i == MusicListManager.getInstance().nowList().size() - 1) i = 0;
+                else i++;
                 playerTab.doStop();
                 setMedia(MusicListManager.getInstance().at(i).getFilename());
                 playerTab.doPlay();
-                playerTab.updateUI();
             }
         });
 
