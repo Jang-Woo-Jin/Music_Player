@@ -1,6 +1,8 @@
 package GUI;
 
 import FileIO.FileIO;
+import Music.CurrentMusic;
+import sun.util.resources.cldr.da.CurrencyNames_da;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +24,7 @@ public class Main {
 
         JPanel listPanel = gui_musicList.getPanel();
 
+        CurrentMusic.getInstance().setPlayerTab(playerPanel);
         this.mainFrame.setLayout(new BorderLayout());
         this.mainFrame.setSize(800, 450);
         this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -1,6 +1,9 @@
 package Music;
 
 import FileIO.FilePathParser;
+import GUI.PlayerTab;
+import GUI.Tab;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
@@ -12,9 +15,11 @@ import java.util.Optional;
 public class CurrentMusic {
     private static CurrentMusic uniqueInstance;
     private Optional<MediaPlayer> mediaPlayerOptional;
+    private PlayerTab playerTab;
 
     private CurrentMusic() {
         this.mediaPlayerOptional = Optional.empty();
+
     }
 
     public static CurrentMusic getInstance() {
@@ -35,7 +40,7 @@ public class CurrentMusic {
                     || status == Status.PAUSED
                     || status == Status.STOPPED);
         }
-        
+
         return false;
     }
 
@@ -46,6 +51,19 @@ public class CurrentMusic {
                 MusicListManager.getInstance().getRecentPlayList().add(this.toMusic());
             }
         });
+        mediaPlayerOptional.get().setOnEndOfMedia(new Runnable() {
+            public void run() {
+                Media media = mediaPlayerOptional.get().getMedia();
+
+                int i = MusicListManager.getInstance().findIndex(media.getSource());
+                i++;
+                playerTab.doStop();
+                setMedia(MusicListManager.getInstance().at(i).getFilename());
+                playerTab.doPlay();
+            }
+
+        });
+
     }
 
     public void pause() {
@@ -58,7 +76,6 @@ public class CurrentMusic {
 
     public boolean setMedia(File file) {
         if (file.isFile()) {
-            stop();
             mediaPlayerOptional = Optional.of(
                     new MediaPlayer(
                             new Media(file.toURI().toString())));
@@ -94,19 +111,25 @@ public class CurrentMusic {
     }
 
     public void seekNext() {
-        seek(5);
+        seek(10);
     }
 
     public void seekPrevious() {
-        seek(-5);
+        seek(-10);
     }
 
     public Music toMusic() {
     	String filePath = mediaPlayerOptional.get().getMedia().getSource();
-        filePath = filePath.substring(6, filePath.length());
-        filePath = filePath.replaceAll("/","\\\\");
-        filePath = filePath.replaceAll("%20", " ");
+        filePath = FilePathParser.parseSeparator(filePath);
         Music music = MusicListManager.getInstance().find(filePath);
         return music;
+    }
+
+    public Status getStatus() {
+        return mediaPlayerOptional.get().getStatus();
+    }
+
+    public void setPlayerTab(PlayerTab playerTab) {
+        this.playerTab = playerTab;
     }
 }

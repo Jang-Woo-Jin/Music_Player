@@ -18,6 +18,7 @@ public class MusicList {
     private DefaultListModel<Music> listModel = new DefaultListModel<>();
     private PlayerTab player;
 
+    public static int listNum = 0;
 
     public MusicList(PlayerTab playerTab) {
         this.player = playerTab;
@@ -37,6 +38,7 @@ public class MusicList {
                     CurrentMusic.getInstance().setMedia(list.getSelectedValue().getFilename());
                     MusicListManager.getInstance().getRecentPlayList().add(CurrentMusic.getInstance().toMusic());
                     player.doPlay();
+                    listNum = Tab.listNum;
 
 
                 }
