@@ -20,6 +20,7 @@ public class PlayerTab extends JPanel {
 
 	private JPanel musicInfoPanel;
 	private JLabel musicName;
+<<<<<<< HEAD
 	private Image musicImage;
 	private Image playButtonImage;
 	private Image pauseButtonImage;
@@ -28,6 +29,9 @@ public class PlayerTab extends JPanel {
 	private Image seekPreviousButtonImage;
 	private Image stopButtonImage;
 	private Image starButtonImage;
+=======
+	private Image  musicImage;
+>>>>>>> refs/remotes/origin/master
 	private JLabel musicImageLabel;
 
 	private JButton playButton;
@@ -41,6 +45,7 @@ public class PlayerTab extends JPanel {
 	private JSlider volumeSlider;
 	private JSlider currentTimeSlider;
 
+    private JPanel listPanel;
 	private JPanel buttonPanel = new JPanel(new GridLayout(2, 3, 30, 10));
 
 	public PlayerTab() {
@@ -98,7 +103,12 @@ public class PlayerTab extends JPanel {
             CurrentMusic currentMusic = CurrentMusic.getInstance();
             if (currentMusic.isPlayable()) {
                 CurrentMusic.getInstance().play();
+<<<<<<< HEAD
                 playButton.setIcon(new ImageIcon(pauseButtonImage));
+=======
+                playButton.setText("||");
+                if(MusicList.listNum == 1) starButton.setText("☆");
+>>>>>>> refs/remotes/origin/master
                 MusicListManager.getInstance().addToRecentPlayList(CurrentMusic.getInstance().toMusic());
             } else {
                 CurrentMusic.getInstance().pause();       
@@ -204,11 +214,11 @@ public class PlayerTab extends JPanel {
 
         starButton.addActionListener(e -> {
             Music temp = CurrentMusic.getInstance().toMusic();
-            if(!temp.getFavorite()) {
-               if(MusicListManager.getInstance().addToFavoriteMusicList(temp))
-                    temp.setFavorite();
-                    starButton.setText("☆");
-
+            if(!starButton.getText().equals("☆")) {
+               if(MusicListManager.getInstance().addToFavoriteMusicList(temp)) {
+                   temp.setFavorite();
+                   starButton.setText("☆");
+               }
             }
             else {
                 if(MusicListManager.getInstance().deleteToFavoriteMusicList(temp))
@@ -256,7 +266,15 @@ public class PlayerTab extends JPanel {
 		starButton.doClick();
 	}
     public void reset() {
+<<<<<<< HEAD
         starButton.setText("★");
         playButton.setIcon(new ImageIcon(playButtonImage));
+=======
+        if(MusicList.listNum == 1)
+            starButton.setText("☆");
+        else
+            starButton.setText("★");
+        playButton.setText("▶");
+>>>>>>> refs/remotes/origin/master
     }
 }

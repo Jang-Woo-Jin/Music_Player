@@ -16,12 +16,10 @@ public class MusicList {
     private final JPanel musicListPanel = new JPanel(new BorderLayout());
     private final JList<Music> musicList;
     private DefaultListModel<Music> listModel = new DefaultListModel<>();
-    private PlayerTab playerTab;
 
     public static int listNum = 0;
 
     public MusicList(PlayerTab playerTab) {
-        this.playerTab = playerTab;
         musicList = new JList<>(listModel);
         musicList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
