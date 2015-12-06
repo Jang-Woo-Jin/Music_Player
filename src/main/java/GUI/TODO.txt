@@ -1,14 +1,11 @@
-GUI
-    - List 기능    -> 새로고침
-    - Button 만들기 (Player)
-    - Image 띄우기
-    - Slide Bar
-    - 가사 띄우기 ( 영은이 파트 Merge 필요 )
-    - 자동으로 다음곡 재생 -------
-        - all
-        - all/repeat
-        - one
-    - playCountSort() 구현 필요
-        -> fewMusicList
+    1. - Image 띄우기 - 우진
+    2. - 자동으로 다음곡 재생 -------
+              - all
+              - all/repeat - default
+              - one
+    3. - 가사 띄우기 ( 영은이 파트 Merge 필요 )
+    4. - 알람       ( 효민이 파트 적용 )
+    5. - Progress Bar
 
-    = recentPlayList
+
+    버그잡기

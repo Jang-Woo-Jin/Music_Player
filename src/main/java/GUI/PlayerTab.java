@@ -136,7 +136,7 @@ public class PlayerTab extends JPanel {
     		playButton.setIcon(new ImageIcon(seekPrevioutButtonImage));
 		}catch(IOException e){e.printStackTrace();}
     }
-
+//
 	private void addStopButton() {
         stopButton = new JButton();
 
