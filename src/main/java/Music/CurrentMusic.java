@@ -2,8 +2,6 @@ package Music;
 
 import FileIO.FilePathParser;
 import GUI.PlayerTab;
-import GUI.Tab;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
@@ -16,7 +14,7 @@ public class CurrentMusic {
     private static CurrentMusic uniqueInstance;
     private Optional<MediaPlayer> mediaPlayerOptional;
     private PlayerTab playerTab;
-
+    private Music thisMusic;
     private CurrentMusic() {
         this.mediaPlayerOptional = Optional.empty();
 
@@ -54,14 +52,13 @@ public class CurrentMusic {
         mediaPlayerOptional.get().setOnEndOfMedia(new Runnable() {
             public void run() {
                 Media media = mediaPlayerOptional.get().getMedia();
-
                 int i = MusicListManager.getInstance().findIndex(media.getSource());
                 i++;
                 playerTab.doStop();
                 setMedia(MusicListManager.getInstance().at(i).getFilename());
                 playerTab.doPlay();
+                playerTab.updateUI();
             }
-
         });
 
     }
@@ -121,8 +118,8 @@ public class CurrentMusic {
     public Music toMusic() {
     	String filePath = mediaPlayerOptional.get().getMedia().getSource();
         filePath = FilePathParser.parseSeparator(filePath);
-        Music music = MusicListManager.getInstance().find(filePath);
-        return music;
+        thisMusic = MusicListManager.getInstance().find(filePath);
+        return thisMusic;
     }
 
     public Status getStatus() {

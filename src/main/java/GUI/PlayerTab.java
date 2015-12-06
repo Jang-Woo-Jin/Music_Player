@@ -1,6 +1,7 @@
 package GUI;
 
 import Music.CurrentMusic;
+import Music.Music;
 import Music.MusicListManager;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
@@ -154,7 +155,15 @@ public class PlayerTab extends JPanel {
         starButton = new JButton("★");
 
         starButton.addActionListener(e -> {
-            MusicListManager.getInstance().getFavoriteFileList().add(CurrentMusic.getInstance().toMusic());
+            Music temp = CurrentMusic.getInstance().toMusic();
+            if(!temp.getFavorite()) {
+               if(MusicListManager.getInstance().getFavoriteFileList().add(temp))
+                    starButton.setText("☆");
+            }
+            else {
+                if(MusicListManager.getInstance().getFavoriteFileList().delete(temp))
+                    starButton.setText("★");
+            }
         });
 
         buttonPanel.add(starButton);
@@ -192,4 +201,5 @@ public class PlayerTab extends JPanel {
         playButton.doClick();
     }
 
+    public void doStar() { starButton.doClick(); }
 }
