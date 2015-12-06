@@ -84,7 +84,7 @@ public class PlayerTab extends JPanel {
                 MusicListManager.getInstance().addToRecentPlayList(CurrentMusic.getInstance().toMusic());
             } else {
                 CurrentMusic.getInstance().pause();
-                playButton.setText("▶");
+                reset();
             }
         });
         buttonPanel.add(playButton);
@@ -118,8 +118,8 @@ public class PlayerTab extends JPanel {
         stopButton.addActionListener(e -> {
 
             CurrentMusic currentMusic = CurrentMusic.getInstance();
-            playButton.setText("▶");
             currentMusic.stop();
+            reset();
         });
         buttonPanel.add(stopButton);
     }
@@ -161,10 +161,11 @@ public class PlayerTab extends JPanel {
                if(MusicListManager.getInstance().addToFavoriteMusicList(temp))
                     temp.setFavorite();
                     starButton.setText("☆");
+
             }
             else {
                 if(MusicListManager.getInstance().deleteToFavoriteMusicList(temp))
-                    starButton.setText("★");
+                    reset();
             }
         });
 
@@ -207,4 +208,8 @@ public class PlayerTab extends JPanel {
 	public void doStar() {
 		starButton.doClick();
 	}
+    public void reset() {
+        starButton.setText("★");
+        playButton.setText("▶");
+    }
 }
