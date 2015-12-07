@@ -2,12 +2,15 @@ package GUI;
 
 import FileIO.FilePathParser;
 import Music.CurrentMusic;
+import Music.Lyric_Parser;
+import Music.Lyric_Repeat;
 import Music.Music;
 import Music.MusicListManager;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import org.omg.CORBA.Current;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -42,6 +45,8 @@ public class PlayerTab extends JPanel {
 	private JSlider volumeSlider;
 	private JSlider currentTimeSlider;
 
+	public static JLabel text;
+	
     private MusicList   listPanel;
 	private JPanel      buttonPanel = new JPanel(new GridLayout(2, 3, 30, 10));
     private Tab         tabPanel;
@@ -65,6 +70,9 @@ public class PlayerTab extends JPanel {
         buttonPanel.setBackground(Color.black);
         this.add(buttonPanel);
 
+        //TODO!!!!!
+        addLyric();
+        
         Platform.runLater(() -> initFX(fxPanel));
         fxPanel.setSize(0, 0);
 
@@ -101,8 +109,7 @@ public class PlayerTab extends JPanel {
 		}catch(IOException e){
 			playButton.setText("▶");
 		}
-    
-        
+
         playButton.addActionListener(e -> {
             CurrentMusic currentMusic = CurrentMusic.getInstance();
             if (currentMusic.isPlayable()) {
@@ -176,8 +183,24 @@ public class PlayerTab extends JPanel {
         }catch(Exception e){playModeButton.setText("All");}
 
         playModeButton.addActionListener(e -> {
-            CurrentMusic currentMusic = CurrentMusic.getInstance();
-            //TODO
+            if (CurrentMusic.playMode == 0) {
+                CurrentMusic.playMode++;
+                try{
+                    addButtonImage(playModeButton, "loop.png");
+                }catch(Exception e1){playModeButton.setText("A/NR");}
+            }
+            else if (CurrentMusic.playMode == 1) {
+                CurrentMusic.playMode++;
+                try{
+                    addButtonImage(playModeButton, "loop.png");
+                }catch(Exception e2){playModeButton.setText("O/R");}
+            }
+            else {
+                CurrentMusic.playMode = 0;
+                try{
+                    addButtonImage(playModeButton, "loop.png");
+                }catch(Exception e3){playModeButton.setText("A/R");}
+            }
         });
         buttonPanel.add(playModeButton);
     }
@@ -233,6 +256,7 @@ public class PlayerTab extends JPanel {
 
 			musicName = new JLabel();
 			musicName.setText("Ready");
+			musicName.setForeground(Color.WHITE);
 			musicName.setBackground(Color.darkGray);
 			musicName.setOpaque(true);
 
@@ -281,4 +305,26 @@ public class PlayerTab extends JPanel {
         this.tabPanel = tabPanel;
     }
 
+    public void setPlay() {
+        this.playButton.setText("| |");
+        this.updateUI();
+    }
+    public void resetPlay() {
+        this.playButton.setText("▶");
+        this.updateUI();
+    }
+    public void addLyric(){
+    	Lyric_Repeat rp = new Lyric_Repeat();
+  
+    	text = new JLabel();
+		
+		text.setOpaque(true);
+		text.setBackground(Color.BLACK);
+		text.setForeground(Color.WHITE);
+		text.setSize(30, 30);
+		add(text);
+
+    	
+    	//buttonPanel.add(text1);
+    }
 }

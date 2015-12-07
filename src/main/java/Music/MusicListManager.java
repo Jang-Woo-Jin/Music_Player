@@ -85,7 +85,6 @@ public class MusicListManager {
     }
 
     public int findIndex(String filePath){
-
         for(Music iter : nowList()){
             if(iter.getFilename().replaceAll("[+]", " ").equals(filePath)){
                 return nowList().indexOf(iter);

@@ -21,8 +21,8 @@ public class Lyric {
     }
 
 
-    public void lyricShow(int min, int sec, int msec) {
-        System.out.println(min + " : " + sec + " : " + msec + " ������ ���縦 �����մϴ�");
+    public String lyricShow(int min, int sec, int msec) {
+      //  System.out.println(min + " : " + sec + " : " + msec + " ������ ���縦 �����մϴ�");
         int j = 1, start = 0, finish = 0;
         while (lrc[j] != null) {    //텍스트 파일의 총 줄수
             j++;
@@ -47,12 +47,14 @@ public class Lyric {
             }
         }
 
-        for (int i = start; i < finish; i++) {
-            System.out.println(lrc[i]);
+        /*for (int i = start; i < finish; i++) {
+            return lrc[i];
         }
         if (timeCal(min, sec, msec) > timeCal(time[j - 1][0], time[j - 1][1], time[j - 1][2])) {
-            System.out.println(lrc[j - 1]);
-        }
+            return lrc[j - 1];
+        }*/
+        
+        return lrc[start];
 
     }
 }
