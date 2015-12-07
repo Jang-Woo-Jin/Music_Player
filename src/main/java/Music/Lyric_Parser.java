@@ -25,8 +25,11 @@ public class Lyric_Parser {
 
     private void splitLrc() {
         FileIO a = new FileIO();
-        ArrayList<String> b = FileIO.readTextFile("C:", "kimagurestadamu");
+        ArrayList<String> b = FileIO.readTextFile("C:", "test");
+        
+
         for (int i = 0; i < b.size(); i++) {
+        	//System.out.println(b);
             index = b.get(i).split("]");
             lrctime[i] = index[0];
             lrctime[i] = lrctime[i].replaceAll("\\[", "");
@@ -36,7 +39,9 @@ public class Lyric_Parser {
             } catch (Exception ArrayIndexOutOfBoundsException) {
 
             }
-
+            
+           // System.out.println(i+"--"+lrc[i]);
+            
             time[i][0] = (lrctime[i].charAt(0) - 48) * 10
                     + (lrctime[i].charAt(1) - 48);
             time[i][1] = (lrctime[i].charAt(3) - 48) * 10

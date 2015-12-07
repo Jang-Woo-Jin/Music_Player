@@ -3,7 +3,6 @@ package GUI;
 import Alarm.AlarmSystem;
 import FileIO.FileIO;
 import Music.CurrentMusic;
-import sun.util.resources.cldr.da.CurrencyNames_da;
 
 import javax.swing.*;
 
@@ -16,6 +15,7 @@ public class Main {
         Main main = new Main();
         FileIO.makeDirectory(System.getProperty("user.home") + "/Desktop/" + "music-info");
         main.init();
+        
     }
 
     private void init() {

@@ -1,15 +1,11 @@
 package Music;
 
 import FileIO.FileIO;
-<<<<<<< HEAD
-
-=======
 import FileIO.FilePathParser;
 
 import GUI.MusicList;
 import GUI.Tab;
 import com.beust.jcommander.internal.Nullable;
->>>>>>> 297345ba2aa4dd021fe4b61ee73f6ba6b83c3a4f
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.UnsupportedTagException;
 import javafx.scene.media.Media;
