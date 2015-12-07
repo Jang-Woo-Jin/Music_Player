@@ -1,13 +1,9 @@
 package GUI;
 
-import java.awt.Color;
-import java.awt.GridLayout;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -16,9 +12,8 @@ import javax.swing.JTextField;
 
 
 import Alarm.AlarmSystem;
-import Music.CurrentMusic;
 
-public class AlarmFrame extends JFrame {
+class AlarmFrame extends JFrame {
 	private AlarmSystem alarmSystem;
 	private JLabel textLabel;
 	private JLabel hour_label;
@@ -30,8 +25,8 @@ public class AlarmFrame extends JFrame {
 	private JButton okButton;
 	private JComboBox<String> ampm;
 	
-	public AlarmFrame(String s){
-		super(s);
+	public AlarmFrame(){
+		super("AlarmSetting Window");
 		this.setSize(420,235);
         this.setLocation(400,200);
         this.setLayout(null);

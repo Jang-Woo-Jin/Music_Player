@@ -1,15 +1,13 @@
 package GUI;
 
-import Alarm.*;
 import FileIO.FileIO;
 import Music.CurrentMusic;
 
 import javax.swing.*;
 
 import java.awt.*;
-import java.io.IOException;
 
-public class Main {
+class Main {
     private final JFrame mainFrame = new JFrame();
 
     public static void main(String[] args) {
@@ -24,7 +22,7 @@ public class Main {
         MusicList musicList = new MusicList(playerPanel);
         Tab tabPanel = new Tab();
 
-        playerPanel.connectPanels(musicList, tabPanel);
+        playerPanel.connectPanels(tabPanel);
         tabPanel.connectPanels(playerPanel);
 
         CurrentMusic.getInstance().setPlayerTab(playerPanel);

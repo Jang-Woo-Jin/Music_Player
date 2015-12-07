@@ -1,19 +1,14 @@
 package Music;
 
 import FileIO.FileIO;
-import FileIO.FilePathParser;
 
 import GUI.MusicList;
-import GUI.Tab;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.UnsupportedTagException;
-import javafx.scene.media.Media;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class MusicListManager {
@@ -21,9 +16,9 @@ public class MusicListManager {
 
     private final String FILE_INFO_ADDRESS = System.getProperty("user.home") + "/Desktop/"+"music-info";
     private final String FILE_INFO_NAME = "abc";//"MusicInfoFile";
-    private ArrayList<Music> musicList = new ArrayList<Music>();
-    private ArrayList<Music> recentPlayList = new ArrayList<Music>();
-    private ArrayList<Music> favoriteMusicList = new ArrayList<Music>();
+    private final ArrayList<Music> musicList = new ArrayList<>();
+    private final ArrayList<Music> recentPlayList = new ArrayList<>();
+    private final ArrayList<Music> favoriteMusicList = new ArrayList<>();
 
     public static MusicListManager getInstance() {
         if (uniqueInstance == null) {
@@ -40,6 +35,7 @@ public class MusicListManager {
         ArrayList<String> informationString = FileIO.readTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME);
         String[] information = new String[5];
 
+        assert informationString != null;
         for (String iter : informationString) {
             information = iter.split("/");
             if (information[1].equals(fileName)) {
@@ -67,13 +63,9 @@ public class MusicListManager {
                 e.printStackTrace();
             }
         }
-        ArrayList<String> infoFileInfo = new ArrayList<String>();
+        ArrayList<String> infoFileInfo = musicList.stream().map(iter -> iter.getSaveInfo()).collect(Collectors.toCollection(ArrayList::new));
 
-        for (Music iter : musicList) {
-            infoFileInfo.add(iter.getSaveInfo());
-        }
-
-        FileIO.writeTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME, infoFileInfo, "");
+        FileIO.writeTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME, infoFileInfo);
 
     }
     
@@ -101,24 +93,24 @@ public class MusicListManager {
         return musicList;
     }
 
-    public boolean addToRecentPlayList(Music music) {
+    public void addToRecentPlayList(Music music) {
         int temp = MusicList.listNum;
         MusicList.listNum = 2;
         if (isExist(music)) recentPlayList.remove(find(music.getFilename()));
         MusicList.listNum = temp;
-        return recentPlayList.add(music);
+        recentPlayList.add(music);
     }
 
-    public boolean addToFavoriteMusicList(Music music) {
+    public void addToFavoriteMusicList(Music music) {
         int temp = MusicList.listNum;
         MusicList.listNum = 1;
         if(!isExist(music)) {
             MusicList.listNum = temp;
-            return favoriteMusicList.add(music.clone());
+            favoriteMusicList.add(music.clone());
         }
         else {
             MusicList.listNum = temp;
-            return false;
+
     }
     }
 
@@ -136,11 +128,8 @@ public class MusicListManager {
 
     }
 
-    public boolean isExist(Music music) {
-        if (MusicListManager.getInstance().findIndex(music.getFilename()) != -1)
-            return true;
-        else
-            return false;
+    private boolean isExist(Music music) {
+        return MusicListManager.getInstance().findIndex(music.getFilename()) != -1;
     }
 
     public ArrayList<Music> nowList() {

@@ -1,28 +1,22 @@
 package Music;
 
-public class Lyric {
+class Lyric {
     private int[][] time;
     private String[] lrc;
-
-    public Lyric() {
-
-    }
 
     public Lyric(int[][] time, String[] lrc) {
         this.time = time;
         this.lrc = lrc;
-        int msec = 0, sec = 0, min = 0;
     }
 
-    int timeCal(int min, int sec, int msec) {
-        int total = 0;
+    private int timeCal(int min, int sec, int msec) {
+        int total;
         total = min * 60 * 100 + sec * 100 + msec;    //0.01초 단위로 표현?
         return total;
     }
 
 
     public String lyricShow(int min, int sec, int msec) {
-      //  System.out.println(min + " : " + sec + " : " + msec + " ������ ���縦 �����մϴ�");
         int j = 1, start = 0, finish = 0;
         while (lrc[j] != null) {    //텍스트 파일의 총 줄수
             j++;
@@ -40,20 +34,6 @@ public class Lyric {
             break;
         }
 
-        for (int i = 0; i < j; i++) {
-            if (timeCal(min, sec, msec) < timeCal(time[i][0], time[i][1], time[i][2])) {
-                finish = i;
-                break;
-            }
-        }
-
-        /*for (int i = start; i < finish; i++) {
-            return lrc[i];
-        }
-        if (timeCal(min, sec, msec) > timeCal(time[j - 1][0], time[j - 1][1], time[j - 1][2])) {
-            return lrc[j - 1];
-        }*/
-        
         return lrc[start];
 
     }

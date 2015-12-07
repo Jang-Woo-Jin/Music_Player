@@ -20,27 +20,25 @@ public class FileIO {
                             + fileName + ".txt"), "UTF-8"));
             while ((readLine = input.readLine()) != null) {
 
-                if (readLine.startsWith("//") || (readLine.trim()).equals("")) {
-                } else {
+                if (!(readLine.startsWith("//") || (readLine.trim()).equals("")))
                     information.add(readLine);
-                }
             }
             input.close();
         } catch (IOException e) {
-            File file = new File(fileAddress, fileName + ".txt");
+            new File(fileAddress, fileName + ".txt");
         }
 
         return information;
     }
 
-    public static void writeTextFile(final String fileInformationAddress, final String fileName, ArrayList<String> writeInformation, final String delimiter) {
+    public static void writeTextFile(final String fileInformationAddress, final String fileName, ArrayList<String> writeInformation) {
         File file = new File(fileInformationAddress, fileName + ".txt");
         try {
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
 
             for (String iter : writeInformation) {
                 writer.write(iter);
-                writer.write(delimiter);
+                writer.write("");
             }
             writer.close();
         } catch (IOException e) {
@@ -48,44 +46,11 @@ public class FileIO {
         }
     }
 
-    public static ArrayList<String> readAllFileInPath(final String fileAddress) {
-        File dirFile = new File(fileAddress);
-        File[] fileList = dirFile.listFiles();
-        ArrayList<String> information = new ArrayList<>();
-        for (File tempFile : fileList) {
-            if (tempFile.isFile()) {
-                String tempFileName = tempFile.getName();
-                if (FilePathParser.getExtension(tempFileName).equals("mp3")) {
-                    information.add(FilePathParser.getFileName(tempFileName));
-                }
-            }
-        }
-        return information;
-    }
-
-    public static boolean makeDirectory(final String fileAddress) {
+    public static void makeDirectory(final String fileAddress) {
         try {
-            File file = new File(fileAddress);
-            return file.mkdir();
+            new File(fileAddress).mkdir();
         } catch (SecurityException e) {
-            return false;
-        }
-    }
-
-    public static void renameTextFile(final String fileAddress, final String fileName, final String newName) {
-        renameFile(fileAddress, fileName, newName, ".txt");
-    }
-
-    public static void renameMP3File(final String fileAddress, final String fileName, final String newName) {
-        renameFile(fileAddress, fileName, newName, ".mp3");
-    }
-
-    private static void renameFile(final String fileAddress, final String fileName, final String newName, final String type) {
-        String path = fileAddress;
-        File oldFile = new File(path, fileName + type);
-        if (oldFile.isFile()) {
-            File newFile = new File(path, newName + type);
-            oldFile.renameTo(newFile);
+            return;
         }
     }
 }

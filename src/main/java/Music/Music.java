@@ -17,7 +17,6 @@ public class Music extends Mp3File {
     private final String FILE_INFO_NAME = "MusicInfoFile";
     private int playCount;
     private String fileName, fileAddress;
-    private Lyric lyrics;
     private String lyricsFileAddress, lyricsFileName;
     private String artist, composer, name, album;
     private byte[] image;
@@ -66,6 +65,7 @@ public class Music extends Mp3File {
     	ArrayList<String> informationString = FileIO.readTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME);
 
 
+        assert informationString != null;
         for (String iter : informationString) {
             musicInfo = iter.split("/");
             if (musicInfo[1].equals(fileName)) {
@@ -77,13 +77,11 @@ public class Music extends Mp3File {
             	break;
             }
         }
-        if(check){
-        	this.playCount = 0;
-        	this.lyricsFileName = "null";
-        	this.lyricsFileAddress = "null";
-        }
-        
-    		
+        this.playCount = 0;
+        this.lyricsFileName = "null";
+        this.lyricsFileAddress = "null";
+
+
     }
     
     private void setMusicInformation() {
@@ -114,7 +112,6 @@ public class Music extends Mp3File {
 
     public void setLyrics(Lyric lyrics, String lyricsFileName,
                           String lyricsFileAddress) {
-        this.lyrics = lyrics;
         this.lyricsFileName = lyricsFileName;
         this.lyricsFileAddress = lyricsFileAddress;
     }
@@ -129,11 +126,7 @@ public class Music extends Mp3File {
     public Music clone() {
         try {
             return new Music(fileName, fileAddress, musicInfo);
-        } catch (UnsupportedTagException e) {
-            e.printStackTrace();
-        } catch (InvalidDataException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (UnsupportedTagException | InvalidDataException | IOException e) {
             e.printStackTrace();
         }
         return null;

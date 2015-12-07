@@ -13,8 +13,8 @@ import javax.swing.JTextArea;
 public class AlarmSystem extends Thread {
 
     private long ringring;
-    private JFrame alarmMessageFrame;
-    private JTextArea alarmMessage;
+    private final JFrame alarmMessageFrame;
+    private final JTextArea alarmMessage;
     
     public AlarmSystem(JTextArea alarmMessage){
         alarmMessageFrame = new JFrame("Alarm Message");

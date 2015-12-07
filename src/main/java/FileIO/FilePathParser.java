@@ -6,10 +6,6 @@ import java.net.URLDecoder;
 
 public class FilePathParser {
 
-    public static String getExtension(String fileStr) {
-        return fileStr.substring(fileStr.lastIndexOf(".") + 1);
-    }
-
     public static String getPath(String fileStr) {
         return fileStr.substring(0, fileStr.lastIndexOf(File.separatorChar));
     }

@@ -5,17 +5,16 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import Alarm.AlarmSystem;
 import Alarm.AutomaticShutdown;
 
-public class ShutdownFrame extends JFrame{
+class ShutdownFrame extends JFrame{
 	private JComboBox<String> selectTimeComboBox;
 	private JLabel selectTimeLabel;
 	private JLabel textLabel;
 	private JButton okButton;
 	
-	ShutdownFrame(String s){
-		super(s);
+	ShutdownFrame(){
+		super("AutomaticShutdown Window");
 		this.setSize(280,155);
 		this.setLocation(400,200);
 		this.setLayout(null);

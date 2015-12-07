@@ -27,9 +27,9 @@ public class RecursiveFinder {
     private final Path startingDir;
     private final String pattern;
 
-    public RecursiveFinder(String startingDir, String pattern) {
+    public RecursiveFinder(String startingDir) {
         this.startingDir = Paths.get(startingDir);
-        this.pattern = pattern;
+        this.pattern = "*.mp3";
     }
 
     public ArrayList<Path> find() throws IOException {

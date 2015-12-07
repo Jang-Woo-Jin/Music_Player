@@ -3,7 +3,7 @@ package Music;
 import GUI.PlayerTab;
 
 public class Lyric_Repeat extends Thread {
-	 String showLyric;
+	 private String showLyric;
 	
 	 public Lyric_Repeat() {
 		 start();
@@ -13,7 +13,7 @@ public class Lyric_Repeat extends Thread {
         int min = 0;
         int sec = 0;
         int msec = 0;
-        int total=0;
+        int total;
        // String showLyric;
             
         while (true) {  
@@ -22,7 +22,7 @@ public class Lyric_Repeat extends Thread {
 
             //�ð��� 00:00:00 �������� �߶�
             try {
-                this.sleep(10);
+                sleep(10);
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

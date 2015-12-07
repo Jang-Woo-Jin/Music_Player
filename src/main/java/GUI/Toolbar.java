@@ -1,7 +1,6 @@
 package GUI;
 
 import Alarm.AlarmSystem;
-import Music.Music;
 import Music.MusicListManager;
 import OS.RecursiveFinder;
 
@@ -11,7 +10,7 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.nio.file.Path;
 
-public class Toolbar extends JMenuBar {
+class Toolbar extends JMenuBar {
     private final JMenu fileMenu = new JMenu("File Path");
     private final JMenuItem setMenuItem = new JMenuItem("Set");
 
@@ -20,10 +19,7 @@ public class Toolbar extends JMenuBar {
     
     private final JMenu automaticShutdownMenu = new JMenu("Automatic Shutdown");
     private final JMenuItem setAutomaticShutdownMenuItem = new JMenuItem("Set");
-    
-    private MusicList musicList;
-    private AlarmSystem alarmSystem;
-    
+
     public Toolbar(MusicList musicList) {
         onCreate(musicList);
     }
@@ -34,7 +30,6 @@ public class Toolbar extends JMenuBar {
     private void onCreate(MusicList musicList) {
 
         //connect musicList
-        this.musicList = musicList;
 
         //create menu items
         setMenuItem.setMnemonic(KeyEvent.VK_N);
@@ -56,7 +51,7 @@ public class Toolbar extends JMenuBar {
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 try {
                     RecursiveFinder finder = new RecursiveFinder(
-                            chooser.getSelectedFile().getPath(), "*.mp3");
+                            chooser.getSelectedFile().getPath());
                     String[] paths = finder.find()
                             .stream()
                             .map(Path::toAbsolutePath)
@@ -91,7 +86,7 @@ public class Toolbar extends JMenuBar {
         this.setVisible(true);
         
         setAlarmMenuItem.addActionListener(e -> {
-            AlarmFrame alarmFrame = new AlarmFrame("AlarmSetting Window");
+            AlarmFrame alarmFrame = new AlarmFrame();
              
         });
     }
@@ -111,7 +106,7 @@ public class Toolbar extends JMenuBar {
         this.setVisible(true);
         
         setAutomaticShutdownMenuItem.addActionListener(e -> {
-            ShutdownFrame shutdownFrame = new ShutdownFrame("AutomaticShutdown Window");
+            ShutdownFrame shutdownFrame = new ShutdownFrame();
         });
     }
 }

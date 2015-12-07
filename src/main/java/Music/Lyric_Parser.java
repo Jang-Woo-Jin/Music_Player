@@ -4,10 +4,10 @@ import FileIO.FileIO;
 
 import java.util.ArrayList;
 
-public class Lyric_Parser {
+class Lyric_Parser {
 
     private int[][] time = new int[1000][3];// 0:Min  1:Sec   2:0.Sec
-    private String[] lrctime = new String[1000];
+    private String[] lrcTime = new String[1000];
     private String[] lrc = new String[1000];
     private String[] index = new String[10];
 
@@ -24,15 +24,14 @@ public class Lyric_Parser {
     }
 
     private void splitLrc() {
-        FileIO a = new FileIO();
         ArrayList<String> b = FileIO.readTextFile("C:", "test");
-        
+
 
         for (int i = 0; i < b.size(); i++) {
         	//System.out.println(b);
             index = b.get(i).split("]");
-            lrctime[i] = index[0];
-            lrctime[i] = lrctime[i].replaceAll("\\[", "");
+            lrcTime[i] = index[0];
+            lrcTime[i] = lrcTime[i].replaceAll("\\[", "");
 
             try {
                 lrc[i] = index[1];
@@ -42,23 +41,23 @@ public class Lyric_Parser {
             
            // System.out.println(i+"--"+lrc[i]);
             
-            time[i][0] = (lrctime[i].charAt(0) - 48) * 10
-                    + (lrctime[i].charAt(1) - 48);
-            time[i][1] = (lrctime[i].charAt(3) - 48) * 10
-                    + (lrctime[i].charAt(4) - 48);
-            time[i][2] = (lrctime[i].charAt(6) - 48) * 10
-                    + (lrctime[i].charAt(7) - 48);
+            time[i][0] = (lrcTime[i].charAt(0) - 48) * 10
+                    + (lrcTime[i].charAt(1) - 48);
+            time[i][1] = (lrcTime[i].charAt(3) - 48) * 10
+                    + (lrcTime[i].charAt(4) - 48);
+            time[i][2] = (lrcTime[i].charAt(6) - 48) * 10
+                    + (lrcTime[i].charAt(7) - 48);
 
         }
 
     }
 
-    public String[] getLrctime() {
-        return lrctime;
+    public String[] getLrcTime() {
+        return lrcTime;
     }
 
-    public void setLrctime(String[] lrctime) {
-        this.lrctime = lrctime;
+    public void setLrcTime(String[] lrcTime) {
+        this.lrcTime = lrcTime;
     }
 
     public String[] getLrc() {
