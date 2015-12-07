@@ -40,6 +40,7 @@ public class Main {
 
         this.mainFrame.setJMenuBar(new Toolbar(musicList));
         this.mainFrame.getJMenuBar().add(new Toolbar(gui_alarmSystem));
+        
         this.mainFrame.setVisible(true);
     }
 }
