@@ -1,15 +1,21 @@
 package Alarm;
 
+import java.io.IOException;
 import java.util.Calendar;
 
-class AutomaticShutdown extends Thread {
+import javax.swing.JFrame;
 
+public class AutomaticShutdown extends Thread {
+
+
+	JFrame a;
     private long ringring;
-
+    
     @Override
     public void run() {
         try {
             Thread.sleep(ringring);
+            a.setVisible(false);
             System.exit(0);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -19,13 +25,14 @@ class AutomaticShutdown extends Thread {
     public void setShutdown(String time) {
 
         int setTime = Integer.parseInt(time);
-        long setMilliTime = setTime * 1000 * 60;
-
-        Calendar currentTime = Calendar.getInstance();
-        Calendar shutTime = Calendar.getInstance();
-
-        shutTime.setTimeInMillis(currentTime.getTimeInMillis() + setMilliTime);
-
-        ringring = shutTime.getTimeInMillis() - currentTime.getTimeInMillis();
+//        long setMilliTime = setTime * 1000 * 60;
+          ringring = setTime * 1000* 60;
+//        Calendar currentTime = Calendar.getInstance();
+//        Calendar shutTime = Calendar.getInstance();
+//
+//        shutTime.setTimeInMillis(currentTime.getTimeInMillis() + setMilliTime);
+//
+//        ringring = shutTime.getTimeInMillis() - currentTime.getTimeInMillis();
     }
+    
 }

@@ -1,6 +1,6 @@
 package GUI;
 
-import Alarm.AlarmSystem;
+import Alarm.*;
 import FileIO.FileIO;
 import Music.CurrentMusic;
 import sun.util.resources.cldr.da.CurrencyNames_da;
@@ -8,6 +8,7 @@ import sun.util.resources.cldr.da.CurrencyNames_da;
 import javax.swing.*;
 
 import java.awt.*;
+import java.io.IOException;
 
 public class Main {
     private final JFrame mainFrame = new JFrame();
@@ -16,12 +17,11 @@ public class Main {
         Main main = new Main();
         FileIO.makeDirectory(System.getProperty("user.home") + "/Desktop/" + "music-info");
         main.init();
+       
     }
 
     private void init() {
         PlayerTab playerPanel = new PlayerTab();
-
-        AlarmSystem gui_alarmSystem = new AlarmSystem();
 
         MusicList musicList = new MusicList(playerPanel);
         Tab tabPanel = new Tab();
@@ -39,7 +39,7 @@ public class Main {
         this.mainFrame.add(playerPanel, BorderLayout.EAST);
 
         this.mainFrame.setJMenuBar(new Toolbar(musicList));
-        this.mainFrame.getJMenuBar().add(new Toolbar(gui_alarmSystem));
+        this.mainFrame.getJMenuBar().add(new Toolbar());
         
         this.mainFrame.setVisible(true);
     }

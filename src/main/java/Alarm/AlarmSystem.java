@@ -1,22 +1,37 @@
 package Alarm;
 
+import java.awt.Color;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
 public class AlarmSystem extends Thread {
 
     private long ringring;
-
+    private JFrame alarmMessageFrame;
+    private JTextArea alarmMessage;
+    
+    public AlarmSystem(JTextArea alarmMessage){
+        alarmMessageFrame = new JFrame("Alarm Message");
+        this.alarmMessage = alarmMessage;
+        alarmMessageFrameInit();
+    }
+    
     @Override
     public void run() {
 
         try {
             if (ringring < 0)
                 throw new InterruptedException();
-            else
-                Thread.sleep(ringring);
+            else{
+            	Thread.sleep(ringring);
+                alarmMessageFrame.setVisible(true);
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -58,6 +73,14 @@ public class AlarmSystem extends Thread {
         ringring = alarmTime.getTimeInMillis() - currentTime.getTimeInMillis();
 
     }
+
+    private void alarmMessageFrameInit(){
+		alarmMessageFrame.add(alarmMessage);
+        alarmMessageFrame.setSize(400, 200);
+        alarmMessageFrame.setLocationRelativeTo(null);
+        alarmMessage.setEditable(false);
+        alarmMessage.setBackground(Color.white);
+	}
 }
 
 

@@ -18,7 +18,7 @@ import Music.CurrentMusic;
 
 public class AlarmFrame extends JFrame {
 	private AlarmSystem alarmSystem;
-	
+	private JLabel textLabel;
 	private JLabel hour_label;
 	private JLabel minute_label;
 	private JTextField hour;
@@ -27,8 +27,6 @@ public class AlarmFrame extends JFrame {
 	
 	private JButton okButton;
 	private JComboBox<String> ampm;
-	
-	private JFrame alarmMessageFrame;
 	
 	public AlarmFrame(String s){
 		super(s);
@@ -41,24 +39,29 @@ public class AlarmFrame extends JFrame {
         addAmpmContent();
         addOkButton();
         addAlarmMessage();
+        addTextLabel();
         okButton.addActionListener(e -> {
         	this.setVisible(false);
-        	alarmSystem = new AlarmSystem();
+        	
             
         	String selectAmpm = (String)ampm.getSelectedItem();
             selectAmpm = selectAmpm.trim();
             String selectHour = hour.getText().trim();
             String selectMinute = minute.getText().trim();
-            
-            alarmMessageFrame = new JFrame("Alarm Message");
-            alarmMessageFrameInit();
+
+        	alarmSystem = new AlarmSystem(alarmMessage);
             
             alarmSystem.setAlarm(selectAmpm, selectHour, selectMinute);
-            alarmSystem.run();
-            alarmMessageFrame.setVisible(true);
+            alarmSystem.start();
+            
         });
         this.setVisible(true);
         
+	}
+	private void addTextLabel(){
+		textLabel = new JLabel("알람 시각을 설정해주세요.");
+		textLabel.setBounds(20,10,200,30);
+		this.add(textLabel);
 	}
 	private void addAmpmContent(){
 		ampm = new JComboBox<String>(new String[] {"  ","오전","오후"});
@@ -91,11 +94,5 @@ public class AlarmFrame extends JFrame {
 		alarmMessage.setBounds(40,80,280,100);
 		this.add(alarmMessage);
 	}
-	private void alarmMessageFrameInit(){
-		 alarmMessageFrame.add(alarmMessage);
-         alarmMessageFrame.setSize(400, 200);
-         alarmMessageFrame.setLocationRelativeTo(null);
-         alarmMessage.setEditable(false);
-         alarmMessage.setBackground(Color.white);
-	}
+	
 }

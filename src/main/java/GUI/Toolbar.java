@@ -17,14 +17,19 @@ public class Toolbar extends JMenuBar {
 
     private final JMenu alarmMenu = new JMenu("Alarm");
     private final JMenuItem setAlarmMenuItem = new JMenuItem("Set");
+    
+    private final JMenu automaticShutdownMenu = new JMenu("Automatic Shutdown");
+    private final JMenuItem setAutomaticShutdownMenuItem = new JMenuItem("Set");
+    
     private MusicList musicList;
     private AlarmSystem alarmSystem;
     
     public Toolbar(MusicList musicList) {
         onCreate(musicList);
     }
-    public Toolbar(AlarmSystem alarmSystem){
-    	onCreate(alarmSystem);
+    public Toolbar(){
+    	onAlarmToolBarCreate();
+    	onAutomaticShutdownToolBarCreate();
     }
     private void onCreate(MusicList musicList) {
 
@@ -71,8 +76,7 @@ public class Toolbar extends JMenuBar {
         });
     }
 
-    private void onCreate(AlarmSystem alarmSystem){
-    	this.alarmSystem = alarmSystem;
+    private void onAlarmToolBarCreate(){
     	
     	setAlarmMenuItem.setMnemonic(KeyEvent.VK_N);
         setAlarmMenuItem.setActionCommand("Set");
@@ -88,8 +92,26 @@ public class Toolbar extends JMenuBar {
         
         setAlarmMenuItem.addActionListener(e -> {
             AlarmFrame alarmFrame = new AlarmFrame("AlarmSetting Window");
-            
-            
+             
+        });
+    }
+    
+    private void onAutomaticShutdownToolBarCreate(){
+    	
+    	setAutomaticShutdownMenuItem.setMnemonic(KeyEvent.VK_N);
+        setAutomaticShutdownMenuItem.setActionCommand("Set");
+        
+        //add menu items to menus
+        automaticShutdownMenu.add(setAutomaticShutdownMenuItem);
+        
+        //add menu to this
+        this.add(automaticShutdownMenu);
+        
+        //add this to the frame
+        this.setVisible(true);
+        
+        setAutomaticShutdownMenuItem.addActionListener(e -> {
+            ShutdownFrame shutdownFrame = new ShutdownFrame("AutomaticShutdown Window");
         });
     }
 }
