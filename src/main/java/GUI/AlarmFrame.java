@@ -34,6 +34,7 @@ public class AlarmFrame extends JFrame {
         addAmpmContent();
         addOkButton();
         okButton.addActionListener(e -> {
+        	alarmSystem = new AlarmSystem();
             String selectAmpm = (String)ampm.getSelectedItem();
             selectAmpm = selectAmpm.trim();
             String selectHour = hour.getText().trim();

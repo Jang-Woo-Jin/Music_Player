@@ -21,6 +21,8 @@ public class Main {
     private void init() {
         PlayerTab playerPanel = new PlayerTab();
 
+        AlarmSystem gui_alarmSystem = new AlarmSystem();
+
         MusicList musicList = new MusicList(playerPanel);
         Tab tabPanel = new Tab();
 
@@ -36,8 +38,8 @@ public class Main {
         this.mainFrame.add(new JScrollPane(musicList.getPanel()), BorderLayout.CENTER);
         this.mainFrame.add(playerPanel, BorderLayout.EAST);
 
-        this.mainFrame.getJMenuBar().add(new Toolbar(gui_alarmSystem));
         this.mainFrame.setJMenuBar(new Toolbar(musicList));
+        this.mainFrame.getJMenuBar().add(new Toolbar(gui_alarmSystem));
         this.mainFrame.setVisible(true);
     }
 }
