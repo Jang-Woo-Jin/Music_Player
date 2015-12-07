@@ -2,8 +2,6 @@ package Music;
 
 import FileIO.FilePathParser;
 import GUI.PlayerTab;
-import GUI.Tab;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
@@ -16,7 +14,7 @@ public class CurrentMusic {
     private static CurrentMusic uniqueInstance;
     private Optional<MediaPlayer> mediaPlayerOptional;
     private PlayerTab playerTab;
-
+    private Music thisMusic;
     private CurrentMusic() {
         this.mediaPlayerOptional = Optional.empty();
 
@@ -48,20 +46,19 @@ public class CurrentMusic {
         mediaPlayerOptional.ifPresent(mediaPlayer -> {
             if (isPlayable()) {
                 mediaPlayer.play();
-                MusicListManager.getInstance().getRecentPlayList().add(this.toMusic());
+                MusicListManager.getInstance().addToRecentPlayList(this.toMusic());
             }
         });
         mediaPlayerOptional.get().setOnEndOfMedia(new Runnable() {
             public void run() {
                 Media media = mediaPlayerOptional.get().getMedia();
-
-                int i = MusicListManager.getInstance().findIndex(media.getSource());
-                i++;
+                int i = MusicListManager.getInstance().findIndex(FilePathParser.parseSeparator(media.getSource()));
+                if(i == MusicListManager.getInstance().nowList().size() - 1) i = 0;
+                else i++;
                 playerTab.doStop();
                 setMedia(MusicListManager.getInstance().at(i).getFilename());
                 playerTab.doPlay();
             }
-
         });
 
     }
@@ -121,8 +118,9 @@ public class CurrentMusic {
     public Music toMusic() {
     	String filePath = mediaPlayerOptional.get().getMedia().getSource();
         filePath = FilePathParser.parseSeparator(filePath);
-        Music music = MusicListManager.getInstance().find(filePath);
-        return music;
+        thisMusic = MusicListManager.getInstance().find(filePath);
+        System.out.println(filePath);
+        return thisMusic;
     }
 
     public Status getStatus() {

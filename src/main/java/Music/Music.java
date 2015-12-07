@@ -1,12 +1,13 @@
 package Music;
 
+import FileIO.FileIO;
 import FileIO.FilePathParser;
 
-import com.googlecode.mp4parser.util.Path;
 import com.mpatric.mp3agic.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Music extends Mp3File {
     private final String FILE_INFO_ADDRESS = System.getProperty("user.home")
@@ -24,6 +25,8 @@ public class Music extends Mp3File {
     private ID3v1 id3v1Tag;
     private ID3v2 id3v2Tag;
     private boolean isV1Tag = false, isV2Tag = false;
+
+    private String[] musicInfo;
 
     public Music(String musicFileName, String musicFileAddress, String[] infoInfo) throws UnsupportedTagException, InvalidDataException, IOException {
         super(musicFileAddress
@@ -49,17 +52,40 @@ public class Music extends Mp3File {
         }
         this.fileAddress = musicFileAddress;
         this.fileName = musicFileName;
+        this.musicInfo = infoInfo;
         setMusicInformation();
 
     }
 
     public Music(File file) throws UnsupportedTagException, InvalidDataException, IOException{
     	super(file.getAbsolutePath());
+    	boolean check = true;
     	String path = file.getAbsolutePath();
     	this.fileName = FilePathParser.getFileName(path);
     	this.fileAddress = FilePathParser.getPath(path);
-    	
+    	ArrayList<String> informationString = FileIO.readTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME);
+
+
+        for (String iter : informationString) {
+            musicInfo = iter.split("/");
+            if (musicInfo[1].equals(fileName)) {
+            	 this.playCount = Integer.parseInt(musicInfo[0]);
+                 this.fileName = musicInfo[1];
+                 this.fileAddress = musicInfo[2];
+                 this.lyricsFileName = musicInfo[3];
+                 this.lyricsFileAddress = musicInfo[4];
+            	break;
+            }
+        }
+        if(check){
+        	this.playCount = 0;
+        	this.lyricsFileName = "null";
+        	this.lyricsFileAddress = "null";
+        }
+        
+    		
     }
+    
     private void setMusicInformation() {
         if (isV1Tag) {
             this.artist = id3v1Tag.getArtist();
@@ -93,15 +119,24 @@ public class Music extends Mp3File {
         this.lyricsFileAddress = lyricsFileAddress;
     }
 
-    public int getPlayCount() {
-        return this.playCount;
+    public byte[] getAlbumArt(){
+    	return this.image;
     }
-
-    public void setPlayCount() {
-        this.playCount = 0;
-    }
-
     public boolean getFavorite() { return this.favorite; }
 
     public void setFavorite() { this.favorite = !this.favorite; }
+
+    public Music clone() {
+        try {
+            return new Music(fileName, fileAddress, musicInfo);
+        } catch (UnsupportedTagException e) {
+            e.printStackTrace();
+        } catch (InvalidDataException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

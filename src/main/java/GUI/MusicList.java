@@ -16,12 +16,9 @@ public class MusicList {
     private final JPanel musicListPanel = new JPanel(new BorderLayout());
     private final JList<Music> musicList;
     private DefaultListModel<Music> listModel = new DefaultListModel<>();
-    private PlayerTab player;
-
     public static int listNum = 0;
 
     public MusicList(PlayerTab playerTab) {
-        this.player = playerTab;
         musicList = new JList<>(listModel);
         musicList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -34,13 +31,11 @@ public class MusicList {
             public void mouseClicked(MouseEvent evt) {
                 if (evt.getClickCount() == 2) {
                     JList<Music> list = (JList<Music>) evt.getSource();
-                    player.doStop();
+                    playerTab.doStop();
                     CurrentMusic.getInstance().setMedia(list.getSelectedValue().getFilename());
-                    MusicListManager.getInstance().getRecentPlayList().add(CurrentMusic.getInstance().toMusic());
-                    player.doPlay();
+                    MusicListManager.getInstance().addToRecentPlayList(CurrentMusic.getInstance().toMusic());
+                    playerTab.doPlay();
                     listNum = Tab.listNum;
-
-
                 }
             }
         });
@@ -70,7 +65,6 @@ public class MusicList {
         }
         musicList.setModel(listModel);
         musicList.setSelectedIndex(0);
-
     }
 
 }

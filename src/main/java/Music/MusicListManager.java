@@ -16,7 +16,9 @@ import javafx.scene.media.Media;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 public class MusicListManager {
@@ -25,9 +27,8 @@ public class MusicListManager {
     private final String FILE_INFO_ADDRESS = System.getProperty("user.home") + "/Desktop/"+"music-info";
     private final String FILE_INFO_NAME = "abc";//"MusicInfoFile";
     private ArrayList<Music> musicList = new ArrayList<Music>();
-    private RecentPlayList recentPlayList = new RecentPlayList();
-    private FavoriteMusicList favoriteMusicList = new FavoriteMusicList();
-    private ArrayList<Music> choosePlayList = new ArrayList<Music>();
+    private ArrayList<Music> recentPlayList = new ArrayList<Music>();
+    private ArrayList<Music> favoriteMusicList = new ArrayList<Music>();
 
     public static MusicListManager getInstance() {
         if (uniqueInstance == null) {
@@ -38,24 +39,6 @@ public class MusicListManager {
             }
         }
         return uniqueInstance;
-    }
-
-    public void addMusicFileInDirectory(final String fileAddress) {
-        ArrayList<String> musicFileNameList = FileIO.readAllFileInPath(fileAddress);
-
-        for (String iter : musicFileNameList) {
-            try {
-                musicList.add(new Music(iter, fileAddress, getMusicInfoFile(iter, fileAddress)));
-            } catch (UnsupportedTagException | IOException | InvalidDataException e) {
-                e.printStackTrace();
-            }
-        }
-        ArrayList<String> infoFileInfo = musicList.stream()
-                .map(iter -> iter.getSaveInfo())
-                .collect(Collectors.toCollection(ArrayList::new));
-
-        FileIO.writeTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME, infoFileInfo, "");
-        favoriteMusicList.sort();
     }
 
     private String[] getMusicInfoFile(final String fileName, final String fileAddress) {
@@ -100,80 +83,84 @@ public class MusicListManager {
     }
     
     public Music find(String filePath){
-    	for(Music iter : musicList){
-            if(iter.getFilename().equals(filePath)){
-    			return iter;
-    		}
-    	}
-    	return null;
+
+        Music temp = nowList().get(findIndex(filePath));
+        if(temp != null) return temp;
+        else return null;
     }
 
     public int findIndex(String filePath){
-        filePath = FilePathParser.parseSeparator(filePath);
-        switch(MusicList.listNum) {
-            case 0 :
-                for(Music iter : musicList){
-                    if(iter.getFilename().equals(filePath)){
-                        if(musicList.indexOf(iter) == musicList.size() - 1) return -1;
-                        return musicList.indexOf(iter);
-                    }
-                }
-                break;
-            case 1 :
-                for(Music iter : favoriteMusicList){
-                    if(iter.getFilename().equals(filePath)){
-                        if(musicList.indexOf(iter) == favoriteMusicList.size() - 1) return -1;
-                        return musicList.indexOf(iter);
-                    }
-                }
-                break;
-            case 2 :
-                for(Object iter : recentPlayList){
-                    if(((Music)iter).getFilename().equals(filePath)){
-                        if(musicList.indexOf(iter) == recentPlayList.size() - 1) return -1;
-                        return musicList.indexOf(iter);
-                    }
-                }
-                break;
-            case 3:
-                for(Music iter : choosePlayList){
-                    if(iter.getFilename().equals(filePath)){
-                        if(musicList.indexOf(iter) == choosePlayList.size() - 1) return -1;
-                        return musicList.indexOf(iter);
-                    }
-                }
-                break;
-        }
 
+        for(Music iter : nowList()){
+            if(iter.getFilename().equals(filePath)){
+                return nowList().indexOf(iter);
+            }
+        }
         return -1;
     }
 
     public Music at(int i) {
-        switch(MusicList.listNum) {
-            case -1 :
-            case 0 :
-                return musicList.get(i);
-            case 1 :
-                return favoriteMusicList.get(i);
-            case 2 :
-                return (Music)recentPlayList.get(i);
-            case 3:
-                return choosePlayList.get(i);
-        }
-        return null;
+       return nowList().get(i);
     }
 
     public ArrayList<Music> getMusicList() {
         return musicList;
     }
 
-    public FavoriteMusicList getFavoriteFileList() {
+    public ArrayList<Music> getFavoriteFileList() {
         return favoriteMusicList;
     }
 
-    public ArrayList<Music> getChoosePlayList() {
-        return choosePlayList;
+    public ArrayList<Music> getRecentPlayList() { return recentPlayList; }
+
+    public boolean addToRecentPlayList(Music music) {
+        if (recentPlayList.contains(music)) recentPlayList.remove(music);
+        return recentPlayList.add(music);
     }
 
-    public RecentPlayList<Music> getRecentPlayList() { return recentPlayList; }
+    public boolean addToFavoriteMusicList(Music music) {
+        int temp = MusicList.listNum;
+        MusicList.listNum = 1;
+        if(!isExist(music)) {
+            MusicList.listNum = temp;
+            return favoriteMusicList.add(music.clone());
+        }
+        else {
+            MusicList.listNum = temp;
+            return false;
+    }
+    }
+
+    public boolean deleteToFavoriteMusicList(Music music) {
+        if(isExist(music)) {
+            for(int i = 0 ; i < nowList().size() ; i++) {
+                if(nowList().get(i).getFilename().equals(music.getFilename())) {
+                    nowList().remove(i);
+                    break;
+                }
+            }
+            return true;
+        }
+        else return false;
+
+    }
+
+    public boolean isExist(Music music) {
+        if (MusicListManager.getInstance().findIndex(music.getFilename()) != -1)
+            return true;
+        else
+            return false;
+    }
+
+    public ArrayList<Music> nowList() {
+        switch(MusicList.listNum) {
+            case 0 :
+                return musicList;
+            case 1 :
+                return favoriteMusicList;
+            case 2 :
+                return recentPlayList;
+        }
+        return null;
+    }
 }
