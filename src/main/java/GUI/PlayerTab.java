@@ -78,14 +78,35 @@ public class PlayerTab extends JPanel {
 		return (new Scene(root, javafx.scene.paint.Color.GREENYELLOW));
 	}
 
+	private void addButtonImage(JButton button, String imageFileName) throws IOException{
+		
+		Image buttonImage = ImageIO.read(new File(System.getProperty("user.home")
+					+ "/Desktop/" + imageFileName));
+		buttonImage = buttonImage.getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+		button.setIcon(new ImageIcon(buttonImage));
+		
+	}
+	
 	private void addPlayButton() {
         playButton = new JButton();
+        
         /* buttons setting */
+        try{
+        	addButtonImage(playButton, "play.jpg");
+		}catch(IOException e){
+			playButton.setText("▶");
+		}
+    
+        
         playButton.addActionListener(e -> {
             CurrentMusic currentMusic = CurrentMusic.getInstance();
             if (currentMusic.isPlayable()) {
                 CurrentMusic.getInstance().play();
-                playButton.setText("||");
+                try{
+                	addButtonImage(playButton, "pause.png");
+                }catch(Exception k){
+                    playButton.setText("||");
+                }
                 MusicListManager.getInstance().addToRecentPlayList(CurrentMusic.getInstance().toMusic());
             } else {
                 CurrentMusic.getInstance().pause();
@@ -93,35 +114,30 @@ public class PlayerTab extends JPanel {
             }
         });
         buttonPanel.add(playButton);
-        try{
-            playButtonImage = ImageIO.read(new File(System.getProperty("user.home")
-    				+ "/Desktop/" + "ic_play_arrow_black_18dp.png"));
-            playButtonImage = playButtonImage.getScaledInstance(20, 20, Image.SCALE_DEFAULT);
-    		playButton.setIcon(new ImageIcon(playButtonImage));
-		}catch(IOException e){e.printStackTrace();}
     }
 
 	private void addSeekNextButton() {
-        seekNextButton = new JButton(">>");
-
-        seekNextButton.addActionListener(e -> {
+        seekNextButton = new JButton();
+        try{
+        	addButtonImage(seekNextButton, "seek-next.png");
+        }
+        catch(Exception e){seekNextButton.setText(">>");}
+        
+        seekPreviousButton.addActionListener(e -> {
             CurrentMusic currentMusic = CurrentMusic.getInstance();
             currentMusic.seekNext();
         });
-
         buttonPanel.add(seekNextButton);
-        
-        try{
-            seekNextButtonImage = ImageIO.read(new File(System.getProperty("user.home")
-    				+ "/Desktop/" + "ic_fast_forward_black_18dp.png"));
-            seekNextButtonImage = seekNextButtonImage.getScaledInstance(20, 20, Image.SCALE_DEFAULT);
-    		playButton.setIcon(new ImageIcon(seekNextButtonImage));
-		}catch(IOException e){e.printStackTrace();}
     }
 
 	private void addSeekPreviousButton() {
         seekPreviousButton = new JButton();
 
+        try{
+        	addButtonImage(seekPreviousButton, "seek-Previous.png");
+		
+        }catch(IOException e){e.printStackTrace();}
+        
         seekPreviousButton.addActionListener(e -> {
             CurrentMusic currentMusic = CurrentMusic.getInstance();
             currentMusic.seekPrevious();
@@ -129,35 +145,29 @@ public class PlayerTab extends JPanel {
 
         buttonPanel.add(seekPreviousButton);
         
-        try{
-            seekPrevioutButtonImage = ImageIO.read(new File(System.getProperty("user.home")
-    				+ "/Desktop/" + "ic_fast_rewind_black_18dp.png"));
-            seekPrevioutButtonImage = seekPrevioutButtonImage.getScaledInstance(20, 20, Image.SCALE_DEFAULT);
-    		playButton.setIcon(new ImageIcon(seekPrevioutButtonImage));
-		}catch(IOException e){e.printStackTrace();}
     }
-//
+
 	private void addStopButton() {
         stopButton = new JButton();
-
+        try{
+        	addButtonImage(stopButton, "stop.png");
+		}catch(IOException e){e.printStackTrace();}
+        
         stopButton.addActionListener(e -> {
-
             CurrentMusic currentMusic = CurrentMusic.getInstance();
             currentMusic.stop();
             reset();
         });
         buttonPanel.add(stopButton);
         
-        try{
-            stopButtonImage = ImageIO.read(new File(System.getProperty("user.home")
-    				+ "/Desktop/" + "ic_fast_rewind_black_18dp.png"));
-            stopButtonImage = stopButtonImage.getScaledInstance(20, 20, Image.SCALE_DEFAULT);
-    		playButton.setIcon(new ImageIcon(seekPrevioutButtonImage));
-		}catch(IOException e){e.printStackTrace();}
+        
     }
 
 	private void addPlayModeButton() {
-        playModeButton = new JButton("all");
+        playModeButton = new JButton();
+        try{
+        	addButtonImage(playModeButton, "loop.png");
+        }catch(Exception e){playModeButton.setText("All");}
 
         playModeButton.addActionListener(e -> {
             CurrentMusic currentMusic = CurrentMusic.getInstance();
@@ -242,6 +252,10 @@ public class PlayerTab extends JPanel {
 	}
     public void reset() {
         starButton.setText("★");
-        playButton.setText("▶");
+        try{
+        	addButtonImage(playButton, "play.jpg");
+		}catch(IOException e){
+			playButton.setText("▶");
+		}
     }
 }
