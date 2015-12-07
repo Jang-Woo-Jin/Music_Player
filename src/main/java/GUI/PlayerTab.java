@@ -1,5 +1,6 @@
 package GUI;
 
+import FileIO.FilePathParser;
 import Music.CurrentMusic;
 import Music.Music;
 import Music.MusicListManager;
@@ -10,7 +11,9 @@ import javafx.scene.Scene;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
 import java.awt.*;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -66,7 +69,10 @@ public class PlayerTab extends JPanel {
         this.add(fxPanel);
         this.setVisible(true);
     }
-
+	private void initPlayTab(){
+		
+	}
+	
 	private void initFX(JFXPanel fxPanel) {
 		Scene scene = initScene();
 		fxPanel.setScene(scene);
@@ -213,11 +219,14 @@ public class PlayerTab extends JPanel {
 
         buttonPanel.add(starButton);
     }
-
+	
 	private void addImageLabel() {
+		
 		try {
-			musicImage = ImageIO.read(new File(System.getProperty("user.home")
+			if(musicImage == null){
+				musicImage = ImageIO.read(new File(System.getProperty("user.home")
 					+ "/Desktop/" + "defaultImage.jpg"));
+			}
 			musicImage = musicImage.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
 			musicImageLabel = new JLabel(new ImageIcon(musicImage));
 			musicInfoPanel = new JPanel();
@@ -236,14 +245,28 @@ public class PlayerTab extends JPanel {
 
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		} 
 	}
     
+	private void replaceMusicInfo(){
+		try{
+			Music music = CurrentMusic.getInstance().toMusic();
+			if(music.getAlbumArt() != null){
+				musicImage = ImageIO.read(new ByteArrayInputStream(music.getAlbumArt()));
+				musicImage = musicImage.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
+				musicImageLabel.removeAll();
+				musicImageLabel.setIcon(new ImageIcon(musicImage));
+			}
+			musicName.setText(FilePathParser.getFileName(music.getFilename()));
+		}catch(Exception e){};
+	}
+	
 	public void doStop() {
 		stopButton.doClick();
 	}
 
 	public void doPlay() {
+		replaceMusicInfo();
 		playButton.doClick();
 	}
 

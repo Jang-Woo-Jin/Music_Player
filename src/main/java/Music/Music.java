@@ -117,6 +117,9 @@ public class Music extends Mp3File {
         this.lyricsFileAddress = lyricsFileAddress;
     }
 
+    public byte[] getAlbumArt(){
+    	return this.image;
+    }
     public boolean getFavorite() { return this.favorite; }
 
     public void setFavorite() { this.favorite = !this.favorite; }

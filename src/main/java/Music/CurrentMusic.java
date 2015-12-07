@@ -119,6 +119,7 @@ public class CurrentMusic {
     	String filePath = mediaPlayerOptional.get().getMedia().getSource();
         filePath = FilePathParser.parseSeparator(filePath);
         thisMusic = MusicListManager.getInstance().find(filePath);
+        System.out.println(filePath);
         return thisMusic;
     }
 
