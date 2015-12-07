@@ -16,7 +16,6 @@ public class MusicList {
     private final JPanel musicListPanel = new JPanel(new BorderLayout());
     private final JList<Music> musicList;
     private DefaultListModel<Music> listModel = new DefaultListModel<>();
-
     public static int listNum = 0;
 
     public MusicList(PlayerTab playerTab) {
@@ -37,7 +36,6 @@ public class MusicList {
                     MusicListManager.getInstance().addToRecentPlayList(CurrentMusic.getInstance().toMusic());
                     playerTab.doPlay();
                     listNum = Tab.listNum;
-                    playerTab.updateUI();
                 }
             }
         });
@@ -67,7 +65,6 @@ public class MusicList {
         }
         musicList.setModel(listModel);
         musicList.setSelectedIndex(0);
-
     }
 
 }

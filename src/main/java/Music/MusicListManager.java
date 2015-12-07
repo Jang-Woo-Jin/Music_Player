@@ -88,8 +88,6 @@ public class MusicListManager {
     public int findIndex(String filePath){
 
         for(Music iter : nowList()){
-            System.out.println(filePath);
-            System.out.println(iter.getFilename());
             if(iter.getFilename().equals(filePath)){
                 return nowList().indexOf(iter);
             }
@@ -121,7 +119,7 @@ public class MusicListManager {
         MusicList.listNum = 1;
         if(!isExist(music)) {
             MusicList.listNum = temp;
-            return favoriteMusicList.add(music);
+            return favoriteMusicList.add(music.clone());
         }
         else {
             MusicList.listNum = temp;
@@ -130,17 +128,17 @@ public class MusicListManager {
     }
 
     public boolean deleteToFavoriteMusicList(Music music) {
-        int temp = MusicList.listNum;
-        MusicList.listNum = 1;
         if(isExist(music)) {
-           MusicList.listNum = temp;
-            nowList().remove(music);
+            for(int i = 0 ; i < nowList().size() ; i++) {
+                if(nowList().get(i).getFilename().equals(music.getFilename())) {
+                    nowList().remove(i);
+                    break;
+                }
+            }
             return true;
         }
-        else {
-            MusicList.listNum = temp;
-            return false;
-        }
+        else return false;
+
     }
 
     public boolean isExist(Music music) {
@@ -151,7 +149,6 @@ public class MusicListManager {
     }
 
     public ArrayList<Music> nowList() {
-        System.out.println(MusicList.listNum);
         switch(MusicList.listNum) {
             case 0 :
                 return musicList;

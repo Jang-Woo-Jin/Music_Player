@@ -3,7 +3,6 @@ package Music;
 import FileIO.FileIO;
 import FileIO.FilePathParser;
 
-import com.googlecode.mp4parser.util.Path;
 import com.mpatric.mp3agic.*;
 
 import java.io.File;
@@ -26,6 +25,8 @@ public class Music extends Mp3File {
     private ID3v1 id3v1Tag;
     private ID3v2 id3v2Tag;
     private boolean isV1Tag = false, isV2Tag = false;
+
+    private String[] musicInfo;
 
     public Music(String musicFileName, String musicFileAddress, String[] infoInfo) throws UnsupportedTagException, InvalidDataException, IOException {
         super(musicFileAddress
@@ -51,6 +52,7 @@ public class Music extends Mp3File {
         }
         this.fileAddress = musicFileAddress;
         this.fileName = musicFileName;
+        this.musicInfo = infoInfo;
         setMusicInformation();
 
     }
@@ -62,16 +64,16 @@ public class Music extends Mp3File {
     	this.fileName = FilePathParser.getFileName(path);
     	this.fileAddress = FilePathParser.getPath(path);
     	ArrayList<String> informationString = FileIO.readTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME);
-        String[] information = new String[5];
+
 
         for (String iter : informationString) {
-            information = iter.split("/");
-            if (information[1].equals(fileName)) {
-            	 this.playCount = Integer.parseInt(information[0]);
-                 this.fileName = information[1];
-                 this.fileAddress = information[2];
-                 this.lyricsFileName = information[3];
-                 this.lyricsFileAddress = information[4];
+            musicInfo = iter.split("/");
+            if (musicInfo[1].equals(fileName)) {
+            	 this.playCount = Integer.parseInt(musicInfo[0]);
+                 this.fileName = musicInfo[1];
+                 this.fileAddress = musicInfo[2];
+                 this.lyricsFileName = musicInfo[3];
+                 this.lyricsFileAddress = musicInfo[4];
             	break;
             }
         }
@@ -123,4 +125,18 @@ public class Music extends Mp3File {
     public boolean getFavorite() { return this.favorite; }
 
     public void setFavorite() { this.favorite = !this.favorite; }
+
+    public Music clone() {
+        try {
+            return new Music(fileName, fileAddress, musicInfo);
+        } catch (UnsupportedTagException e) {
+            e.printStackTrace();
+        } catch (InvalidDataException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

@@ -11,6 +11,7 @@ public class Tab extends JPanel {
     private final JButton recentMusic = new JButton("최근 재생한 곡");
 
     private MusicList musicList;
+    private PlayerTab playerTab;
 
     public static int listNum = 0;
 
@@ -28,23 +29,38 @@ public class Tab extends JPanel {
 
     private void setActionListeners() {
         this.allMusic.addActionListener(e -> {
-            musicList.arrayListToListModel(MusicListManager.getInstance().getMusicList());
-            musicList.getPanel().updateUI();
             listNum = 0;
+            MusicList.listNum = 0;
+            tabClicked();
         });
 
         this.favoriteMusic.addActionListener(e -> {
-            musicList.arrayListToListModel(MusicListManager.getInstance().getFavoriteFileList());
-            musicList.getPanel().updateUI();
             listNum = 1;
+            MusicList.listNum = 1;
+            tabClicked();
         });
 
         this.recentMusic.addActionListener(e -> {
-            musicList.arrayListToListModel(MusicListManager.getInstance().getRecentPlayList());
-            musicList.getPanel().updateUI();
             listNum = 2;
+            MusicList.listNum = 2;
+            tabClicked();
         });
 
+    }
+
+    public void connectPanels(PlayerTab playerTab) {
+        this.playerTab = playerTab;
+    }
+
+    private void tabClicked() {
+        musicList.arrayListToListModel(MusicListManager.getInstance().nowList());
+        musicList.getPanel().updateUI();
+        playerTab.reset();
+        playerTab.updateUI();
+    }
+
+    public JButton getFavoriteButton() {
+        return this.favoriteMusic;
     }
 
 }
