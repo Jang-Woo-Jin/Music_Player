@@ -42,7 +42,9 @@ public class PlayerTab extends JPanel {
 	private JSlider volumeSlider;
 	private JSlider currentTimeSlider;
 
-	private JPanel buttonPanel = new JPanel(new GridLayout(2, 3, 30, 10));
+    private MusicList   listPanel;
+	private JPanel      buttonPanel = new JPanel(new GridLayout(2, 3, 30, 10));
+    private Tab         tabPanel;
 
 	public PlayerTab() {
 
@@ -69,9 +71,6 @@ public class PlayerTab extends JPanel {
         this.add(fxPanel);
         this.setVisible(true);
     }
-	private void initPlayTab(){
-		
-	}
 	
 	private void initFX(JFXPanel fxPanel) {
 		Scene scene = initScene();
@@ -114,8 +113,9 @@ public class PlayerTab extends JPanel {
                     playButton.setText("||");
                 }
                 MusicListManager.getInstance().addToRecentPlayList(CurrentMusic.getInstance().toMusic());
-            } else {
-                CurrentMusic.getInstance().pause();
+            }
+            else {
+                CurrentMusic.getInstance().stop();
                 reset();
             }
         });
@@ -201,22 +201,18 @@ public class PlayerTab extends JPanel {
 
 	private void addStarButton() {
         //TODO
-        starButton = new JButton("★");
-
+        starButton = new JButton("☆");
         starButton.addActionListener(e -> {
             Music temp = CurrentMusic.getInstance().toMusic();
-            if(!temp.getFavorite()) {
-               if(MusicListManager.getInstance().addToFavoriteMusicList(temp))
-                    temp.setFavorite();
-                    starButton.setText("☆");
+            if(MusicList.listNum != 1) {
+                MusicListManager.getInstance().addToFavoriteMusicList(temp);
 
             }
             else {
-                if(MusicListManager.getInstance().deleteToFavoriteMusicList(temp))
-                    reset();
+                MusicListManager.getInstance().deleteToFavoriteMusicList(temp);
+                tabPanel.getFavoriteButton().doClick();
             }
         });
-
         buttonPanel.add(starButton);
     }
 	
@@ -228,16 +224,18 @@ public class PlayerTab extends JPanel {
 					+ "/Desktop/" + "defaultImage.jpg"));
 			}
 			musicImage = musicImage.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
+
 			musicImageLabel = new JLabel(new ImageIcon(musicImage));
+
 			musicInfoPanel = new JPanel();
 			musicInfoPanel.setLayout(new BorderLayout());
 			musicInfoPanel.add(musicImageLabel,BorderLayout.CENTER);
 
 			musicName = new JLabel();
-
 			musicName.setText("Ready");
 			musicName.setBackground(Color.darkGray);
 			musicName.setOpaque(true);
+
 			musicInfoPanel.setSize(30, 30);
 			musicInfoPanel.add(musicName,BorderLayout.SOUTH);
 
@@ -281,4 +279,18 @@ public class PlayerTab extends JPanel {
 			playButton.setText("▶");
 		}
     }
+    public void connectPanels(MusicList listPanel, Tab tabPanel) {
+        this.listPanel = listPanel;
+        this.tabPanel = tabPanel;
+    }
+
+    public void setPlay() {
+        this.playButton.setText("| |");
+        this.updateUI();
+    }
+    public void resetPlay() {
+        this.playButton.setText("▶");
+        this.updateUI();
+    }
+
 }
