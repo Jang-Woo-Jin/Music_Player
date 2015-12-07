@@ -103,7 +103,10 @@ public class MusicListManager {
     }
 
     public boolean addToRecentPlayList(Music music) {
-        if (recentPlayList.contains(music)) recentPlayList.remove(music);
+        int temp = MusicList.listNum;
+        MusicList.listNum = 2;
+        if (isExist(music)) recentPlayList.remove(find(music.getFilename()));
+        MusicList.listNum = temp;
         return recentPlayList.add(music);
     }
 

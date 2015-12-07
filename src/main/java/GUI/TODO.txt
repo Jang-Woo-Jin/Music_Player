@@ -1,7 +1,3 @@
-    1. - 자동으로 다음곡 재생 -------
-              - all
-              - all/repeat - default
-              - one
     2. - 가사 띄우기 ( 영은이 파트 Merge 필요 )
     3. - 알람       ( 효민이 파트 적용 )
     4. - Progress Bar
