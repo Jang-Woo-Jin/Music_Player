@@ -15,7 +15,6 @@ public class AutomaticShutdown extends Thread {
     public void run() {
         try {
             Thread.sleep(ringring);
-            a.setVisible(false);
             System.exit(0);
         } catch (InterruptedException e) {
             e.printStackTrace();

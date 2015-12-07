@@ -40,7 +40,7 @@ public class ShutdownFrame extends JFrame{
 		this.add(textLabel);
 	}
 	private void addSelectTimeComboBox(){
-		selectTimeComboBox = new JComboBox<String>(new String[]{"  ","5","10","15","30","45","60","90","120"});
+		selectTimeComboBox = new JComboBox<String>(new String[]{"1","5","10","15","30","45","60","90","120"});
 		selectTimeComboBox.setBounds(40, 55, 60, 30);
 		selectTimeLabel = new JLabel("분");
 		selectTimeLabel.setBounds(110, 50, 60, 40);
