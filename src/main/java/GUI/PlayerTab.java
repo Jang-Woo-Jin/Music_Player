@@ -201,7 +201,7 @@ public class PlayerTab extends JPanel {
 
 	private void addStarButton() {
         //TODO
-        starButton = new JButton("☆");
+        starButton = new JButton("★");
         starButton.addActionListener(e -> {
             Music temp = CurrentMusic.getInstance().toMusic();
             if(MusicList.listNum != 1) {
@@ -268,9 +268,6 @@ public class PlayerTab extends JPanel {
 		playButton.doClick();
 	}
 
-	public void doStar() {
-		starButton.doClick();
-	}
     public void reset() {
         starButton.setText("★");
         try{
@@ -282,15 +279,6 @@ public class PlayerTab extends JPanel {
     public void connectPanels(MusicList listPanel, Tab tabPanel) {
         this.listPanel = listPanel;
         this.tabPanel = tabPanel;
-    }
-
-    public void setPlay() {
-        this.playButton.setText("| |");
-        this.updateUI();
-    }
-    public void resetPlay() {
-        this.playButton.setText("▶");
-        this.updateUI();
     }
 
 }

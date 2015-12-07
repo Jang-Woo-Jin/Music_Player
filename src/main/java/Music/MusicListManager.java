@@ -88,7 +88,7 @@ public class MusicListManager {
     public int findIndex(String filePath){
 
         for(Music iter : nowList()){
-            if(iter.getFilename().equals(filePath)){
+            if(iter.getFilename().replaceAll("[+]", " ").equals(filePath)){
                 return nowList().indexOf(iter);
             }
         }
@@ -102,12 +102,6 @@ public class MusicListManager {
     public ArrayList<Music> getMusicList() {
         return musicList;
     }
-
-    public ArrayList<Music> getFavoriteFileList() {
-        return favoriteMusicList;
-    }
-
-    public ArrayList<Music> getRecentPlayList() { return recentPlayList; }
 
     public boolean addToRecentPlayList(Music music) {
         if (recentPlayList.contains(music)) recentPlayList.remove(music);
