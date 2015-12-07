@@ -10,6 +10,7 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import org.omg.CORBA.Current;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -108,8 +109,7 @@ public class PlayerTab extends JPanel {
 		}catch(IOException e){
 			playButton.setText("▶");
 		}
-    
-        
+
         playButton.addActionListener(e -> {
             CurrentMusic currentMusic = CurrentMusic.getInstance();
             if (currentMusic.isPlayable()) {
@@ -183,8 +183,24 @@ public class PlayerTab extends JPanel {
         }catch(Exception e){playModeButton.setText("All");}
 
         playModeButton.addActionListener(e -> {
-            CurrentMusic currentMusic = CurrentMusic.getInstance();
-            //TODO
+            if (CurrentMusic.playMode == 0) {
+                CurrentMusic.playMode++;
+                try{
+                    addButtonImage(playModeButton, "loop.png");
+                }catch(Exception e1){playModeButton.setText("A/NR");}
+            }
+            else if (CurrentMusic.playMode == 1) {
+                CurrentMusic.playMode++;
+                try{
+                    addButtonImage(playModeButton, "loop.png");
+                }catch(Exception e2){playModeButton.setText("O/R");}
+            }
+            else {
+                CurrentMusic.playMode = 0;
+                try{
+                    addButtonImage(playModeButton, "loop.png");
+                }catch(Exception e3){playModeButton.setText("A/R");}
+            }
         });
         buttonPanel.add(playModeButton);
     }

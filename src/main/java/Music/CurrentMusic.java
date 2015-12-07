@@ -12,6 +12,7 @@ import java.util.Optional;
 
 public class CurrentMusic {
     private static CurrentMusic uniqueInstance;
+    public static int playMode = 0;
     private Optional<MediaPlayer> mediaPlayerOptional;
     private PlayerTab playerTab;
     private Music thisMusic;
@@ -53,11 +54,21 @@ public class CurrentMusic {
             public void run() {
                 Media media = mediaPlayerOptional.get().getMedia();
                 int i = MusicListManager.getInstance().findIndex(FilePathParser.parseSeparator(media.getSource()));
-                if(i == MusicListManager.getInstance().nowList().size() - 1) i = 0;
-                else i++;
-                playerTab.doStop();
-                setMedia(MusicListManager.getInstance().at(i).getFilename());
-                playerTab.doPlay();
+
+                switch(playMode) {
+                    case 0:
+                        if (i == MusicListManager.getInstance().nowList().size() - 1) i = 0;
+                        else i++;
+                        break;
+                    case 1:
+                        if (!(i > MusicListManager.getInstance().nowList().size() - 1)) i++;
+                        break;
+                    case 2:
+                        break;
+                }
+                    playerTab.doStop();
+                    setMedia(MusicListManager.getInstance().at(i).getFilename());
+                    playerTab.doPlay();
             }
         });
 
