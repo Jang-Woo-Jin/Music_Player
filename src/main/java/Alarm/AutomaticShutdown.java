@@ -6,9 +6,6 @@ import java.util.Calendar;
 import javax.swing.JFrame;
 
 public class AutomaticShutdown extends Thread {
-
-
-	JFrame a;
     private long ringring;
     
     @Override
