@@ -2,6 +2,8 @@ package GUI;
 
 import FileIO.FilePathParser;
 import Music.CurrentMusic;
+import Music.Lyric_Parser;
+import Music.Lyric_Repeat;
 import Music.Music;
 import Music.MusicListManager;
 import javafx.application.Platform;
@@ -43,6 +45,8 @@ public class PlayerTab extends JPanel {
 	private JSlider volumeSlider;
 	private JSlider currentTimeSlider;
 
+	public static JLabel text;
+	
     private MusicList   listPanel;
 	private JPanel      buttonPanel = new JPanel(new GridLayout(2, 3, 30, 10));
     private Tab         tabPanel;
@@ -66,6 +70,9 @@ public class PlayerTab extends JPanel {
         buttonPanel.setBackground(Color.black);
         this.add(buttonPanel);
 
+        //TODO!!!!!
+        addLyric();
+        
         Platform.runLater(() -> initFX(fxPanel));
         fxPanel.setSize(0, 0);
 
@@ -249,6 +256,7 @@ public class PlayerTab extends JPanel {
 
 			musicName = new JLabel();
 			musicName.setText("Ready");
+			musicName.setForeground(Color.WHITE);
 			musicName.setBackground(Color.darkGray);
 			musicName.setOpaque(true);
 
@@ -297,4 +305,26 @@ public class PlayerTab extends JPanel {
         this.tabPanel = tabPanel;
     }
 
+    public void setPlay() {
+        this.playButton.setText("| |");
+        this.updateUI();
+    }
+    public void resetPlay() {
+        this.playButton.setText("▶");
+        this.updateUI();
+    }
+    public void addLyric(){
+    	Lyric_Repeat rp = new Lyric_Repeat();
+  
+    	text = new JLabel();
+		
+		text.setOpaque(true);
+		text.setBackground(Color.BLACK);
+		text.setForeground(Color.WHITE);
+		text.setSize(30, 30);
+		add(text);
+
+    	
+    	//buttonPanel.add(text1);
+    }
 }
