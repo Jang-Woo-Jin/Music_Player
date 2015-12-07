@@ -1,10 +1,12 @@
 package GUI;
 
+import Alarm.AlarmSystem;
 import FileIO.FileIO;
 import Music.CurrentMusic;
 import sun.util.resources.cldr.da.CurrencyNames_da;
 
 import javax.swing.*;
+
 import java.awt.*;
 
 public class Main {
@@ -19,8 +21,8 @@ public class Main {
     private void init() {
         PlayerTab playerPanel = new PlayerTab();
         MusicList gui_musicList = new MusicList(playerPanel);
+        AlarmSystem gui_alarmSystem = new AlarmSystem();
         JPanel tabPanel = new Tab().createTab(gui_musicList);
-
 
         JPanel listPanel = gui_musicList.getPanel();
 
@@ -34,6 +36,7 @@ public class Main {
         this.mainFrame.add(playerPanel, BorderLayout.EAST);
 
         this.mainFrame.setJMenuBar(new Toolbar(gui_musicList));
+        this.mainFrame.getJMenuBar().add(new Toolbar(gui_alarmSystem));
         this.mainFrame.setVisible(true);
     }
 }
