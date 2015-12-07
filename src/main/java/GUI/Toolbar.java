@@ -19,21 +19,12 @@ public class Toolbar extends JMenuBar {
     private final JMenuItem setAlarmMenuItem = new JMenuItem("Set");
     private MusicList musicList;
     private AlarmSystem alarmSystem;
+    
     public Toolbar(MusicList musicList) {
         onCreate(musicList);
     }
     public Toolbar(AlarmSystem alarmSystem){
     	onCreate(alarmSystem);
-    	this.alarmSystem = alarmSystem;
-    	
-        //add menu items to menus
-        alarmMenu.add(setAlarmMenuItem);
-
-        //add menu to this
-        this.add(alarmMenu);
-
-        //add this to the frame
-        this.setVisible(true);
     }
     private void onCreate(MusicList musicList) {
 
@@ -81,7 +72,24 @@ public class Toolbar extends JMenuBar {
     }
 
     private void onCreate(AlarmSystem alarmSystem){
-    	 setMenuItem.setMnemonic(KeyEvent.VK_N);
-         setMenuItem.setActionCommand("Set");
+    	this.alarmSystem = alarmSystem;
+    	
+    	setAlarmMenuItem.setMnemonic(KeyEvent.VK_N);
+        setAlarmMenuItem.setActionCommand("Set");
+        
+        //add menu items to menus
+        alarmMenu.add(setAlarmMenuItem);
+        
+        //add menu to this
+        this.add(alarmMenu);
+        
+        //add this to the frame
+        this.setVisible(true);
+        
+        setAlarmMenuItem.addActionListener(e -> {
+            AlarmFrame alarmFrame = new AlarmFrame("AlarmSetting Window");
+            
+            
+        });
     }
 }

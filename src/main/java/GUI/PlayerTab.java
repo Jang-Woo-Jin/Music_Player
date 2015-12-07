@@ -142,7 +142,7 @@ public class PlayerTab extends JPanel {
         try{
         	addButtonImage(seekPreviousButton, "seek-Previous.png");
 		
-        }catch(IOException e){e.printStackTrace();}
+        }catch(IOException e){seekPreviousButton.setText("<<");}
         
         seekPreviousButton.addActionListener(e -> {
             CurrentMusic currentMusic = CurrentMusic.getInstance();
@@ -157,7 +157,7 @@ public class PlayerTab extends JPanel {
         stopButton = new JButton();
         try{
         	addButtonImage(stopButton, "stop.png");
-		}catch(IOException e){e.printStackTrace();}
+		}catch(IOException e){stopButton.setText("■");}
         
         stopButton.addActionListener(e -> {
             CurrentMusic currentMusic = CurrentMusic.getInstance();
