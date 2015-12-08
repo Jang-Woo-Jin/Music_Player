@@ -35,7 +35,6 @@ public class Music extends Mp3File {	// extends MP3File - it is in Mp3agic libra
                 + musicFileName
                 + ".mp3");	// make an object
         favorite = false;	// default setting - favorite is false
-        
         if (infoInfo != null) {	// when information exist
             if (infoInfo[0] == null) infoInfo[0] = "0";
             this.playCount = Integer.parseInt(infoInfo[0]);

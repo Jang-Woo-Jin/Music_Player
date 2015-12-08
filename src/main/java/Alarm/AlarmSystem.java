@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-public class AlarmSystem extends Thread {
+public class AlarmSystem extends Thread {	// alarm with thread to run under main program
 
     private long ringring;
     private final JFrame alarmMessageFrame;
@@ -23,7 +23,7 @@ public class AlarmSystem extends Thread {
     }
     
     @Override
-    public void run() {
+    public void run() {	// to run
 
         try {
             if (ringring < 0)
@@ -37,7 +37,7 @@ public class AlarmSystem extends Thread {
         }
     }
 
-    public void setAlarm(String ampm, String hour, String min) {
+    public void setAlarm(String ampm, String hour, String min) {	// set alarm with ampm, hour, time
 
         int setHour = Integer.parseInt(hour);
         int setMin = Integer.parseInt(min);

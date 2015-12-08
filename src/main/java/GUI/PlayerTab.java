@@ -86,9 +86,7 @@ public class PlayerTab extends JPanel {
     }
                                                                                                             //add whole Buttons
     private void addButtonImage(JButton button, String imageFileName) throws IOException {
-
-        Image buttonImage = ImageIO.read(new File(System.getProperty("user.home")
-                + "/Desktop/" + imageFileName));
+        Image buttonImage = ImageIO.read(new File("./"+ imageFileName));
         buttonImage = buttonImage.getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         button.setIcon(new ImageIcon(buttonImage));
 
@@ -262,8 +260,7 @@ public class PlayerTab extends JPanel {
 
         try {
             if (musicImage == null) {
-                musicImage = ImageIO.read(new File(System.getProperty("user.home")
-                        + "/Desktop/" + "defaultImage.jpg"));
+                musicImage = ImageIO.read(new File("./"+ "defaultImage.jpg"));
             }
             musicImage = musicImage.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
 

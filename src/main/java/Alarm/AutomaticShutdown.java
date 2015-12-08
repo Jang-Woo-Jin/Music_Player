@@ -25,7 +25,7 @@ public class AutomaticShutdown extends Thread {	// automatic shutdown with threa
     
     @Override
     public void run() { // to run
-    	flag = false;
+    	this.flag = false;
         try {
             Thread.sleep(ringring);
             System.exit(0);
@@ -39,7 +39,7 @@ public class AutomaticShutdown extends Thread {	// automatic shutdown with threa
 
         int setTime = Integer.parseInt(time);
 
-        ringring = setTime * 1000 * 60;
+        this.ringring = setTime * 1000 * 60;
     }
     
     public boolean getStatus(){
