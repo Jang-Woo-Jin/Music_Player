@@ -35,7 +35,7 @@ public class MusicListManager {
     }
 
     private String[] getMusicInfoFile(final String fileName, final String fileAddress) {
-        ArrayList<String> informationString = FileIO.readTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME);
+        ArrayList<String> informationString = FileIO.readTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME, ".txt");
         String[] information = new String[5];
 
         assert informationString != null;
