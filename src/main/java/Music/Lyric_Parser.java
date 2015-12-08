@@ -21,8 +21,10 @@ public class Lyric_Parser {
     }
 
     private void splitLrc() {
-    	ArrayList<String> b = FileIO.readTextFile(System.getProperty("user.home") + "/Desktop/"+"music-info",
-                CurrentMusic.getInstance().toMusic().getFilename(), ".lrc");
+    	if(CurrentMusic.getInstance().toMusic() == null) return ;
+    	System.out.println(CurrentMusic.getInstance().toMusic().getFilename().replace(".mp3", ".lrc"));
+    	ArrayList<String> b = FileIO.readTextFile("",
+                CurrentMusic.getInstance().toMusic().getFilename().replace(".mp3", ".lrc"), "");
         
         for (int i = 0; i < b.size(); i++) {
         	index = b.get(i).split("]");

@@ -19,7 +19,7 @@ public class Lyric_Repeat extends Thread {
         while (true) {  
             Lyric_Parser b = new Lyric_Parser();
             Lyric c = new Lyric(b.getTime(), b.getLrc());
-
+            if(b == null) continue;
             try {
                 sleep(10);
             } catch (InterruptedException e) {

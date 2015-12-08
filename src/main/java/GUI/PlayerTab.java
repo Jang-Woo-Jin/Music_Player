@@ -313,16 +313,18 @@ public class PlayerTab extends JPanel {
         this.tabPanel = tabPanel;
     }
 
-    private void addLyric() {
-        text = new JLabel();
+    public void addLyric(){
+    	Lyric_Repeat rp = new Lyric_Repeat();
+  
+    	text = new JLabel();
+		
+		text.setOpaque(true);
+		text.setBackground(Color.BLACK);
+		text.setForeground(Color.WHITE);
+		text.setSize(30, 30);
+		add(text);
 
-        text.setOpaque(true);
-        text.setBackground(Color.BLACK);
-        text.setForeground(Color.WHITE);
-        text.setSize(30, 30);
-        add(text);
-        new Lyric_Repeat();
-
-        //buttonPanel.add(text1);
+    	
+    	//buttonPanel.add(text1);
     }
 }
