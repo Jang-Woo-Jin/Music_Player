@@ -7,6 +7,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.util.Duration;
 
+import javax.swing.*;
 import java.io.File;
 import java.util.Optional;
 
@@ -93,6 +94,7 @@ public class CurrentMusic {
     public boolean setVolume(float volume) {
         if (volume >= 0.0 && volume <= 1.0) {
             mediaPlayerOptional.ifPresent(mediaPlayer -> setVolume(volume));
+
             return true;
         }
         return false;
