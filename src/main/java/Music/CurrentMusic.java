@@ -95,12 +95,10 @@ public class CurrentMusic {
 
     public boolean setVolume(float volume) {
         if (volume >= 0.0 && volume <= 1.0) {
-            mediaPlayerOptional.ifPresent(mediaPlayer -> setVolume(volume));
-
+            mediaPlayerOptional.ifPresent(mediaPlayer -> mediaPlayer.setVolume(volume));
             return true;
         }
         return false;
-
     }
 
     public boolean setMedia(String filePath) {
