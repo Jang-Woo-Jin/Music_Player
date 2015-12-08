@@ -1,15 +1,8 @@
 package FileIO;
 
 import java.io.File;
-<<<<<<< Updated upstream
 import java.net.URI;
 import java.net.URISyntaxException;
-=======
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URLDecoder;
->>>>>>> Stashed changes
 import java.nio.file.Paths;
 
 public class FilePathParser {

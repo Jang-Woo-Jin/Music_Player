@@ -7,16 +7,17 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.util.Duration;
 
-import javax.swing.*;
 import java.io.File;
 import java.util.Optional;
+import java.util.function.Function;
 
 public class CurrentMusic {
-    private static CurrentMusic uniqueInstance;
     public static int playMode = 0;
+    private static CurrentMusic uniqueInstance;
     private Optional<MediaPlayer> mediaPlayerOptional;
     private PlayerTab playerTab;
     private Music thisMusic;
+
     private CurrentMusic() {
         this.mediaPlayerOptional = Optional.empty();
 
@@ -45,10 +46,10 @@ public class CurrentMusic {
     }
 
     public void play() {
-    	
+
         mediaPlayerOptional.ifPresent(mediaPlayer -> {
             if (isPlayable()) {
-            	mediaPlayer.play();
+                mediaPlayer.play();
                 MusicListManager.getInstance().addToRecentPlayList(this.toMusic());
             }
         });
@@ -56,7 +57,7 @@ public class CurrentMusic {
             Media media = mediaPlayerOptional.get().getMedia();
             int i = MusicListManager.getInstance().findIndex(FilePathParser.parseSeparator(media.getSource()));
 
-            switch(playMode) {
+            switch (playMode) {
                 case 0:
                     if (i == MusicListManager.getInstance().nowList().size() - 1) i = 0;
                     else i++;
@@ -67,11 +68,11 @@ public class CurrentMusic {
                 case 2:
                     break;
             }
-                playerTab.doStop();
-                setMedia(MusicListManager.getInstance().at(i).getFilename());
-                playerTab.doPlay();
+            playerTab.doStop();
+            setMedia(MusicListManager.getInstance().at(i).getFilename());
+            playerTab.doPlay();
         });
-        
+
     }
 
     public void pause() {
@@ -127,16 +128,22 @@ public class CurrentMusic {
         seek(-10);
     }
 
+    public void seek(float percent) {
+        if (percent >= 0 && percent <= 1 && mediaPlayerOptional.isPresent()) {
+            MediaPlayer mediaPlayer = mediaPlayerOptional.get();
+            mediaPlayer.seek(mediaPlayer.getCurrentTime().multiply(percent));
+        }
+    }
+
     public Music toMusic() {
-    	try{
-    		String filePath = mediaPlayerOptional.get().getMedia().getSource();
-    		filePath = FilePathParser.parseSeparator(filePath);
-    		thisMusic = MusicListManager.getInstance().find(filePath);
-    		System.out.println(filePath);
-    		return thisMusic;
-    	}
-    	catch (Exception e1)
-    	{ return null; }
+        try {
+            String filePath = mediaPlayerOptional.get().getMedia().getSource();
+            filePath = FilePathParser.parseSeparator(filePath);
+            thisMusic = MusicListManager.getInstance().find(filePath);
+            return thisMusic;
+        } catch (Exception e1) {
+            return null;
+        }
     }
 
     public Status getStatus() {
@@ -145,5 +152,11 @@ public class CurrentMusic {
 
     public void setPlayerTab(PlayerTab playerTab) {
         this.playerTab = playerTab;
+    }
+
+    public <T, R> void addChangeTimeEvent(T t, Function<T, R> func) {
+        mediaPlayerOptional.ifPresent(mediaPlayer -> mediaPlayer.currentTimeProperty().addListener(observable -> {
+            func.apply(t);
+        }));
     }
 }

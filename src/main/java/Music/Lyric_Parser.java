@@ -2,7 +2,6 @@ package Music;
 
 import FileIO.FileIO;
 
-import java.io.FileInputStream;
 import java.util.ArrayList;
 
 public class Lyric_Parser {
@@ -21,13 +20,12 @@ public class Lyric_Parser {
     }
 
     private void splitLrc() {
-    	if(CurrentMusic.getInstance().toMusic() == null) return ;
-    	System.out.println(CurrentMusic.getInstance().toMusic().getFilename().replace(".mp3", ".lrc"));
-    	ArrayList<String> b = FileIO.readTextFile("",
+        if (CurrentMusic.getInstance().toMusic() == null) return;
+        ArrayList<String> b = FileIO.readTextFile("",
                 CurrentMusic.getInstance().toMusic().getFilename().replace(".mp3", ".lrc"), "");
-        
+
         for (int i = 0; i < b.size(); i++) {
-        	index = b.get(i).split("]");
+            index = b.get(i).split("]");
             lrcTime[i] = index[0];
             lrcTime[i] = lrcTime[i].replaceAll("\\[", "");
             try {
@@ -43,6 +41,7 @@ public class Lyric_Parser {
                     + (lrcTime[i].charAt(7) - 48);
         }
     }
+
     public String[] getLrc() {
         return lrc;
     }

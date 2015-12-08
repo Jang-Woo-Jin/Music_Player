@@ -7,9 +7,11 @@ import Music.Music;
 import Music.MusicListManager;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.media.Media;
+import javafx.util.Duration;
 import org.omg.CORBA.Current;
 
 import javax.imageio.ImageIO;
@@ -18,6 +20,7 @@ import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 public class PlayerTab extends JPanel {
 
@@ -225,8 +228,13 @@ public class PlayerTab extends JPanel {
         // TODO
         // horizontal plz
         currentTimeSlider = new JSlider();
-        currentTimeSlider.setEnabled(false);
+        currentTimeSlider.setEnabled(true);
+        CurrentMusic currentMusic = CurrentMusic.getInstance();
 
+        currentTimeSlider.addChangeListener(evt -> {
+            float percent = (currentTimeSlider.getValue() - currentTimeSlider.getMinimum()) / (currentTimeSlider.getMaximum() - currentTimeSlider.getMinimum());
+            currentMusic.seek(percent);
+        });
         this.add(currentTimeSlider);
     }
 
