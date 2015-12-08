@@ -27,9 +27,8 @@ class ShutdownFrame extends JFrame{
         	String selectMinute = (String)selectTimeComboBox.getSelectedItem();
             selectMinute = selectMinute.trim();
            
-        	AutomaticShutdown automaticShutdown = new AutomaticShutdown();
-        	automaticShutdown.setShutdown(selectMinute);
-        	automaticShutdown.start();
+        	AutomaticShutdown.getInstance().setShutdown(selectMinute);
+        	AutomaticShutdown.getInstance().start();
         });
 		this.setVisible(true);
 	}
