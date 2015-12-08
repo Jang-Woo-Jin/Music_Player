@@ -1,8 +1,15 @@
 package FileIO;
 
 import java.io.File;
+<<<<<<< Updated upstream
 import java.net.URI;
 import java.net.URISyntaxException;
+=======
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLDecoder;
+>>>>>>> Stashed changes
 import java.nio.file.Paths;
 
 public class FilePathParser {
@@ -15,7 +22,7 @@ public class FilePathParser {
         return fileStr.substring(fileStr.lastIndexOf(File.separatorChar) + 1, fileStr.lastIndexOf("."));
     }
 
-    public static String parseSeparator(String filePath) {
+    public static String parseSeparator(String filePath){
         String path = null;
         try {
             path = Paths.get(new URI(filePath)).toAbsolutePath().toString();
