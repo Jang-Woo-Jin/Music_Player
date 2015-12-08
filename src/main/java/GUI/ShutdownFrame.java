@@ -28,7 +28,8 @@ class ShutdownFrame extends JFrame{
             selectMinute = selectMinute.trim();
            
         	AutomaticShutdown.getInstance().setShutdown(selectMinute);
-        	AutomaticShutdown.getInstance().start();
+        	if(AutomaticShutdown.getInstance().getStatus())
+        		AutomaticShutdown.getInstance().start();
         });
 		this.setVisible(true);
 	}
