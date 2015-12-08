@@ -1,6 +1,5 @@
 package GUI;
 
-import Alarm.AlarmSystem;
 import Music.MusicListManager;
 import OS.RecursiveFinder;
 
@@ -11,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 class Toolbar extends JMenuBar {
+    /* These Menus are create into ToolBar */
     private final JMenu fileMenu = new JMenu("File Path");
     private final JMenuItem setMenuItem = new JMenuItem("Set");
 
@@ -20,13 +20,17 @@ class Toolbar extends JMenuBar {
     private final JMenu automaticShutdownMenu = new JMenu("Automatic Shutdown");
     private final JMenuItem setAutomaticShutdownMenuItem = new JMenuItem("Set");
 
+    /* Constructor */
     public Toolbar(MusicList musicList) {
         onCreate(musicList);
     }
+
+    /* Constructor */
     public Toolbar(){
     	onAlarmToolBarCreate();
     	onAutomaticShutdownToolBarCreate();
     }
+
     private void onCreate(MusicList musicList) {
 
         //connect musicList
@@ -70,7 +74,7 @@ class Toolbar extends JMenuBar {
             }
         });
     }
-
+    /* Alarm Tools */
     private void onAlarmToolBarCreate(){
     	
     	setAlarmMenuItem.setMnemonic(KeyEvent.VK_N);
@@ -85,12 +89,9 @@ class Toolbar extends JMenuBar {
         //add this to the frame
         this.setVisible(true);
         
-        setAlarmMenuItem.addActionListener(e -> {
-            AlarmFrame alarmFrame = new AlarmFrame();
-             
-        });
+        setAlarmMenuItem.addActionListener(e -> new AlarmFrame());
     }
-    
+    /* Alarm Tools */
     private void onAutomaticShutdownToolBarCreate(){
     	
     	setAutomaticShutdownMenuItem.setMnemonic(KeyEvent.VK_N);
@@ -106,7 +107,7 @@ class Toolbar extends JMenuBar {
         this.setVisible(true);
         
         setAutomaticShutdownMenuItem.addActionListener(e -> {
-            ShutdownFrame shutdownFrame = new ShutdownFrame();
+            new ShutdownFrame();
         });
     }
 }

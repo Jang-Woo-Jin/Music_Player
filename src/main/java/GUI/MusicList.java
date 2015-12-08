@@ -14,10 +14,10 @@ import java.util.ArrayList;
 
 public class MusicList {
 
-    private final JPanel musicListPanel = new JPanel(new BorderLayout());
-    private final JList<Music> musicList;
+    private final JPanel musicListPanel = new JPanel(new BorderLayout());           // Panel
+    private final JList<Music> musicList;                                           // Store Music List
     private DefaultListModel<Music> listModel = new DefaultListModel<>();
-    public static int listNum = 0;
+    public static int listNum = 0;                                                  // Static Variable ; that can recognize list that you are playing now
 
     public MusicList(PlayerTab playerTab) {
     	musicList = new JList<>(listModel);
@@ -25,11 +25,10 @@ public class MusicList {
 
         musicList.setVisible(true);
 
-
         // Action Listeners Below
 
         musicList.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent evt) {
+            public void mouseClicked(MouseEvent evt) {                                          // Play when double clicked
                 if (evt.getClickCount() == 2) {
                     JList<Music> list = (JList<Music>) evt.getSource();
                     playerTab.doStop();
@@ -41,7 +40,7 @@ public class MusicList {
             }
         });
 
-    }
+    }                                     // Constructor ; connect panels and actionListeners
 
 
     //Functions
@@ -51,7 +50,7 @@ public class MusicList {
             musicListPanel.setVisible(true);
         }
         return musicListPanel;
-    }
+    }                                                  // can give Music List Panel
 
     public void arrayListToListModel(ArrayList<Music> list) {
         listModel = new DefaultListModel<>();
@@ -60,7 +59,7 @@ public class MusicList {
         }
         musicList.setModel(listModel);
         musicList.setSelectedIndex(0);
-    }
+    }                   // can apply input Array List to List Model
 
 }
 
