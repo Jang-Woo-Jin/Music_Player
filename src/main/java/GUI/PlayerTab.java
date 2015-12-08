@@ -172,7 +172,7 @@ public class PlayerTab extends JPanel {
     private void addPlayModeButton() {
         playModeButton = new JButton();
         try {
-            addButtonImage(playModeButton, "loop.png");
+        	addButtonImage(playModeButton,"loop");
         } catch (Exception e) {
             playModeButton.setText("A/R");
         }
@@ -180,25 +180,16 @@ public class PlayerTab extends JPanel {
         playModeButton.addActionListener(e -> {
             if (CurrentMusic.playMode == 0) {
                 CurrentMusic.playMode++;
-                try {
-                    addButtonImage(playModeButton, "loop.png");
-                } catch (Exception e1) {
-                    playModeButton.setText("A/N");
-                }
+                playModeButton.setText("A/N");
+                
             } else if (CurrentMusic.playMode == 1) {
                 CurrentMusic.playMode++;
-                try {
-                    addButtonImage(playModeButton, "loop.png");
-                } catch (Exception e2) {
-                    playModeButton.setText("O/R");
-                }
+                playModeButton.setText("O/R");
+                
             } else {
                 CurrentMusic.playMode = 0;
-                try {
-                    addButtonImage(playModeButton, "loop.png");
-                } catch (Exception e3) {
-                    playModeButton.setText("A/R");
-                }
+                playModeButton.setText("A/R");
+                
             }
         });
         buttonPanel.add(playModeButton);
