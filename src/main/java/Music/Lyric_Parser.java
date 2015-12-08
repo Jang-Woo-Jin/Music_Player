@@ -21,8 +21,6 @@ class Lyric_Parser {
 
     private void splitLrc() {
         ArrayList<String> b = FileIO.readTextFile("C:", "test");
-
-
         for (int i = 0; i < b.size(); i++) {
         	index = b.get(i).split("]");
             lrcTime[i] = index[0];
@@ -39,7 +37,6 @@ class Lyric_Parser {
             time[i][2] = (lrcTime[i].charAt(6) - 48) * 10
                     + (lrcTime[i].charAt(7) - 48);
         }
-
     }
     public String[] getLrc() {
         return lrc;
