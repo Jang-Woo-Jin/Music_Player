@@ -4,6 +4,8 @@ import javax.swing.*;
 
 /**
  * Created by Elliad on 2015-12-08.
+ * This Class can make new Frame
+ * When Error Detected.
  */
 public class ErrorDetector {
     public ErrorDetector() {

@@ -85,10 +85,7 @@ class Toolbar extends JMenuBar {
         //add this to the frame
         this.setVisible(true);
         
-        setAlarmMenuItem.addActionListener(e -> {
-            AlarmFrame alarmFrame = new AlarmFrame();
-             
-        });
+        setAlarmMenuItem.addActionListener(e -> new AlarmFrame());
     }
     
     private void onAutomaticShutdownToolBarCreate(){
@@ -106,7 +103,7 @@ class Toolbar extends JMenuBar {
         this.setVisible(true);
         
         setAutomaticShutdownMenuItem.addActionListener(e -> {
-            ShutdownFrame shutdownFrame = new ShutdownFrame();
+            new ShutdownFrame();
         });
     }
 }

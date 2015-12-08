@@ -7,12 +7,8 @@ import Music.Music;
 import Music.MusicListManager;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.media.Media;
-import javafx.util.Duration;
-import org.omg.CORBA.Current;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -20,17 +16,16 @@ import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.Optional;
 
 public class PlayerTab extends JPanel {
 
+    public static JLabel text;
     private final JFXPanel fxPanel = new JFXPanel();
-
+    private final JPanel buttonPanel = new JPanel(new GridLayout(2, 3, 30, 10));
     private JPanel musicInfoPanel;
     private JLabel musicName;
     private Image musicImage;
     private JLabel musicImageLabel;
-
     private JButton playButton;
     private JButton seekNextButton;
     private JButton seekPreviousButton;
@@ -41,10 +36,6 @@ public class PlayerTab extends JPanel {
     private JButton starButton; // for favorite
     private JSlider volumeSlider;
     private JSlider currentTimeSlider;
-
-    public static JLabel text;
-
-    private final JPanel buttonPanel = new JPanel(new GridLayout(2, 3, 30, 10));
     private Tab tabPanel;
 
     public PlayerTab() {
@@ -321,18 +312,16 @@ public class PlayerTab extends JPanel {
         this.tabPanel = tabPanel;
     }
 
-    public void addLyric(){
-    	Lyric_Repeat rp = new Lyric_Repeat();
-  
-    	text = new JLabel();
-		
-		text.setOpaque(true);
-		text.setBackground(Color.BLACK);
-		text.setForeground(Color.WHITE);
-		text.setSize(30, 30);
-		add(text);
+    private void addLyric() {
+        text = new JLabel();
 
-    	
-    	//buttonPanel.add(text1);
+        text.setOpaque(true);
+        text.setBackground(Color.BLACK);
+        text.setForeground(Color.WHITE);
+        text.setSize(30, 30);
+        add(text);
+
+        new Lyric_Repeat();
+        //buttonPanel.add(text1);
     }
 }
