@@ -17,17 +17,16 @@ class Main {
     }
 
     private void init() {
-        PlayerTab playerPanel = new PlayerTab();
+        PlayerTab playerPanel = new PlayerTab();                        // Player Panel
+        MusicList musicList = new MusicList(playerPanel);               // Music List Panel
+        Tab tabPanel = new Tab();                                       // Button Tab Panel
 
-        MusicList musicList = new MusicList(playerPanel);
-        Tab tabPanel = new Tab();
+        playerPanel.connectPanels(tabPanel);                            // Connect Panels
+        tabPanel.connectPanels(playerPanel);                            // Connect Panels
 
-        playerPanel.connectPanels(tabPanel);
-        tabPanel.connectPanels(playerPanel);
-
-        CurrentMusic.getInstance().setPlayerTab(playerPanel);
-        this.mainFrame.setLayout(new BorderLayout());
-        this.mainFrame.setSize(800, 450);
+        CurrentMusic.getInstance().setPlayerTab(playerPanel);           // SetUp Panels
+        this.mainFrame.setLayout(new BorderLayout());                                           //Setting Layout and add Panels start
+        this.mainFrame.setSize(800, 500);
 
         this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -38,6 +37,6 @@ class Main {
         this.mainFrame.setJMenuBar(new Toolbar(musicList));
         this.mainFrame.getJMenuBar().add(new Toolbar());
         
-        this.mainFrame.setVisible(true);
+        this.mainFrame.setVisible(true);                                                        //Setting Layout and add Panels end
     }
 }

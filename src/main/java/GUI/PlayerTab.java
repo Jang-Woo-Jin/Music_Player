@@ -9,6 +9,7 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -19,23 +20,28 @@ import java.io.IOException;
 
 public class PlayerTab extends JPanel {
 
-    public static JLabel text;
     private final JFXPanel fxPanel = new JFXPanel();
-    private final JPanel buttonPanel = new JPanel(new GridLayout(2, 3, 30, 10));
+
+
+    /* Music info -> Image, name */
     private JPanel musicInfoPanel;
     private JLabel musicName;
     private Image musicImage;
     private JLabel musicImageLabel;
+
+    /* Buttons */
     private JButton playButton;
     private JButton seekNextButton;
     private JButton seekPreviousButton;
     private JButton stopButton;
-    private JButton playModeButton; // this button can change play mode ( all
-    // music play, all music play repeatly, one
-    // music repeatly )
+    private JButton playModeButton;
     private JButton starButton; // for favorite
     private JSlider volumeSlider;
     private JSlider currentTimeSlider;
+
+    public static JLabel text;
+
+    private final JPanel buttonPanel = new JPanel(new GridLayout(2, 3, 30, 10));
     private Tab tabPanel;
 
     public PlayerTab() {
@@ -54,9 +60,10 @@ public class PlayerTab extends JPanel {
         addPlayModeButton();
         addStopButton();
         addStarButton();
+
         buttonPanel.setBackground(Color.black);
         this.add(buttonPanel);
-
+        addVolumeSlider();
         //TODO!!!!!
         addLyric();
 
@@ -70,14 +77,14 @@ public class PlayerTab extends JPanel {
     private void initFX(JFXPanel fxPanel) {
         Scene scene = initScene();
         fxPanel.setScene(scene);
-    }
+    }                                   // can play media using javafx scene and mediaplayer
 
     private Scene initScene() {
         Group root = new Group();
 
         return (new Scene(root, javafx.scene.paint.Color.GREENYELLOW));
     }
-
+                                                                                                            //add whole Buttons
     private void addButtonImage(JButton button, String imageFileName) throws IOException {
 
         Image buttonImage = ImageIO.read(new File(System.getProperty("user.home")
@@ -212,6 +219,9 @@ public class PlayerTab extends JPanel {
             CurrentMusic currentMusic = CurrentMusic.getInstance();
             currentMusic.setVolume(volume);
         });
+        volumeSlider.setBackground(Color.BLACK);
+        volumeSlider.setPaintTicks(true);
+        volumeSlider.setForeground(Color.white);
         this.add(volumeSlider);
     }
 
@@ -226,6 +236,9 @@ public class PlayerTab extends JPanel {
             float percent = (currentTimeSlider.getValue() - currentTimeSlider.getMinimum()) / (currentTimeSlider.getMaximum() - currentTimeSlider.getMinimum());
             currentMusic.seek(percent);
         });
+        currentTimeSlider.setBackground(Color.BLACK);
+        currentTimeSlider.setPaintTicks(true);
+        currentTimeSlider.setForeground(Color.white);
         this.add(currentTimeSlider);
     }
 
