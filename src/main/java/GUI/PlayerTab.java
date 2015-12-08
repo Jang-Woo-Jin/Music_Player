@@ -9,7 +9,7 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.media.Media;
+import javafx.util.Duration;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -17,18 +17,18 @@ import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 public class PlayerTab extends JPanel {
 
+    public static JLabel text;
     private final JFXPanel fxPanel = new JFXPanel();
-
-
+    private final JPanel buttonPanel = new JPanel(new GridLayout(2, 3, 30, 10));
     /* Music info -> Image, name */
     private JPanel musicInfoPanel;
     private JLabel musicName;
     private Image musicImage;
     private JLabel musicImageLabel;
-
     /* Buttons */
     private JButton playButton;
     private JButton seekNextButton;
@@ -38,10 +38,6 @@ public class PlayerTab extends JPanel {
     private JButton starButton; // for favorite
     private JSlider volumeSlider;
     private JSlider currentTimeSlider;
-
-    public static JLabel text;
-
-    private final JPanel buttonPanel = new JPanel(new GridLayout(2, 3, 30, 10));
     private Tab tabPanel;
 
     public PlayerTab() {
@@ -84,7 +80,8 @@ public class PlayerTab extends JPanel {
 
         return (new Scene(root, javafx.scene.paint.Color.GREENYELLOW));
     }
-                                                                                                            //add whole Buttons
+
+    //add whole Buttons
     private void addButtonImage(JButton button, String imageFileName) throws IOException {
 
         Image buttonImage = ImageIO.read(new File(System.getProperty("user.home")
@@ -214,8 +211,8 @@ public class PlayerTab extends JPanel {
         volumeSlider = new JSlider();
 
         // TODO add graphic option
-        volumeSlider.addPropertyChangeListener(evt -> {
-            float volume = volumeSlider.getValue() / (volumeSlider.getMaximum() - volumeSlider.getMinimum());
+        volumeSlider.addChangeListener(evt -> {
+            float volume = (float) (volumeSlider.getValue() - volumeSlider.getMinimum()) / (volumeSlider.getMaximum() - volumeSlider.getMinimum());
             CurrentMusic currentMusic = CurrentMusic.getInstance();
             currentMusic.setVolume(volume);
         });
@@ -233,12 +230,25 @@ public class PlayerTab extends JPanel {
         CurrentMusic currentMusic = CurrentMusic.getInstance();
 
         currentTimeSlider.addChangeListener(evt -> {
-            float percent = (currentTimeSlider.getValue() - currentTimeSlider.getMinimum()) / (currentTimeSlider.getMaximum() - currentTimeSlider.getMinimum());
+            float percent = (float) (currentTimeSlider.getValue() - currentTimeSlider.getMinimum()) / (currentTimeSlider.getMaximum() - currentTimeSlider.getMinimum());
             currentMusic.seek(percent);
         });
         currentTimeSlider.setBackground(Color.BLACK);
         currentTimeSlider.setPaintTicks(true);
         currentTimeSlider.setForeground(Color.white);
+
+        currentTimeSlider.setValue(currentTimeSlider.getMinimum());
+
+        currentMusic.addChangeTimeEvent(currentTimeSlider, (JSlider jSlider) -> {
+            SwingUtilities.invokeLater(() -> {
+                Optional<Duration> currentTimeOptional = currentMusic.getCurrentTime();
+                Optional<Duration> totalTimeOptional = currentMusic.getTotalTime();
+                if (currentTimeOptional.isPresent() && totalTimeOptional.isPresent()) {
+                    double percent = currentTimeOptional.get().toMillis() / totalTimeOptional.get().toMillis();
+                    jSlider.setValue((int) (percent * (jSlider.getMaximum() - jSlider.getMinimum())) + jSlider.getMinimum());
+                }
+            });
+        });
         this.add(currentTimeSlider);
     }
 

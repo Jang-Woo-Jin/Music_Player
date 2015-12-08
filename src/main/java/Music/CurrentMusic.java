@@ -9,6 +9,7 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class CurrentMusic {
@@ -129,7 +130,7 @@ public class CurrentMusic {
     public void seek(float percent) {
         if (percent >= 0 && percent <= 1 && mediaPlayerOptional.isPresent()) {
             MediaPlayer mediaPlayer = mediaPlayerOptional.get();
-            mediaPlayer.seek(mediaPlayer.getCurrentTime().multiply(percent));
+            mediaPlayer.seek(mediaPlayer.getTotalDuration().multiply(percent));
         }
     }
 
@@ -152,9 +153,13 @@ public class CurrentMusic {
         this.playerTab = playerTab;
     }
 
-    public <T, R> void addChangeTimeEvent(T t, Function<T, R> func) {
+    public <T> void addChangeTimeEvent(T t, Consumer<T> func) {
         mediaPlayerOptional.ifPresent(mediaPlayer -> mediaPlayer.currentTimeProperty().addListener(observable -> {
-            func.apply(t);
+            func.accept(t);
         }));
+    }
+
+    public Optional<Duration> getTotalTime() {
+        return mediaPlayerOptional.map(MediaPlayer::getTotalDuration);
     }
 }
