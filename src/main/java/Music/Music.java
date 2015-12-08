@@ -110,7 +110,7 @@ public class Music extends Mp3File {
         return this.fileName;
     }
 
-    public void setLyrics(Lyric lyrics, String lyricsFileName,
+    public void setLyrics(String lyricsFileName,
                           String lyricsFileAddress) {
         this.lyricsFileName = lyricsFileName;
         this.lyricsFileAddress = lyricsFileAddress;

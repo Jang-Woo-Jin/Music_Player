@@ -28,6 +28,7 @@ class Main {
         CurrentMusic.getInstance().setPlayerTab(playerPanel);
         this.mainFrame.setLayout(new BorderLayout());
         this.mainFrame.setSize(800, 450);
+
         this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.mainFrame.add(tabPanel.createTab(musicList), BorderLayout.WEST);
