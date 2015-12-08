@@ -11,7 +11,7 @@ public class AutomaticShutdown extends Thread {
 
 	private static AutomaticShutdown uniqueInstance;
     private long ringring;
-    
+    private boolean flag = true;
     public static AutomaticShutdown getInstance() {
         if (uniqueInstance == null) {
             synchronized (MusicListManager.class) {
@@ -25,7 +25,7 @@ public class AutomaticShutdown extends Thread {
     
     @Override
     public void run() {
-    	
+    	flag = false;
         try {
             Thread.sleep(ringring);
             System.exit(0);
@@ -39,7 +39,11 @@ public class AutomaticShutdown extends Thread {
 
         int setTime = Integer.parseInt(time);
 
-        ringring = 5 * 10* 60;
+        ringring = setTime * 1000 * 60;
+    }
+    
+    public boolean getStatus(){
+    	return flag;
     }
     
 }

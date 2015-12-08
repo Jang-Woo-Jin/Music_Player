@@ -45,9 +45,10 @@ public class CurrentMusic {
     }
 
     public void play() {
+    	
         mediaPlayerOptional.ifPresent(mediaPlayer -> {
             if (isPlayable()) {
-                mediaPlayer.play();
+            	mediaPlayer.play();
                 MusicListManager.getInstance().addToRecentPlayList(this.toMusic());
             }
         });
@@ -70,7 +71,7 @@ public class CurrentMusic {
                 setMedia(MusicListManager.getInstance().at(i).getFilename());
                 playerTab.doPlay();
         });
-
+        
     }
 
     public void pause() {
@@ -127,11 +128,15 @@ public class CurrentMusic {
     }
 
     public Music toMusic() {
-    	String filePath = mediaPlayerOptional.get().getMedia().getSource();
-        filePath = FilePathParser.parseSeparator(filePath);
-        thisMusic = MusicListManager.getInstance().find(filePath);
-        System.out.println(filePath);
-        return thisMusic;
+    	try{
+    		String filePath = mediaPlayerOptional.get().getMedia().getSource();
+    		filePath = FilePathParser.parseSeparator(filePath);
+    		thisMusic = MusicListManager.getInstance().find(filePath);
+    		System.out.println(filePath);
+    		return thisMusic;
+    	}
+    	catch (Exception e1)
+    	{ return null; }
     }
 
     public Status getStatus() {

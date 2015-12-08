@@ -1,10 +1,12 @@
 package GUI;
 
 import Music.CurrentMusic;
+import Music.Lyric_Parser;
 import Music.Music;
 import Music.MusicListManager;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -18,7 +20,7 @@ public class MusicList {
     public static int listNum = 0;
 
     public MusicList(PlayerTab playerTab) {
-        musicList = new JList<>(listModel);
+    	musicList = new JList<>(listModel);
         musicList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         musicList.setVisible(true);
