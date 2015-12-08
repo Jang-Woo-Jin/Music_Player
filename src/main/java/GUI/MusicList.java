@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public class MusicList {
 
-    private final JButton refreshButton = new JButton("refresh list");
     private final JPanel musicListPanel = new JPanel(new BorderLayout());
     private final JList<Music> musicList;
     private DefaultListModel<Music> listModel = new DefaultListModel<>();
@@ -40,11 +39,6 @@ public class MusicList {
             }
         });
 
-        refreshButton.addActionListener(e -> {
-            arrayListToListModel(MusicListManager.getInstance().getMusicList());
-            musicListPanel.updateUI();
-        });
-
     }
 
 
@@ -52,7 +46,6 @@ public class MusicList {
     public JPanel getPanel() {
         if (musicListPanel.getComponentCount() == 0) {
             musicListPanel.add(musicList, BorderLayout.NORTH);
-            musicListPanel.add(refreshButton, BorderLayout.SOUTH);
             musicListPanel.setVisible(true);
         }
         return musicListPanel;
