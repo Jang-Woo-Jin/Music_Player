@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 import Music.MusicListManager;
 
-public class AutomaticShutdown extends Thread {
+public class AutomaticShutdown extends Thread {	// automatic shutdown with thread to run under main program
 
 	private static AutomaticShutdown uniqueInstance;
     private long ringring;
@@ -24,7 +24,7 @@ public class AutomaticShutdown extends Thread {
     }
     
     @Override
-    public void run() {
+    public void run() { // to run
     	flag = false;
         try {
             Thread.sleep(ringring);
@@ -35,7 +35,7 @@ public class AutomaticShutdown extends Thread {
     	}
     }
 
-    public void setShutdown(String time) {
+    public void setShutdown(String time) {	// set shutdown program
 
         int setTime = Integer.parseInt(time);
 

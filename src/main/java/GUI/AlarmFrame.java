@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 
 import Alarm.AlarmSystem;
 
-class AlarmFrame extends JFrame {
+class AlarmFrame extends JFrame {	// Alarm frame extend jframe to make window
 	private AlarmSystem alarmSystem;
 	private JLabel textLabel;
 	private JLabel hour_label;
@@ -25,7 +25,7 @@ class AlarmFrame extends JFrame {
 	private JButton okButton;
 	private JComboBox<String> ampm;
 	
-	public AlarmFrame(){
+	public AlarmFrame(){	//  make alarm setting window frame
 		super("AlarmSetting Window");
 		this.setSize(420,235);
         this.setLocation(400,200);
@@ -37,7 +37,7 @@ class AlarmFrame extends JFrame {
         addOkButton();
         addAlarmMessage();
         addTextLabel();
-        okButton.addActionListener(e -> {
+        okButton.addActionListener(e -> {	// when ok button is clicked, make alarm
         	this.setVisible(false);
         	
             
@@ -46,7 +46,7 @@ class AlarmFrame extends JFrame {
             String selectHour = (String) hour.getSelectedItem();
             String selectMinute = (String) minute.getSelectedItem();
 
-        	alarmSystem = new AlarmSystem(alarmMessage);
+        	alarmSystem = new AlarmSystem(alarmMessage);	// make alarm
             
             alarmSystem.setAlarm(selectAmpm, selectHour, selectMinute);
             alarmSystem.start();
@@ -55,17 +55,17 @@ class AlarmFrame extends JFrame {
         this.setVisible(true);
         
 	}
-	private void addTextLabel(){
+	private void addTextLabel(){	// add text label
 		textLabel = new JLabel("알람 시각을 설정해주세요.");
 		textLabel.setBounds(20,10,200,30);
 		this.add(textLabel);
 	}
-	private void addAmpmContent(){
+	private void addAmpmContent(){	// add select ampm
 		ampm = new JComboBox<String>(new String[] {"오전","오후"});
 		ampm.setBounds(40,40,60,30);
 		this.add(ampm);
 	}
-	private void addHourContent(){
+	private void addHourContent(){	// add select hour
 		hour_label = new JLabel("Hour : ");
 		hour = new JComboBox<String>(new String[]{"0","1","2","3","4","5","6","7","8","9","10","11","12"});
 		this.add(hour_label);
@@ -73,7 +73,7 @@ class AlarmFrame extends JFrame {
 		this.add(hour);
 		hour.setBounds(160,40,50,30);
 	}
-	private void addMinuteContent(){
+	private void addMinuteContent(){	// add select minute
 		minute_label = new JLabel("Minute : ");
 		minute = new JComboBox<String>(new String[]{"0","1","2","3","4","5","6","7","8","9","10",
 													"11","12","13","14","15","16","17","18","19","20",
@@ -86,7 +86,7 @@ class AlarmFrame extends JFrame {
 		this.add(minute);
 		minute.setBounds(280,40,50,30);
 	}
-	private void addOkButton(){
+	private void addOkButton(){	// add okbutton
 		okButton = new JButton("OK");
 		okButton.setBounds(330,140,60,40);
 		this.add(okButton);

@@ -14,16 +14,16 @@ import java.rmi.server.ExportException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class MusicListManager {
-    private static MusicListManager uniqueInstance;
+public class MusicListManager {	// manage music objects and it made by singleton skill
+    private static MusicListManager uniqueInstance;		// unique object to make sigleton
 
-    private final String FILE_INFO_ADDRESS = System.getProperty("user.home") + "/Desktop/"+"music-info";
-    private final String FILE_INFO_NAME = "abc";//"MusicInfoFile";
-    private final ArrayList<Music> musicList = new ArrayList<>();
-    private final ArrayList<Music> recentPlayList = new ArrayList<>();
-    private final ArrayList<Music> favoriteMusicList = new ArrayList<>();
+    private final String FILE_INFO_ADDRESS = System.getProperty("user.home") + "/Desktop/"+"music-info";	// file address
+    private final String FILE_INFO_NAME = "MusicInfoFile";	// music information name
+    private final ArrayList<Music> musicList = new ArrayList<>();	// musiclist that has all music object
+    private final ArrayList<Music> recentPlayList = new ArrayList<>();	// save recent played music object
+    private final ArrayList<Music> favoriteMusicList = new ArrayList<>();	// save music object that is setted to favorite
 
-    public static MusicListManager getInstance() {
+    public static MusicListManager getInstance() {	// return unique object
         if (uniqueInstance == null) {
             synchronized (MusicListManager.class) {
                 if (uniqueInstance == null) {
@@ -34,7 +34,7 @@ public class MusicListManager {
         return uniqueInstance;
     }
 
-    private String[] getMusicInfoFile(final String fileName, final String fileAddress) {
+    private String[] getMusicInfoFile(final String fileName, final String fileAddress) {	// read musicinfo file's information
         ArrayList<String> informationString = FileIO.readTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME, ".txt");
         String[] information = new String[5];
 
@@ -53,7 +53,7 @@ public class MusicListManager {
         return information;
     }
 
-    public void addMusic(String filepath) {
+    public void addMusic(String filepath) {	// add music file's with path, it get all music file in path and under path
         File file = new File(filepath);
 
         if (file.isFile()) {
@@ -72,7 +72,7 @@ public class MusicListManager {
 
     }
     
-    public Music find(String filePath) {
+    public Music find(String filePath) {	// find music file
         try {
             Music temp = nowList().get(findIndex(filePath));
             if (temp != null) return temp;
@@ -84,7 +84,7 @@ public class MusicListManager {
     }
 
 
-    public int findIndex(String filePath){
+    public int findIndex(String filePath){	// find music file's index
         for(Music iter : nowList()){
             if(iter.getFilename().replaceAll("[+]", " ").equals(filePath)){
                 return nowList().indexOf(iter);
@@ -93,15 +93,15 @@ public class MusicListManager {
         return -1;
     }
 
-    public Music at(int i) {
+    public Music at(int i) {	// return music object
        return nowList().get(i);
     }
 
-    public ArrayList<Music> getMusicList() {
+    public ArrayList<Music> getMusicList() {	// return music list
         return musicList;
     }
 
-    public void addToRecentPlayList(Music music) {
+    public void addToRecentPlayList(Music music) {	// add to recent play list
         int temp = MusicList.listNum;
         MusicList.listNum = 2;
         if (isExist(music)) recentPlayList.remove(find(music.getFilename()));
@@ -109,7 +109,7 @@ public class MusicListManager {
         recentPlayList.add(music);
     }
 
-    public void addToFavoriteMusicList(Music music) {
+    public void addToFavoriteMusicList(Music music) {	// add to favorite music list
         int temp = MusicList.listNum;
         MusicList.listNum = 1;
         if(!isExist(music)) {
@@ -121,7 +121,7 @@ public class MusicListManager {
         }
     }
 
-    public boolean deleteToFavoriteMusicList(Music music) {
+    public boolean deleteToFavoriteMusicList(Music music) {	// delete music object in favoite music list 
         if(isExist(music)) {
             for(int i = 0 ; i < nowList().size() ; i++) {
                 if(nowList().get(i).getFilename().equals(music.getFilename())) {
@@ -135,11 +135,11 @@ public class MusicListManager {
 
     }
 
-    private boolean isExist(Music music) {
+    private boolean isExist(Music music) {	// check music object exist
         return MusicListManager.getInstance().findIndex(music.getFilename()) != -1;
     }
 
-    public ArrayList<Music> nowList() {
+    public ArrayList<Music> nowList() {	// return using list
         switch(MusicList.listNum) {
             case 0 :
                 return musicList;
