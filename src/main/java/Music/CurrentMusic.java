@@ -45,9 +45,10 @@ public class CurrentMusic {
     }
 
     public void play() {
+    	
         mediaPlayerOptional.ifPresent(mediaPlayer -> {
             if (isPlayable()) {
-                mediaPlayer.play();
+            	mediaPlayer.play();
                 MusicListManager.getInstance().addToRecentPlayList(this.toMusic());
             }
         });
@@ -70,7 +71,7 @@ public class CurrentMusic {
                 setMedia(MusicListManager.getInstance().at(i).getFilename());
                 playerTab.doPlay();
         });
-
+        
     }
 
     public void pause() {

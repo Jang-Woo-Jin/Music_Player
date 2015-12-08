@@ -321,7 +321,7 @@ public class PlayerTab extends JPanel {
         text.setForeground(Color.WHITE);
         text.setSize(30, 30);
         add(text);
-
+        new Lyric_Repeat();
 
         //buttonPanel.add(text1);
     }
