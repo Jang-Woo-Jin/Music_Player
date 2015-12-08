@@ -62,7 +62,7 @@ public class Music extends Mp3File {
     	String path = file.getAbsolutePath();
     	this.fileName = FilePathParser.getFileName(path);
     	this.fileAddress = FilePathParser.getPath(path);
-    	ArrayList<String> informationString = FileIO.readTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME);
+    	ArrayList<String> informationString = FileIO.readTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME, ".txt");
 
 
         assert informationString != null;

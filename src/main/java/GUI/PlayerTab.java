@@ -208,6 +208,19 @@ public class PlayerTab extends JPanel {
         buttonPanel.add(playModeButton);
     }
 
+    private void addVolumeSlider() {
+        //vertical plz
+        volumeSlider = new JSlider();
+
+        // TODO add graphic option
+        volumeSlider.addPropertyChangeListener(evt -> {
+            float volume = volumeSlider.getValue() / (volumeSlider.getMaximum() - volumeSlider.getMinimum());
+            CurrentMusic currentMusic = CurrentMusic.getInstance();
+            currentMusic.setVolume(volume);
+        });
+        this.add(volumeSlider);
+    }
+
     private void addCurrentTimeSlider() {
         // TODO
         // horizontal plz

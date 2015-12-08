@@ -2,6 +2,7 @@ package Music;
 
 import FileIO.FileIO;
 
+import GUI.ErrorDetector;
 import GUI.MusicList;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.UnsupportedTagException;
@@ -9,6 +10,7 @@ import com.mpatric.mp3agic.UnsupportedTagException;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.rmi.server.ExportException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -33,7 +35,7 @@ public class MusicListManager {
     }
 
     private String[] getMusicInfoFile(final String fileName, final String fileAddress) {
-        ArrayList<String> informationString = FileIO.readTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME);
+        ArrayList<String> informationString = FileIO.readTextFile(FILE_INFO_ADDRESS, FILE_INFO_NAME, ".txt");
         String[] information = new String[5];
 
         assert informationString != null;
@@ -60,9 +62,8 @@ public class MusicListManager {
             String fileAddress = filepath.substring(0, filepath.lastIndexOf(File.separatorChar));
             try {
                 musicList.add(new Music(fileName, fileAddress, getMusicInfoFile(fileName, fileAddress)));
-            } catch (InvalidDataException | IOException | UnsupportedTagException e) {
-                JFrame errorFrame = new JFrame("Error");
-                errorFrame.add(new JLabel("Cannot Find chosen File"));
+            } catch (Exception e) {
+                new ErrorDetector();
             }
         }
         ArrayList<String> infoFileInfo = musicList.stream().map(iter -> iter.getSaveInfo()).collect(Collectors.toCollection(ArrayList::new));
@@ -71,12 +72,17 @@ public class MusicListManager {
 
     }
     
-    public Music find(String filePath){
-
-        Music temp = nowList().get(findIndex(filePath));
-        if(temp != null) return temp;
-        else return null;
+    public Music find(String filePath) {
+        try {
+            Music temp = nowList().get(findIndex(filePath));
+            if (temp != null) return temp;
+            else return null;
+        } catch (Exception e) {
+            new ErrorDetector();
+            return null;
+        }
     }
+
 
     public int findIndex(String filePath){
         for(Music iter : nowList()){
@@ -112,8 +118,7 @@ public class MusicListManager {
         }
         else {
             MusicList.listNum = temp;
-
-    }
+        }
     }
 
     public boolean deleteToFavoriteMusicList(Music music) {

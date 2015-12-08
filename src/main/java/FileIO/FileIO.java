@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class FileIO {
     @Nullable
-    public static ArrayList<String> readTextFile(final String fileAddress, final String fileName) {
+    public static ArrayList<String> readTextFile(final String fileAddress, final String fileName, final String extension) {
 
         ArrayList<String> information = new ArrayList<>();
         String readLine;
@@ -17,7 +17,7 @@ public class FileIO {
             input = new BufferedReader(new InputStreamReader(
                     new FileInputStream(fileAddress
                             + File.separatorChar
-                            + fileName + ".txt"), "UTF-8"));
+                            + fileName + extension), "UTF-8"));
             while ((readLine = input.readLine()) != null) {
 
                 if (!(readLine.startsWith("//") || (readLine.trim()).equals("")))
@@ -25,7 +25,7 @@ public class FileIO {
             }
             input.close();
         } catch (IOException e) {
-            new File(fileAddress, fileName + ".txt");
+            new File(fileAddress, fileName + extension);
         }
 
         return information;
