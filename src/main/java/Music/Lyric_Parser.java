@@ -2,6 +2,7 @@ package Music;
 
 import FileIO.FileIO;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 
 class Lyric_Parser {
@@ -20,7 +21,8 @@ class Lyric_Parser {
     }
 
     private void splitLrc() {
-        ArrayList<String> b = FileIO.readTextFile("C:", "test");
+        ArrayList<String> b = FileIO.readTextFile(System.getProperty("user.home") + "/Desktop/"+"music-info",
+                CurrentMusic.getInstance().toMusic().getFilename());
         for (int i = 0; i < b.size(); i++) {
         	index = b.get(i).split("]");
             lrcTime[i] = index[0];

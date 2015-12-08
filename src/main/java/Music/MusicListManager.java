@@ -6,6 +6,7 @@ import GUI.MusicList;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -60,7 +61,8 @@ public class MusicListManager {
             try {
                 musicList.add(new Music(fileName, fileAddress, getMusicInfoFile(fileName, fileAddress)));
             } catch (InvalidDataException | IOException | UnsupportedTagException e) {
-                e.printStackTrace();
+                JFrame errorFrame = new JFrame("Error");
+                errorFrame.add(new JLabel("Cannot Find chosen File"));
             }
         }
         ArrayList<String> infoFileInfo = musicList.stream().map(iter -> iter.getSaveInfo()).collect(Collectors.toCollection(ArrayList::new));

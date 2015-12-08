@@ -9,6 +9,8 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import org.omg.CORBA.Current;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -176,7 +178,7 @@ public class PlayerTab extends JPanel {
         try {
             addButtonImage(playModeButton, "loop.png");
         } catch (Exception e) {
-            playModeButton.setText("All");
+            playModeButton.setText("A/R");
         }
 
         playModeButton.addActionListener(e -> {
@@ -185,7 +187,7 @@ public class PlayerTab extends JPanel {
                 try {
                     addButtonImage(playModeButton, "loop.png");
                 } catch (Exception e1) {
-                    playModeButton.setText("A/NR");
+                    playModeButton.setText("A/N");
                 }
             } else if (CurrentMusic.playMode == 1) {
                 CurrentMusic.playMode++;
@@ -204,14 +206,6 @@ public class PlayerTab extends JPanel {
             }
         });
         buttonPanel.add(playModeButton);
-    }
-
-    private void addVolumeSlider() {
-        // TODO
-        // vertical plz
-        volumeSlider = new JSlider();
-
-        this.add(volumeSlider);
     }
 
     private void addCurrentTimeSlider() {

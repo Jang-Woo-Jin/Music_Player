@@ -20,7 +20,6 @@ public class Lyric_Repeat extends Thread {
             Lyric_Parser b = new Lyric_Parser();
             Lyric c = new Lyric(b.getTime(), b.getLrc());
 
-            //�ð��� 00:00:00 �������� �߶�
             try {
                 sleep(10);
             } catch (InterruptedException e) {
@@ -36,15 +35,9 @@ public class Lyric_Repeat extends Thread {
             	System.out.println(min+":"+sec+":"+msec);
             	
             }
-            
             PlayerTab.text.setText(c.lyricShow(min, sec, msec));
             PlayerTab.text.updateUI();
-            
         }
     }
-public String getShowLyric() {
-	return showLyric;
-} 
-
 	
 }

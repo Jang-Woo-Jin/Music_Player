@@ -17,7 +17,7 @@ class Lyric {
 
 
     public String lyricShow(int min, int sec, int msec) {
-        int j = 1, start = 0, finish = 0;
+        int j = 1, start = 0;
         while (lrc[j] != null) {    //텍스트 파일의 총 줄수
             j++;
         }
